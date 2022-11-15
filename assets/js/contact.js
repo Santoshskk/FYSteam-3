@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", function (e){
     // op verzenden klikken slaat info op en reset form
-    document.querySelector("#Verzendknop").addEventListener("click", function (e){
+    document.querySelector("#sendButton").addEventListener("click", function (e){
         // checken of de velden leeg zijn
-        if(document.querySelector("#voornaam").value !== "" &&
-            document.querySelector("#achternaam").value !== "" &&
+        if(document.querySelector("#firstname").value !== "" &&
+            document.querySelector("#prefix").value !== "" &&
             document.querySelector("#email").value !== "" &&
-            document.querySelector("#vraag").value !== "" ){
+            document.querySelector("#question").value !== "" ){
 
             // zorgen dat het form niet reset automatisch
             e.preventDefault();
 
             // object maken met de gegevens uit form
             const form ={
-                voornaam: document.querySelector("#voornaam").value,
-                tussenvoegsel: document.querySelector("#tussenvoegsel").value,
-                achternaam: document.querySelector("#achternaam").value,
+                voornaam: document.querySelector("#firstname").value,
+                tussenvoegsel: document.querySelector("#prefix").value,
+                achternaam: document.querySelector("#lastname").value,
                 email: document.querySelector("#email").value,
-                vraag: document.querySelector("#vraag").value
+                vraag: document.querySelector("#question").value
             }
 
             // voor nu nog naar console, later database?

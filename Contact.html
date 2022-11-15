@@ -11,24 +11,24 @@
 <body>
 <div class="nav-header"></div>
 
-<section id="Contact">
-    <h1 id="Hoofdcontact">Contactformulier</h1>
+<section id="contactSection">
+    <h1 id="mainContact">Contactformulier</h1>
 
     <p class="label">Heb je een vraag of is er iets wat je met ons wilt delen?</p>
-    <p class="label tekst">Dan kun je via dit formulier contact met ons opnemen!</p>
-    <p class="label cursief">Velden met een * zijn verplicht!</p>
+    <p class="label text">Dan kun je via dit formulier contact met ons opnemen!</p>
+    <p class="label italic">Velden met een * zijn verplicht!</p>
     <form id="contactForm">
         <p class="label">
             <label>Voornaam*:</label>
-            <input type="text" name="voornaam" class="inputLabel" id="voornaam" placeholder="Uw voornaam..." required="">
+            <input type="text" name="firstname" class="inputLabel" id="firstname" placeholder="Uw voornaam..." required="">
         </p>
         <p class="label">
             <label>Tussenvoegsel:</label>
-            <input type="text" name="tussenvoegsel" class="inputLabel" id="tussenvoegsel" placeholder="Uw tussenvoegsel...">
+            <input type="text" name="prefix" class="inputLabel" id="prefix" placeholder="Uw tussenvoegsel...">
         </p>
         <p class="label">
             <label>Achternaam*:</label>
-            <input type="text" name="achternaam" class="inputLabel" id="achternaam" placeholder="Uw achternaam..." required="">
+            <input type="text" name="lastname" class="inputLabel" id="lastname" placeholder="Uw achternaam..." required="">
         </p>
         <p class="label">
             <label>E-mailadres*:</label>
@@ -36,10 +36,10 @@
         </p>
         <p class="label">
             <label>Vraag*:</label>
-            <textarea name="vraag" class="inputLabel" id="vraag" placeholder="Uw vraag..." cols="40" rows="5" required=""></textarea>
+            <textarea name="question" class="inputLabel" id="question" placeholder="Uw vraag..." cols="40" rows="5" required=""></textarea>
         </p>
         <p class="label">
-            <input type="submit" value="Verzenden" id="Verzendknop">
+            <input type="submit" value="Verzenden" id="sendButton">
         </p>
     </form>
 </section>

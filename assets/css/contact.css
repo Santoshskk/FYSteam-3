@@ -1,4 +1,4 @@
-#Contact{
+#contactSection{
     background: #fff;
     width: 601px;
     position: relative;
@@ -10,7 +10,7 @@
     z-index: 2;
 }
 
-#Hoofdcontact{
+#mainContact{
     font-weight: bold;
     position: relative;
     left: 25px;
@@ -29,15 +29,15 @@
     width: 400px;
 }
 
-.cursief{
+.italic{
     font-style: italic;
 }
 
-.tekst{
+.text{
     margin-top: -15px;
 }
 
-#Verzendknop{
+#sendButton{
     color: white;
     text-align: center;
     padding: 14px 16px;
