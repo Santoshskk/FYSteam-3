@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProfielPagina</title>
+    <link rel="stylesheet" href="assets/css/Layout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="assets/css/EditProfile.css">
+
+</head>
+<body>
+<div class="nav-header"></div>
+
+<form id="form1" action="EditProfile.html">
+
+    <div class="userProfile">
+
+        <img class="profileImg" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+        <h1 id="TitleName" class="infoTextUser">Sjoerd</h1>
+        <input type="hidden" value="Sjoerd" class="inputText" id="lala">
+
+        <p class="infoTextUser">Gender: </p>
+        <p id="genderText" class="Uservalue">Male</p>
+        <input type="hidden" value="Male" class="inputText" id="gender">
+
+        <p class="infoTextUser">Leeftijdcategorie: </p>
+        <p class="Uservalue" id="leeftijdcategorieText">20-30</p>
+        <input type="hidden" value="20-30" class="inputText" id="leeftijdcategorie">
+
+        <p class="infoTextUser">land: </p>
+        <p class="Uservalue" id="landText">Nederland</p>
+        <input type="hidden" value="Nederland" class="inputText" id="land">
+
+
+        <p class="infoTextUser">Beschrijving: </p>
+        <p id="BeschrijvingText" class="Uservalue">Hallo ik ben Sjoerd en ik ben 25</p>
+        <input type="hidden" value="Hallo ik ben Sjoerd en ik ben 25." class="inputText"
+               id="beschrijving">
+
+
+        <p class="infoTextUser">Interesses: </p>
+        <p class="Uservalue">Voetbal</p>
+        <input type="hidden" value="Voetbal" class="inputText" id="interesses">
+    </div>
+    <input id="submit" type="submit" value="Edit profile" class="inputText" name="name">
+
+</form>
+
+<div class="nav-footer"></div>
+<script src="assets/js/profile.js"></script>
+<script src="assets/js/SharedStyling.js"></script>
+</body>
+</html>

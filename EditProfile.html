@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit profile</title>
+    <link rel="stylesheet" href="assets/css/Layout.css">
+    <link rel="stylesheet" href="assets/css/EditProfile.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="huis2">
+
+
+    <div class="nav-header"></div>
+
+</div>
+<div class="editText">
+    <h1>Bewerk profiel</h1>
+</div>
+
+<form id= "form2" >
+    <div class="row">
+        <div class="column">
+            <table>
+                <tr>
+                    <td>
+                        <label>Naam</label>
+                        <input type="text" class="inputText" id="nameInput">
+                    </td>
+                    <td>
+                        <label>Profile picture</label>
+                        <input type="button"  value="upload image" class="upload" id="profile pic">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Land</label>
+                        <input type="text" class="inputText" id="land">
+                    </td>
+
+                    <td>
+                        <label>Beschrijving</label>
+                        <textarea id="beschrijving" class="inputBeschrijving" placeholder="max 250 tekens"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Gender</label>
+                        <input type="text" class="inputText" name="name" id="gender">
+                    </td>
+                    <td>
+                        <label>Interesses</label>
+                        <select name = "intresses" class="inputText">
+                            <option value="voetbal">voetbal</option>
+                            <option value="surfen">surfen</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Leeftijdcategorie</label>
+                        <input type="text" class="inputText" name="name" id="leeftijdcategorie">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <input type="submit" value="Save" class="inputButton" name="name">
+</form>
+
+
+<div class="nav-footer"></div>
+<script src="assets/js/profile.js"></script>
+<script src="assets/js/SharedStyling.js"></script>
+
+</body>
+</html>
