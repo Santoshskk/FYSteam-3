@@ -1,0 +1,237 @@
+/*
+Same design for all HTML pages
+- font type
+- navbar
+- footer
+- body
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    height:100vh;
+    font-family: "Open Sans", sans-serif;
+}
+header{
+    padding-bottom: 80%;
+}
+
+.huis {
+    width: 50%;
+    padding-bottom: 5%;
+}
+.footerText {
+    font-size: 15px;
+}
+li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 90%;
+    color: white;
+    font-size: 2px;
+    font-weight: bold;
+
+}
+
+
+li.footerText {
+    font-size: 25px;
+    padding-left: 90%;
+    padding-bottom: 85%;
+
+}
+.center {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+}
+.center h1{
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+.center form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+form .text_field{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+.text_field input{
+    width: 100%;
+    padding:  0 5px;
+    height: 40px;
+    front-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+.text_field label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    front-size: 16px;
+    pointer-events: none;
+}
+.text_field span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2148C0;
+    transition: .5s;
+}
+.text_field input:focus ~ label,
+.text_field input:valid~ label{
+    top: -5px;
+    color: #2148C0;
+}
+.text_field input:focus::before,
+.text_field input:valid::before{
+    width: 100%;
+}
+.signup_link{
+    margin: 5px 0 20px 150px;
+    color: #D9260F;
+    cursor: pointer;
+
+}
+.pass:hover{
+    text-decoration: underline;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 50px;
+    border: 1px;
+    background: #D9260F;
+}
+.logoLogin{
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    display: block;
+}
+.footerlogin {
+    width: 100%;
+    height: 60px;
+    background-color: #D9260F;
+    margin-top: 4%;
+    padding: 2% 2% 0% 2%;
+    display: flex;
+    flex-direction: row;
+}
+.headerText{
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+
+
+
+
+
+
+
+.centerRegister {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 75%;
+    background: white;
+    border-radius: 10px;
+}
+.centerRegister h1{
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+.centerRegister form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+form .text_fieldR{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+.text_fieldR input{
+    width: 100%;
+    padding:  0 5px;
+    height: 40px;
+    front-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+.text_fieldR label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    front-size: 16px;
+    pointer-events: none;
+}
+.text_fieldR span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #2148C0;
+    transition: .5s;
+}
+.text_fieldR input:focus ~ label,
+.text_fieldR input:valid~ label{
+    top: -5px;
+    color: #2148C0;
+}
+.text_fieldR input:focus::before,
+.text_fieldR input:valid::before{
+    width: 100%;
+}
+
+.pass:hover{
+    text-decoration: underline;
+}
+input[type="submit"]{
+    width: 100%;
+    height: 50px;
+    border: 1px;
+    background: #D9260F;
+}
+.logoregister{
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    display: block;
+}
+.footerRegistreer {
+    width: 100%;
+    height: 100%;
+    background-color: #D9260F;
+    margin-top: 7%;
+    padding: 2% 0% 0% 0%;
+    text-align: center;
+}
+body{
+    background-image: url('https://i.pinimg.com/originals/44/95/d6/4495d69673d2e0515953bde9789b9e71.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: fit-content;
+
+}
