@@ -1,0 +1,50 @@
+#Contact{
+    background: #fff;
+    width: 601px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-top: 36px;
+    height: 566px;
+    z-index: 2;
+}
+
+#Hoofdcontact{
+    font-weight: bold;
+    position: relative;
+    left: 25px;
+    top: 22px;
+    font-size: 20px;
+    margin-bottom: 35px;
+}
+
+.label{
+    margin-left: 25px;
+    font-size: 16px;
+}
+
+.inputLabel{
+    float: right;
+    width: 400px;
+}
+
+.cursief{
+    font-style: italic;
+}
+
+.tekst{
+    margin-top: -15px;
+}
+
+#Verzendknop{
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    background-color: #d91e18;
+    font-size: 16px;
+    border: 0;
+    cursor: pointer;
+    margin-top: 80px;
+    border-radius: 16px;
+}

@@ -1,0 +1,18 @@
+.userProfile {
+    margin-top: 5%;
+}
+
+.profileImg {
+    float: left;
+    height: 410px;
+}
+
+.infoTextUser {
+    font-weight: bold;
+    padding-left: 25%;
+}
+.Uservalue {
+    padding-left: 25%;
+
+}
+

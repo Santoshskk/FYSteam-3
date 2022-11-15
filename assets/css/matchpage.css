@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+* {
+    box-sizing: border-box;
+}
+
+.fake-persona {
+    height: 200px;
+    width: 200px;
+    display: inline;
+    border: 4px solid #666;
+    padding: 10px;
+    border-radius: 2em;
+    margin-right: 20px;
+
+}
+
+.fake-persona2 {
+    height: 150px;
+    width: 150px;
+    display: inline;
+    border: 4px solid #666;
+    padding: 10px;
+    border-radius: 2em;
+    margin-right: 20px;
+}
+
+.mogelijke-matches {
+    margin-top: 300px;
+}

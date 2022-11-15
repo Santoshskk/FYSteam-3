@@ -1,0 +1,43 @@
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    margin: 25px 0;
+}
+
+.btn {
+    border: 1px solid #00BCE2;
+    border-radius: 19px;
+
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+
+}
+
+.btn.signup {
+    background-color: #fff;
+    color: #00BCE2;
+}
+
+.btn.signin {
+    background-color: #00BCE2;
+    color: #fff;
+}
+
+.btn_nav {
+    border-radius: 19px;
+
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+
+}
