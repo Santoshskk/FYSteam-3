@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <link rel="stylesheet" href="assets/css/contact.css">
+    <link rel="stylesheet" href="assets/css/Layout.css">
+    <script src="assets/js/contact.js"></script>
+</head>
+
+<body>
+<div class="nav-header"></div>
+
+<section id="Contact">
+    <h1 id="Hoofdcontact">Contactformulier</h1>
+
+    <p class="label">Heb je een vraag of is er iets wat je met ons wilt delen?</p>
+    <p class="label tekst">Dan kun je via dit formulier contact met ons opnemen!</p>
+    <p class="label cursief">Velden met een * zijn verplicht!</p>
+    <form id="contactForm">
+        <p class="label">
+            <label>Voornaam*:</label>
+            <input type="text" name="voornaam" class="inputLabel" id="voornaam" placeholder="Uw voornaam..." required="">
+        </p>
+        <p class="label">
+            <label>Tussenvoegsel:</label>
+            <input type="text" name="tussenvoegsel" class="inputLabel" id="tussenvoegsel" placeholder="Uw tussenvoegsel...">
+        </p>
+        <p class="label">
+            <label>Achternaam*:</label>
+            <input type="text" name="achternaam" class="inputLabel" id="achternaam" placeholder="Uw achternaam..." required="">
+        </p>
+        <p class="label">
+            <label>E-mailadres*:</label>
+            <input type="email" name="email" class="inputLabel" id="email" placeholder="Uw e-mailadres..." required="">
+        </p>
+        <p class="label">
+            <label>Vraag*:</label>
+            <textarea name="vraag" class="inputLabel" id="vraag" placeholder="Uw vraag..." cols="40" rows="5" required=""></textarea>
+        </p>
+        <p class="label">
+            <input type="submit" value="Verzenden" id="Verzendknop">
+        </p>
+    </form>
+</section>
+
+<div class="nav-footer"></div>
+<script src="assets/js/SharedStyling.js"></script>
+</body>
+</html>
