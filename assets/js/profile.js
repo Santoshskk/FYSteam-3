@@ -12,21 +12,12 @@ form?.addEventListener("submit", function (e) {
 
 function updateProfile(arr, formtype) {
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    var test = FYSCloud.API.queryDatabase("SELECT * FROM user WHERE userID = 1;").value;
+
+    console.log(test);
 
 
-    let counter = 0;
-    urlParams.forEach((value, key) => {
-        console.log(key);
-        let element = urlParams.get(key);
-        if (formtype == 1) {
-            document.getElementById(arr[counter]).innerHTML = element;
-        } else {
-            document.getElementById(arr[counter]).value = element;
-        }
-        counter++;
-    });
+
 }
 
 //EventListener submit
@@ -45,15 +36,17 @@ function CreateUrl(formNum, namePar, landPar, genderPar, leeftijdcategoriePar, b
     const ageCatagory = document.getElementById(leeftijdcategoriePar).value;
     const beschrijving = document.getElementById(beschrijvingPar).value;
 
-    //url
-    const urlForm = "?" + "name=" + name + "&land=" +
-        land + "&gender=" + gender + "&leeftijdcategorie=" + ageCatagory + "&beschrijving=" + beschrijving;
-
     //redirect to pages
     if (formNum === 1) {
-        window.location.href = "EditProfile.html" + urlForm;
+        window.location.href = "EditProfile.html" ;
     } else {
-        window.location.href = "ProfilePage.html" + urlForm;
+
+        // query om message in database te zetten
+        FYSCloud.API.queryDatabase(
+            "UPDATE user SET firstName = (?) WHERE userID = 1;", [name]
+        )
+
+        window.location.href = "ProfilePage.html";
     }
 }
 
