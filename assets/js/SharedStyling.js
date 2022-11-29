@@ -5,7 +5,7 @@ Js script shared layout
 
 const header = document.querySelector('.nav-header');
 const footer = document.querySelector('.nav-footer');
-
+const dbCon = document.querySelector('.dbCon');
 
 //set header all page
 if(header != null) {
