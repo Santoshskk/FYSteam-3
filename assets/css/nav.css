@@ -1,0 +1,51 @@
+.navTop {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.navTop img {
+    width: 280px;
+}
+
+.navLine {
+    /* height: 20px; */
+    background-color: #D9260F;
+
+    display: flex;
+    justify-content: row;
+    padding: 5px 10px;
+}
+
+.btn {
+    margin: 10px 10px;
+    padding: 10px 30px;
+    border: 1px solid #00BCE2;
+    border-radius: 7px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+}
+
+.btn.signout {
+    background-color: #fff;
+    color: #00BCE2;
+}
+
+.btn:hover {
+    background-color: #00BCE2;
+    color: #fff;
+}
+
+.btn.nav {
+    border: 0px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+.btn.nav:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
