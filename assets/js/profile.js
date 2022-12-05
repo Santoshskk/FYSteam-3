@@ -3,7 +3,7 @@ Tygo
 Javascript script for POST request from profile page to edit profile page
 code could be made cleaner ,but it works ;)
 */
-let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality, user.profileImage  FROM user, userinfo WHERE user.userID = userinfo.userID;";
+let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality  FROM user, userinfo WHERE user.userID = userinfo.userID;";
 const userID = FYSCloud.Session.get("userID");
 
 let form = document.getElementById('form1');
@@ -15,27 +15,22 @@ form?.addEventListener("submit", function (e) {
 
 function updateProfile(arr, formtype) {
 
-    FYSCloud.API.queryDatabase
-    (query).then(function(data) {
-            let counter = 1;
-            for (const [key, value] of Object.entries(data[userID -1])) {
-                console.log(value)
+     FYSCloud.API.queryDatabase
+        (query).then(function(data) {
+         let counter = 1;
+         for (const [key, value] of Object.entries(data[userID -1])) {
 
-                if (formtype == 1) {
-                    if(key === "profileImage") {
-                        console.log(value)
-                        document.querySelector(".profileImg").src = value;
-                    }
-                    else {
-                        document.getElementById(arr[counter - 1]).innerHTML = value;
-                    }
-                }
-                else {
-                    document.getElementById(arr[counter-1]).value = value;
-                }
-
-                counter++;
-            }
+             if(counter <= arr.length) {
+                     if (formtype == 1) {
+                         document.getElementById(arr[counter-1]).innerHTML = value;
+                         console.log(arr[counter-1] + value)
+                     }
+                     else {
+                         document.getElementById(arr[counter-1]).value = value;
+                      }
+             }
+             counter++;
+         }
         }
     );
 }
@@ -50,48 +45,29 @@ form?.addEventListener("submit", function (e) {
     const nationality = document.querySelector("#nationality").value;
     let newProfileImage;
 
+
+    //upload image
+
     FYSCloud.Utils
-        .getDataUrl(document.querySelector("#fileUpload"))
+        .getDataUrl("#fileUpload")
         .then(function(data) {
 
-            let name;
-            FYSCloud.API.listDirectory().then(function (list) {
-                name = "ImgNumber" + (list.length +1) + ".png";
+            newProfileImage = data.url;
+            console.log(data.url)
+            const submittedValues = {
+                firstName: firstname,
+                lastName: lastname,
+                email: email,
+                nationality: nationality,
+                profileImage: newProfileImage
+            };
 
-                FYSCloud.API.uploadFile(
-                    name + ".png",
-                    data.url
-                ).then(function(data) {
+            UpdateDB(2,submittedValues);
 
-                    console.log(data)
-                    newProfileImage = data;
-                    const submittedValues = {
-                        firstName: firstname,
-                        lastName: lastname,
-                        email: email,
-                        nationality: nationality,
-                        profileImage: newProfileImage
-                    };
-                    UpdateDB(2, submittedValues);
-                }).catch(function(reason) {
-                });
-            })
-
-        }).catch(function(reason) {
-        const submittedValues = {
-            firstName: firstname,
-            lastName: lastname,
-            email: email,
-            nationality: nationality,
-            profileImage: null
-        };
-        UpdateDB(2, submittedValues);
-    });
-
-
-    //stop
-
-
+        })
+        .catch(function(reason) {
+            console.log(reason)
+        });
 })
 
 function UpdateDB(formNum, ObjDataCurrentUser) {
@@ -103,12 +79,12 @@ function UpdateDB(formNum, ObjDataCurrentUser) {
     const profileImage = ObjDataCurrentUser.profileImage;
 
     if (formNum === 1) {
-        window.location.href = "EditProfile.html" ;
-    } else {
+           window.location.href = "EditProfile.html" ;
+         } else {
         FYSCloud.API.queryDatabase(
             "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), user.profileImage = (?) WHERE user.userID = 1;", [firstName,lastName,email,nationality,profileImage]
         )
-        window.location.href = "ProfilePage.html";
+       // window.location.href = "ProfilePage.html";
     }
 }
 
