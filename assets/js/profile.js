@@ -45,6 +45,9 @@ form?.addEventListener("submit", function (e) {
     const nationality = document.querySelector("#nationality").value;
     let newProfileImage;
 
+
+    //upload image
+
     FYSCloud.Utils
         .getDataUrl("#fileUpload")
         .then(function(data) {
