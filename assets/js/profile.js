@@ -15,27 +15,27 @@ form?.addEventListener("submit", function (e) {
 
 function updateProfile(arr, formtype) {
 
-     FYSCloud.API.queryDatabase
-        (query).then(function(data) {
-         let counter = 1;
-         for (const [key, value] of Object.entries(data[userID -1])) {
-             console.log(value)
+    FYSCloud.API.queryDatabase
+    (query).then(function(data) {
+            let counter = 1;
+            for (const [key, value] of Object.entries(data[userID -1])) {
+                console.log(value)
 
-                     if (formtype == 1) {
-                         if(key === "profileImage") {
-                             console.log(value)
-                             document.querySelector(".profileImg").src = value;
-                         }
-                         else {
-                             document.getElementById(arr[counter - 1]).innerHTML = value;
-                         }
-                         }
-                     else {
-                         document.getElementById(arr[counter-1]).value = value;
-                      }
+                if (formtype == 1) {
+                    if(key === "profileImage") {
+                        console.log(value)
+                        document.querySelector(".profileImg").src = value;
+                    }
+                    else {
+                        document.getElementById(arr[counter - 1]).innerHTML = value;
+                    }
+                }
+                else {
+                    document.getElementById(arr[counter-1]).value = value;
+                }
 
-             counter++;
-         }
+                counter++;
+            }
         }
     );
 }
@@ -56,25 +56,25 @@ form?.addEventListener("submit", function (e) {
 
             let name;
             FYSCloud.API.listDirectory().then(function (list) {
-               name = "ImgNumber" + (list.length +1) + ".png";
+                name = "ImgNumber" + (list.length +1) + ".png";
 
-            FYSCloud.API.uploadFile(
-                name + ".png",
-                data.url
-            ).then(function(data) {
+                FYSCloud.API.uploadFile(
+                    name + ".png",
+                    data.url
+                ).then(function(data) {
 
-                console.log(data)
-                newProfileImage = data;
-                const submittedValues = {
-                    firstName: firstname,
-                    lastName: lastname,
-                    email: email,
-                    nationality: nationality,
-                    profileImage: newProfileImage
-                };
+                    console.log(data)
+                    newProfileImage = data;
+                    const submittedValues = {
+                        firstName: firstname,
+                        lastName: lastname,
+                        email: email,
+                        nationality: nationality,
+                        profileImage: newProfileImage
+                    };
                     UpdateDB(2, submittedValues);
-            }).catch(function(reason) {
-            });
+                }).catch(function(reason) {
+                });
             })
 
         }).catch(function(reason) {
@@ -103,8 +103,8 @@ function UpdateDB(formNum, ObjDataCurrentUser) {
     const profileImage = ObjDataCurrentUser.profileImage;
 
     if (formNum === 1) {
-           window.location.href = "EditProfile.html" ;
-         } else {
+        window.location.href = "EditProfile.html" ;
+    } else {
         FYSCloud.API.queryDatabase(
             "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), user.profileImage = (?) WHERE user.userID = 1;", [firstName,lastName,email,nationality,profileImage]
         )
