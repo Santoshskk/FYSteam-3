@@ -4,46 +4,76 @@
     <meta charset="UTF-8">
     <title>Registreren</title>
     <link rel="stylesheet" href="assets/css/login/registreer.css">
+    <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
+    <script src="assets/js/config.js"></script>
+
+
 
 </head>
 <body>
 
-<img class="logoregister" src="assets/img/tripbuddylogo.png">
 
-<header>
-    <nav class="footerlogin">
-        <div class="headerText">
-            <img class="huis" src="assets/img/huis.svg">
-            <a class="footerText" href="">Sign In</a>
+
+<div class="container">
+    <div class="header">
+        <img class="logoregister" src="assets/img/tripbuddylogo.png">
+        <p class="logoregister">Registreer om de wereld van TripBuddy te gebruiken!</p>
+        <a href="index.html">
+            <p class="center3">Terug naar hoofdpagina</p></a>
+
+    </div>
+    <form id="form" class="form">
+        <div class="form-control">
+            <label for="firstname">Voornaam</label>
+            <input type="text" placeholder="JohnDoe123" id="firstname" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
         </div>
-    </nav>
-</header>
-<div class="centerRegister">
-    <h1>Registreren</h1>
-    <form method="post" action="ProfilePage.html">
-        <div class="text_fieldR">
-            <input type="text" required>
-            <span></span>
-            <label>Voornaam</label>
+        <div class="form-control">
+            <label for="firstname">Achternaam</label>
+            <input type="text" placeholder="JohnDoe123" id="lastname" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
         </div>
-        <div class="text_fieldR">
-            <input type="text" required>
-            <span></span>
-            <label>Achternaam</label>
+        <div class="form-control">
+            <label for="firstname">Email</label>
+            <input type="email" placeholder="johndoe@email.com" id="email" />
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
         </div>
-        <div class="text_fieldR">
-            <input type="Email" required>
-            <span></span>
-            <label>Email</label>
+        <div class="form-control">
+            <label for="firstname">Wachtwoord</label>
+            <input type="password" placeholder="Wachtwoord" id="password" required=""/>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
         </div>
-        <div class="text_fieldR">
-            <input type="wachtwoord" required>
-            <span></span>
-            <label>Wachtwoord</label>
+        <div class="form-control">
+            <label for="firstname">Wachtwoord check</label>
+            <input type="password" placeholder="Wachtwoord twee" id="password2"/>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error message</small>
         </div>
-        <input type="submit" value="Registreer">
+        <button><span class="linkcolor"><a href="Login.html" target="_blank">Registreer</a></span>
+        </button>
     </form>
+    <div class="container">
+        <p class="center2">Heeft u al een account? <a href="Login.html">Log hier in!</a></p>
+    </div>
 </div>
 
+
+
+
+</div>
+</div>
+
+
+
 </body>
+<script src="assets/js/Registreer.js"></script>
 </html>
