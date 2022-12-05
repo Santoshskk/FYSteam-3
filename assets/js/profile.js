@@ -53,7 +53,7 @@ form?.addEventListener("submit", function (e) {
         .then(function(data) {
 
             newProfileImage = data.url;
-            console.log(data)
+            console.log(data.url)
             const submittedValues = {
                 firstName: firstname,
                 lastName: lastname,
