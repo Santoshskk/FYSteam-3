@@ -1,0 +1,202 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Column container */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 84vh;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    /* flex: 17%; */
+    background-color: #D9260F;
+    padding: 20px;
+    min-height: 100%;
+}
+
+/* Main column */
+.main {
+    flex: 83%;
+    background-color: white;
+    padding: 20px;
+    min-height: 100%;
+}
+
+.profileCard {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgba(181, 181, 181, 0.6);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.profileCard div {
+    padding: 0;
+    display: grid;
+}
+
+.profileCard div label {
+    padding: 0 10px;
+}
+
+.profileImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #dadada;
+}
+
+.profileImg.small {
+    width: 30px;
+    height: 30px;
+}
+
+.sideLinks {
+    display: grid;
+}
+
+.sideLink {
+    margin: 5px 0;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgba(181, 181, 181, 0.2);
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sideLink:hover {
+    background-color: rgba(181, 181, 181, 0.4);
+}
+
+.sideLink.active {
+    background-color: rgba(181, 181, 181, 0.5);
+}
+
+.sideLink.active:hover {
+    background-color: rgba(181, 181, 181, 0.7);
+}
+
+.sideLink a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+
+
+/* Main body */
+.tableParent {
+    background-color: #F6F6F6;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.tableHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-bar {
+    width: 100%;
+    border: 0px;
+    padding: 10px 5px;
+}
+
+.table-btn {
+    border-radius: 5px;
+    padding: 7px 15px 7px 10px;
+
+    color: #fff;
+    background-color: #1B59F8;
+
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.table-btn:hover {
+    background-color: rgba(27, 90, 248, 0.6);
+
+}
+
+table {
+    width: 100%;
+    background-color: #dadada;
+}
+
+table tr td {
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+}
+
+.td-img,
+.td-btn {
+    width: 1%;
+}
+
+.td-name {
+    width: 85%;
+}
+
+
+
+/* Smartphones */
+@media only screen and (max-width: 480px) {
+
+    /* Styles */
+    .side {
+        display: none;
+    }
+    .main {
+        flex: 100%;
+    }
+
+
+    .profileCard {
+        border-radius: 0px;
+        background-color: rgb(217, 38, 15);
+    }
+    
+    .profileCard div label {
+        color: #fff;
+    }
+    
+    .profileImg {
+        border: 0;
+    }
+    
+    .sideLink {
+        margin: 5px;
+        border-radius: 5px;
+        background-color: rgba(217, 38, 15, 0.2);
+        text-decoration: none;
+        font-weight: bold;
+        color: #fff;
+    }
+    
+    .sideLink:hover {
+        background-color: rgba(217, 38, 15, 0.4);
+    }
+    
+    .sideLink.active {
+        background-color: rgba(217, 38, 15, 0.5);
+    }
+    
+    .sideLink.active:hover {
+        background-color: rgba(217, 38, 15, 0.7);
+    }
+}

@@ -3,18 +3,25 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/nav.css">
-    <script src="assets/js/Login.js"></script>
+
+    <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
+    <script src="assets/js/config.js"></script>
 </head>
 
-<nav>
-    <div class="navTop">
-        <img src="assets/img/tripbuddylogo1.png" alt="logo">
+<a href="index.html">
+    <img class="logo" src="assets/img/tripbuddylogo.png">
+</a>
 
-        <button class="btn signout" id="logout">Log out</button>
-    </div>
-    <div class="navLine">
-        <a href="#" class="btn nav">Profiel</a>
-        <a href="#" class="btn nav">Matches</a>
-    </div>
+<nav class="navWithItems">
+    <ul>
+        <li class="Navitems">
+            <a class="" href="index.html">
+
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="navText"><a class="" href="ProfilePage.html">Profiel</a></li>
+        <li class="navText"><a class="" href="MatchPage.html">Matches</a></li>
+    </ul>
+
 </nav>
