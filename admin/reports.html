@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TripBuddy</title>
+
+        <script
+            src="https://kit.fontawesome.com/a3aad2d743.js"
+            crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/adminNav.css" />
+
+        <link rel="stylesheet" href="assets/css/dropdown.css" />
+        <script src="assets/js/dropdown.js"></script>
+
+        <script src="assets/js/search.js"></script>
+
+        <link rel="stylesheet" href="assets/css/sideNav.css" />
+        <link rel="stylesheet" href="assets/css/form.css" />
+    </head>
+
+    <body>
+        <nav>
+            <!-- Smartphone header/nav with togglable sidebar -->
+            <div class="navTop">
+                <a href="index.html">
+                    <img src="assets/img/tripbuddylogo1.png" alt="logo" />
+                </a>
+                <button onclick="myFunction()" class="btn signout">Log out</button>
+            </div>
+            <div class="navLine">
+                <button type="button" class="toggle" id="toggle">
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <div class="profileCard">
+                    <img class="profileImg" src="assets/img/profileimg.png"
+                        alt="" />
+                    <div>
+                        <label style="font-weight: bold">John Doe</label>
+                        <label>j.doe@gmail.com</label>
+                    </div>
+                </div>
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="sideLinks">
+                    <a href="index.html" class="sideLink">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        Users
+                    </a>
+
+                    <a href="reports.html" class="sideLink active">
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        Reports
+                    </a>
+
+                    <a href="#" class="sideLink">
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                        Settings
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="side">
+                <div class="profileCard">
+                    <img class="profileImg" src="assets/img/profileimg.png"
+                        alt="" />
+                    <div>
+                        <label style="font-weight: bold">John Doe</label>
+                        <label>j.doe@gmail.com</label>
+                    </div>
+                </div>
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="sideLinks">
+                    <a href="index.html" class="sideLink">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        Users
+                    </a>
+
+                    <a href="reports.html" class="sideLink active">
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        Reports
+                    </a>
+
+                    <a href="#" class="sideLink">
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                        Settings
+                    </a>
+                </div>
+            </div>
+
+
+    <div class="main">
+        
+    </div>
+</div>
+  
+<div class="footer"></div>
+</body>
+</html>
+<script src="assets/js/sharedStyle.js"></script>
+<script>
+function myFunction() {
+    if (confirm("Are you sure you want to log out?")) {
+        // Save it!
+        console.log("Logged out!");
+    } else {
+        // Do nothing!
+        console.log("Not logged out.");
+    }
+}
+</script>
+<script>
+var btn = document.querySelector(".toggle");
+var modal = document.getElementById("sidebar");
+var btnst = true;
+btn.onclick = function () {
+    if (btnst == true) {
+        document.querySelector(".toggle span").classList.add("toggle");
+        document.getElementById("sidebar").classList.add("sidebarshow");
+        btnst = false;
+    } else if (btnst == false) {
+        document.querySelector(".toggle span").classList.remove("toggle");
+        document.getElementById("sidebar").classList.remove("sidebarshow");
+        btnst = true;
+    }
+};
+</script>
