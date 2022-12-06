@@ -4,7 +4,9 @@
 
 .profileImg {
     float: left;
-    height: 410px;
+    height: 300px;
+    padding-right: 100px;
+
 }
 
 .infoTextUser {
