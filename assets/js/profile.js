@@ -4,7 +4,8 @@ Javascript script for POST request from profile page to edit profile page
 code could be made cleaner , but it works ;)
 */
 const userID = FYSCloud.Session.get("userID");
-let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality, user.profileImage  FROM user, userinfo WHERE user.userID = userinfo.userID;";
+
+let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality, user.profileImage FROM user, userinfo WHERE user.userID = userinfo.userID;";
 
 
 let form = document.getElementById('form1');

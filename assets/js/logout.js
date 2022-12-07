@@ -1,4 +1,9 @@
 
+if (userId == null)
+{
+    window.location.assign('index.html')
+}
+
 document.addEventListener("DOMContentLoaded" ,function() {
 
  document.body.addEventListener('click', logOut)

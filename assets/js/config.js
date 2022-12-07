@@ -1,3 +1,7 @@
+const userId = FYSCloud.Session.get("userID");
+
+
+
 FYSCloud.API.configure({
     url: "https://api.fys.cloud",
     apiKey: "fys_is102_3.CCQFcAnNW1sV6uYi",
