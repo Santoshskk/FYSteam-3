@@ -16,9 +16,11 @@ function getInfo() {
     getDatabse()
 
 }
+let xhr = new XMLHttpRequest()
 
 function getDatabse() {
-    FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [userEmail]).then(data => {
+    FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [userEmail]
+    ).then(data => {
         let psw = data[0].password;
         let adm = data[0].isAdmin.data[0];
         if (psw === password) {
@@ -36,6 +38,10 @@ function getDatabse() {
         }
     }).catch(err => {
         console.log(err);
+        var msg = JSON.stringify({
+            "status ": false,
+            "msg": err
+        })
     })
 }
 
