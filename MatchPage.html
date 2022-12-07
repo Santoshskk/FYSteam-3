@@ -5,35 +5,73 @@
     <title>Matchpagina</title>
     <link rel="stylesheet" href="assets/css/matchpage.css">
     <link rel="stylesheet" href="assets/css/Layout.css">
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
+    <script src="assets/js/config.js"></script>
 </head>
 <body>
 
 <!-- Header -->
 <div class="nav-header"></div>
 
-
-
-<div class="jouw-matches">
-    <h1>Jouw matches</h1>
-    <img  class="fake-persona" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto">
-    <img  class="fake-persona" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto">
-    <img  class="fake-persona" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto">
-</div>
-<div class="mogelijke-matches">
-    <h1>Mogelijke matches</h1>
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
+<div class="row">
+    <div class="side">
+        <div class="profile-user">
+            <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
+            <div>
+                <label>Username</label>
+                <label>Online</label>
+            </div>
+        </div>
+        <div class="profile-user">
+            <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
+            <div>
+                <label>Username</label>
+                <label>Online</label>
+            </div>
+        </div>
+        <div class="profile-user">
+            <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
+            <div>
+                <label>Username</label>
+                <label>Offline</label>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-top">
+            <h1>Mogelijke matches</h1>
+            <div class="dropdown">
+                <select name="geslacht" id="geslacht">
+                    <option selected disabled hidden value="geslacht">Geslacht</option>
+                    <option value="man">Man</option>
+                    <option value="vrouw">Vrouw</option>
+                    <option value="anders">Anders</option>
+                </select>
+                <select name="leeftijd" id="leeftijd">
+                    <option selected disabled hidden value="leeftijd">Leeftijd</option>
+                    <option value="18-25">18-25</option>
+                    <option value="26-30">26-30</option>
+                    <option value="31-35">31-35</option>
+                </select>
+            </div>
+        </div>
+        <div id="gebruikers" > </div>
+        <template id="profiel-template">
+            <div class="profile" id="gebruiker">
+                <p id="naam">Gebruiker</p>
+                <img id="image" src="assets/img/blank-profile-picture-973460__480.webp" alt="profile-picture">
+            </div>
+        </template>
+    </div>
 </div>
 
 
 <!-- footer -->
 <div class="nav-footer"></div>
+<script src="assets/js/match.js"></script>
 <script src="assets/js/SharedStyling.js"></script>
 </body>
 </html>
