@@ -51,3 +51,11 @@
 form {
     margin-left: 100px;
 }
+
+#fileUpload {
+    font-weight: bold;
+    color: dodgerblue;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+}

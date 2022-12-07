@@ -11,7 +11,7 @@ let form = document.getElementById('form1');
 form?.addEventListener("submit", function (e) {
     e.preventDefault();
     let submittedValues = {};
-    UpdateDB(1,submittedValues);
+    UpdateDB(1,submittedValues, false);
 })
 
 function updateProfile(arr, formtype) {
@@ -45,16 +45,29 @@ function updateProfile(arr, formtype) {
         }
     );
 }
-//EventListener submit
-form = document.getElementById('form2');
-form?.addEventListener("submit", function (e) {
 
-    e.preventDefault();
+function getValues(profileImage) {
     const firstname = document.querySelector("#name").value;
     const lastname = document.querySelector("#lastName").value;
     const email = document.querySelector("#email").value;
     const nationality = document.querySelector("#nationality").value;
     let newProfileImage;
+
+    const submittedValues = {
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        nationality: nationality,
+        profileImage: profileImage
+    };
+    return submittedValues;
+}
+
+//EventListener submit
+form = document.getElementById('form2');
+form?.addEventListener("submit", function (e) {
+
+    e.preventDefault();
 
     FYSCloud.Utils
         .getDataUrl(document.querySelector("#fileUpload"))
@@ -71,36 +84,20 @@ form?.addEventListener("submit", function (e) {
 
                     console.log(data)
                     newProfileImage = data;
-                    const submittedValues = {
-                        firstName: firstname,
-                        lastName: lastname,
-                        email: email,
-                        nationality: nationality,
-                        profileImage: newProfileImage
-                    };
-                    UpdateDB(2, submittedValues);
+
+                    UpdateDB(2, getValues(newProfileImage), false);
+
+
                 }).catch(function(reason) {
                 });
             })
 
         }).catch(function(reason) {
-        const submittedValues = {
-            firstName: firstname,
-            lastName: lastname,
-            email: email,
-            nationality: nationality,
-            profileImage: null
-        };
-        UpdateDB(2, submittedValues);
+
+        UpdateDB(2, getValues(null), false);
     });
-
-
-    //stop
-
-
 })
-
-function UpdateDB(formNum, ObjDataCurrentUser) {
+function UpdateDB(formNum, ObjDataCurrentUser, deletedImage) {
 
     const firstName = ObjDataCurrentUser.firstName;
     const lastName = ObjDataCurrentUser.lastName
@@ -113,16 +110,20 @@ function UpdateDB(formNum, ObjDataCurrentUser) {
     } else {
 
         if (profileImage == null) {
-            FYSCloud.API.queryDatabase(
-                "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?) WHERE user.userID = (?);", [firstName, lastName, email, nationality, userID]
-            ).then(function () {
+
+        if(deletedImage) {
+            FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?),user.profileImage = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [firstName, lastName, email, nationality, null, userID, userID]).then(function () {
+                window.location.href = "ProfilePage.html";
+        })}
+        else {
+            FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [firstName, lastName, email, nationality, userID, userID]).then(function () {
                 window.location.href = "ProfilePage.html";
             })
         }
-
+        }
         else {
             FYSCloud.API.queryDatabase(
-                "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), user.profileImage = (?) WHERE user.userID = (?);", [firstName, lastName, email, nationality, profileImage, userID]
+                "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), user.profileImage = (?) WHERE user.userID = (?) AND userinfo.userID = (?);", [firstName, lastName, email, nationality, profileImage, userID, userID]
             ).then(function () {
                 window.location.href = "ProfilePage.html";
             })
@@ -143,3 +144,6 @@ if (location.href.includes("EditProfile")) {
     updateProfile(TextID, 1);
 }
 
+function DeleteProfileImage() {
+    UpdateDB(2, getValues(null), true)
+}
