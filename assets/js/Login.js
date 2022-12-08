@@ -1,3 +1,8 @@
+/**
+ * @author Mete en santosh
+ */
+
+
 document.addEventListener('DOMContentLoaded', start)
 
 function start() {
@@ -19,12 +24,13 @@ function getInfo() {
 let xhr = new XMLHttpRequest()
 
 function getDatabse() {
+    //
     FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [userEmail]
     ).then(data => {
         let psw = data[0].password;
         let adm = data[0].isAdmin.data[0];
         if (psw === password) {
-            // sesion code
+            // sesion code7
             FYSCloud.Session.set("userID", data[0].userID);
             FYSCloud.Session.set("isAdmin", data[0].isAdmin.data[0]);
             if (adm === 1) {
