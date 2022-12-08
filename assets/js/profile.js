@@ -23,7 +23,7 @@ function updateProfile(arr, formtype) {
             for (const [key, value] of Object.entries(data[userID -1])) {
                 console.log(value)
 
-                if (formtype == 1) {
+                if (formtype === 1) {
                     if(key === "profileImage") {
                         console.log(value)
                         const defaultPic = "https://www.showflipper.com/blog/images/default.jpg";
