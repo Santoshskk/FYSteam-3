@@ -8,16 +8,8 @@
             let counter = 1;
             for (const [key, value] of Object.entries(data[userID - 1])) {
 
-            if(HasImage) {
-                if (key === "profileImage") {
-                    console.log(value)
-                    const defaultPic = "https://www.showflipper.com/blog/images/default.jpg";
-                    if (value != null) {
+            if(HasImage && key === "profileImage") {
                         document.getElementById(ImgId).src = value;
-                    } else {
-                        document.getElementById(ImgId).src = defaultPic;
-                    }
-                }
             }
                 switch (tagType) {
                     case "HTMLText":

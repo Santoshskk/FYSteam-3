@@ -3,37 +3,40 @@ Tygo
 Javascript script for POST request from profile page to edit profile page
 code could be made cleaner , but it works ;)
 */
+
 const userID = FYSCloud.Session.get("userID");
+let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality, userinfo.age, userinfo.gender, user.profileImage FROM user, userinfo WHERE user.userID = userinfo.userID;";
+let formProfilePage = document.getElementById('form1');
 
-let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality, user.profileImage FROM user, userinfo WHERE user.userID = userinfo.userID;";
-
-
-let form = document.getElementById('form1');
-form?.addEventListener("submit", function (e) {
+//onclick form profile Page
+formProfilePage?.addEventListener("submit", function (e) {
     e.preventDefault();
     let submittedValues = {};
-    UpdateDB(1,submittedValues, false);
-
+    UpdateDB(1, submittedValues, false);
 })
 
-function getValues(profileImage) {
-    const firstname = document.querySelector("#name").value;
-    const lastname = document.querySelector("#lastName").value;
-    const email = document.querySelector("#email").value;
-    const nationality = document.querySelector("#nationality").value;
-    let newProfileImage;
+//array with id names from inputfields editprofilePage
+const arr = ["name", "lastName", "email", "nationality", "genderInput", "ageText"];
 
-    const submittedValues = {
-        firstName: firstname,
-        lastName: lastname,
-        email: email,
-        nationality: nationality,
+//get values from input fields and return object
+function getValues(profileImage, inputId) {
+
+    let submittedValues = {
         profileImage: profileImage
     };
+
+    //key names obj - array
+    let arr2 = ["firstName", "lastName", "email", "nationality", "gender", "ageText"];
+
+    for (let i = 0; i <= inputId.length - 1; i++) {
+        const item = document.querySelector("#" + inputId[i].toString()).value;
+        submittedValues[arr2[i]] = item
+    }
+
     return submittedValues;
 }
 
-//EventListener submit
+//submit editProfile page
 form = document.getElementById('form2');
 form?.addEventListener("submit", function (e) {
 
@@ -41,69 +44,61 @@ form?.addEventListener("submit", function (e) {
 
     FYSCloud.Utils
         .getDataUrl(document.querySelector("#fileUpload"))
-        .then(function(data) {
+        .then(function (data) {
 
             let name;
             FYSCloud.API.listDirectory().then(function (list) {
-                name = "ImgNumber" + (list.length +1) + ".png";
+                name = "ImgNumber" + (list.length + 1) + ".png";
 
                 FYSCloud.API.uploadFile(
                     name + ".png",
                     data.url
-                ).then(function(data) {
+                ).then(function (data) {
                     newProfileImage = data;
-                    UpdateDB(getValues(newProfileImage), false);
+                    UpdateDB(getValues(newProfileImage, arr), false);
 
-                }).catch(function(reason) {
+                }).catch(function (reason) {
                 });
             })
 
-        }).catch(function(reason) {
+        }).catch(function (reason) {
 
-        UpdateDB(getValues(null), false);
+        UpdateDB(getValues(null, arr), false);
 
     });
 })
-function UpdateDB(ObjDataCurrentUser, deletedImage) {
 
-    const firstName = ObjDataCurrentUser.firstName;
-    const lastName = ObjDataCurrentUser.lastName
-    const email = ObjDataCurrentUser.email;
-    const nationality = ObjDataCurrentUser.nationality;
-    const profileImage = ObjDataCurrentUser.profileImage;
+function UpdateDB(CurrentUser, deletedImage) {
 
     if (location.href.includes("ProfilePage")) {
         window.location.href = "EditProfile.html";
     } else {
 
-        if (profileImage == null) {
+        if (CurrentUser.profileImage == null) {
 
-        if(deletedImage) {
-            FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?),user.profileImage = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [firstName, lastName, email, nationality, null, userID, userID]).then(function () {
-                window.location.href = "ProfilePage.html";
-        })}
-        else {
-            FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [firstName, lastName, email, nationality, userID, userID]).then(function () {
-                window.location.href = "ProfilePage.html";
-            })
-        }
-        }
-        else {
+            if (deletedImage) {
+                FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), userinfo.gender = (?),user.profileImage = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [CurrentUser.firstName, CurrentUser.lastName, CurrentUser.email, CurrentUser.nationality, CurrentUser.gender, null, userID, userID]).then(function () {
+                    window.location.href = "ProfilePage.html";
+                })
+            } else {
+                FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), userinfo.gender = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [CurrentUser.firstName, CurrentUser.lastName, CurrentUser.email, CurrentUser.nationality, CurrentUser.gender, userID, userID]).then(function () {
+                    window.location.href = "ProfilePage.html";
+                })
+            }
+        } else {
             FYSCloud.API.queryDatabase(
-                "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), user.profileImage = (?) WHERE user.userID = (?) AND userinfo.userID = (?);", [firstName, lastName, email, nationality, profileImage, userID, userID]
+                "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), userinfo.gender = (?), user.profileImage = (?) WHERE user.userID = (?) AND userinfo.userID = (?);", [CurrentUser.firstName, CurrentUser.lastName, CurrentUser.email, CurrentUser.nationality, CurrentUser.gender, CurrentUser.profileImage, userID, userID]
             ).then(function () {
                 window.location.href = "ProfilePage.html";
             })
         }
-
     }
 }
 
 //array with names profile page id
-const ProfilePageId = ["userID", "nameText", "lastNameText", "emailText", "land"];
-
+const ProfilePageId = ["userID", "nameText", "lastNameText", "emailText", "land", "age", "gender"];
 //array with names profile page id
-const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality"];
+const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality", "ageText", "genderInput"];
 
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", query, true, "img");
@@ -112,5 +107,5 @@ if (location.href.includes("ProfilePage")) {
 }
 
 function DeleteProfileImage() {
-    UpdateDB(2, getValues(null), true)
+    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg", arr), true)
 }
