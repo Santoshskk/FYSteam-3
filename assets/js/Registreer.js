@@ -3,7 +3,7 @@
  * @type {HTMLElement}
  */
 
-const form = document.getElementById('form');
+let form = document.getElementById('form');
 const firstname = document.getElementById('firstname');
 const lastname = document.getElementById('lastname');
 const email = document.getElementById('email');

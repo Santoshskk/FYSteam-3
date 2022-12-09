@@ -1,11 +1,8 @@
-
-
 //function to GET data from database
     function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
 
     FYSCloud.API.queryDatabase
     (query).then(function(data) {
-
         data = data[0]
             let counter = 1;
             var la = 0;
@@ -13,7 +10,6 @@
                 console.log(key)
             if(HasImage && key === "profileImage") {
                 document.getElementById(ImgId).src = value;
-
             }
                 switch (tagType) {
                     case "HTMLText":
@@ -28,17 +24,17 @@
         }
     );
 }
-
 //
-
 function UpdateUserInformation(CurrentUser) {
-    FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?)",
+    FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?,?,?)",
         [CurrentUser.firstName,
             CurrentUser.lastName,
             CurrentUser.email,
             CurrentUser.nationality,
             CurrentUser.gender,
             CurrentUser.profileImage,
+            CurrentUser.age,
+            CurrentUser.discription,
             userID
         ]).then(function () {
         window.location.href = "ProfilePage.html";
