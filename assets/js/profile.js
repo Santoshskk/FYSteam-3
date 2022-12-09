@@ -13,39 +13,8 @@ form?.addEventListener("submit", function (e) {
     e.preventDefault();
     let submittedValues = {};
     UpdateDB(1,submittedValues, false);
+
 })
-
-function updateProfile(arr, formtype) {
-
-    FYSCloud.API.queryDatabase
-    (query).then(function(data) {
-            let counter = 1;
-            for (const [key, value] of Object.entries(data[userID -1])) {
-                console.log(value)
-
-                if (formtype === 1) {
-                    if(key === "profileImage") {
-                        console.log(value)
-                        const defaultPic = "https://www.showflipper.com/blog/images/default.jpg";
-                        if(value != null) {
-                            document.querySelector(".profileImg").src = value;
-                        } else {
-                            document.querySelector(".profileImg").src = defaultPic;
-                        }
-                    }
-                    else {
-                        document.getElementById(arr[counter - 1]).innerHTML = value;
-                    }
-                }
-                else {
-                    document.getElementById(arr[counter-1]).value = value;
-                }
-
-                counter++;
-            }
-        }
-    );
-}
 
 function getValues(profileImage) {
     const firstname = document.querySelector("#name").value;
@@ -82,12 +51,8 @@ form?.addEventListener("submit", function (e) {
                     name + ".png",
                     data.url
                 ).then(function(data) {
-
-                    console.log(data)
                     newProfileImage = data;
-
-                    UpdateDB(2, getValues(newProfileImage), false);
-
+                    UpdateDB(getValues(newProfileImage), false);
 
                 }).catch(function(reason) {
                 });
@@ -95,10 +60,11 @@ form?.addEventListener("submit", function (e) {
 
         }).catch(function(reason) {
 
-        UpdateDB(2, getValues(null), false);
+        UpdateDB(getValues(null), false);
+
     });
 })
-function UpdateDB(formNum, ObjDataCurrentUser, deletedImage) {
+function UpdateDB(ObjDataCurrentUser, deletedImage) {
 
     const firstName = ObjDataCurrentUser.firstName;
     const lastName = ObjDataCurrentUser.lastName
@@ -106,7 +72,7 @@ function UpdateDB(formNum, ObjDataCurrentUser, deletedImage) {
     const nationality = ObjDataCurrentUser.nationality;
     const profileImage = ObjDataCurrentUser.profileImage;
 
-    if (formNum === 1) {
+    if (location.href.includes("ProfilePage")) {
         window.location.href = "EditProfile.html";
     } else {
 
@@ -133,16 +99,16 @@ function UpdateDB(formNum, ObjDataCurrentUser, deletedImage) {
     }
 }
 
-//profilepage ID names //form type 1
-const TextID = ["userID", "nameText", "lastNameText", "emailText", "land"];
+//array with names profile page id
+const ProfilePageId = ["userID", "nameText", "lastNameText", "emailText", "land"];
 
-//edit profile page ID names //form type 2
-const TextID2 = ["userIDInput", "name", "lastName", "email", "nationality"];
+//array with names profile page id
+const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality"];
 
-if (location.href.includes("EditProfile")) {
-    updateProfile(TextID2, 2);
+if (location.href.includes("ProfilePage")) {
+    GetFromDatabase(ProfilePageId, "HTMLText", query, true, "img");
 } else {
-    updateProfile(TextID, 1);
+    GetFromDatabase(EditProfilePageId, "inputText", query, false, null);
 }
 
 function DeleteProfileImage() {
