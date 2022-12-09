@@ -5,11 +5,15 @@
 
     FYSCloud.API.queryDatabase
     (query).then(function(data) {
-            let counter = 1;
-            for (const [key, value] of Object.entries(data[userID - 1])) {
 
+        data = data[0]
+            let counter = 1;
+            var la = 0;
+            for (const [key, value] of Object.entries(data[userID - 1])) {
+                console.log(key)
             if(HasImage && key === "profileImage") {
-                        document.getElementById(ImgId).src = value;
+                document.getElementById(ImgId).src = value;
+
             }
                 switch (tagType) {
                     case "HTMLText":

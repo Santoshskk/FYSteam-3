@@ -5,7 +5,7 @@ code could be made cleaner , but it works ;)
 */
 
 const userID = FYSCloud.Session.get("userID");
-let query = "SELECT user.userID, user.firstName, user.lastName, user.email, userinfo.nationality, userinfo.age, userinfo.gender, user.profileImage FROM user, userinfo WHERE user.userID = userinfo.userID;";
+let callingStoredProcedure = "CALL GetAllUserInformation()";
 let formProfilePage = document.getElementById('form1');
 
 //onclick form profile Page
@@ -101,9 +101,9 @@ const ProfilePageId = ["userID", "nameText", "lastNameText", "emailText", "land"
 const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality", "ageText", "genderInput"];
 
 if (location.href.includes("ProfilePage")) {
-    GetFromDatabase(ProfilePageId, "HTMLText", query, true, "img");
+    GetFromDatabase(ProfilePageId, "HTMLText", callingStoredProcedure, true, "img");
 } else {
-    GetFromDatabase(EditProfilePageId, "inputText", query, false, null);
+    GetFromDatabase(EditProfilePageId, "inputText", callingStoredProcedure, false, null);
 }
 
 function DeleteProfileImage() {
