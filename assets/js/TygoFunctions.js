@@ -30,25 +30,17 @@
 }
 
 //
-//
-//
-// function UpdateDB2(Obj, tableName, userID) {
-//     const dic = {
-//     };
-//
-//     for (let i = 0; i <= tableName.length -1; i++) {
-//         FYSCloud.API.queryDatabase("SELECT count(*) AS NUMBEROFCOLUMNS FROM information_schema.columns WHERE table_name = ?;"
-//             , [tableName[i]]).then(function (data) {
-//             console.log(data)
-//         })
-//     }
-//     for (const [key, value] of Object.entries(Obj)) {
-//
-//         dict.push({
-//             key:   tableName[0],
-//         });
-//         FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.? = ? WHERE user.userID = (?) AND  userinfo.userID = (?);", [ key, value, userID, userID]);
-//     }
-//     //window.location.href = "ProfilePage.html";
-//
-// }
+
+function UpdateUserInformation(CurrentUser) {
+    FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?)",
+        [CurrentUser.firstName,
+            CurrentUser.lastName,
+            CurrentUser.email,
+            CurrentUser.nationality,
+            CurrentUser.gender,
+            CurrentUser.profileImage,
+            userID
+        ]).then(function () {
+        window.location.href = "ProfilePage.html";
+    })
+}

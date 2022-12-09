@@ -73,26 +73,12 @@ function UpdateDB(CurrentUser, deletedImage) {
     if (location.href.includes("ProfilePage")) {
         window.location.href = "EditProfile.html";
     } else {
-
-        if (CurrentUser.profileImage == null) {
-
             if (deletedImage) {
-                FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), userinfo.gender = (?),user.profileImage = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [CurrentUser.firstName, CurrentUser.lastName, CurrentUser.email, CurrentUser.nationality, CurrentUser.gender, null, userID, userID]).then(function () {
-                    window.location.href = "ProfilePage.html";
-                })
-            } else {
-                FYSCloud.API.queryDatabase("UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), userinfo.gender = (?) WHERE user.userID = (?) AND  userinfo.userID = (?);", [CurrentUser.firstName, CurrentUser.lastName, CurrentUser.email, CurrentUser.nationality, CurrentUser.gender, userID, userID]).then(function () {
-                    window.location.href = "ProfilePage.html";
-                })
+                UpdateUserInformation(CurrentUser);
             }
-        } else {
-            FYSCloud.API.queryDatabase(
-                "UPDATE user, userinfo SET user.firstName = (?), user.lastName = (?), user.email = (?), userinfo.nationality = (?), userinfo.gender = (?), user.profileImage = (?) WHERE user.userID = (?) AND userinfo.userID = (?);", [CurrentUser.firstName, CurrentUser.lastName, CurrentUser.email, CurrentUser.nationality, CurrentUser.gender, CurrentUser.profileImage, userID, userID]
-            ).then(function () {
-                window.location.href = "ProfilePage.html";
-            })
-        }
-    }
+            else {
+               UpdateUserInformation(CurrentUser);
+        }}
 }
 
 //array with names profile page id
