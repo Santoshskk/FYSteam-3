@@ -12,25 +12,12 @@ const password2 = document.getElementById('password2');
 
 document.addEventListener('DOMContentLoaded', function (e) {
 
-
     form.addEventListener('submit', e => {
         e.preventDefault();
 
-        checkInputs();
-        FYSCloud.API.queryDatabase(
-            "SELECT user.email FROM user WHERE email = (?)", [email.value],
-        ).then(function (data) {
-            console.log(data)
-            if (data.length >=1) {
-                alert("Deze email adres is al bij ons bekend. Probeer in te loggen")
-            } else {
-                emailDoesNotExist();
-            }
-        })
-
-        function emailDoesNotExist() {
+        kiop();
             FYSCloud.API.queryDatabase(
-                "SELECT userID FROM user WHERE email = (?)", [email.value]
+                "SELECT userID FROM user WHERE email = (?)", [ email.value]
             ).then(() => {
                     FYSCloud.API.queryDatabase(
                         "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
@@ -56,9 +43,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     })
                 }
             );
-        }
 
-        function checkInputs() {
+        function kiop() {
             // trim to remove the whitespaces
             const firstnameValue = firstname.value.trim();
             const lastnameValue = lastname.value.trim();
@@ -72,25 +58,33 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 setSuccessFor(firstname);
             }
 
+
             if (lastnameValue === '') {
                 setErrorFor(lastname, 'Achternaam kan niet leeg zijn')
             } else {
                 setSuccessFor(lastname)
             }
 
+
             if (emailValue === '') {
                 setErrorFor(email, 'Email kan niet leeg zijn');
-            } else if (!isEmail(emailValue)) {
+            }
+            else if (!isEmail(emailValue)) {
                 setErrorFor(email, 'Niet geldige email');
-            } else {
+            } else if (email.value === "SELECT userID FROM user WHERE email = (?)", [ email.value]){
+                setErrorFor(email,'Deze email is al geregistreerd, probeer in te loggen')
+            }
+            else {
                 setSuccessFor(email);
             }
+
 
             if (passwordValue === '') {
                 setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
             } else {
                 setSuccessFor(password);
             }
+
 
             if (password2Value === '') {
                 setErrorFor(password2, 'Wachtwoord2 kan niet leeg zijn');

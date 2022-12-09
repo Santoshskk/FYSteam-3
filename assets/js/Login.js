@@ -2,7 +2,6 @@
  * @author Mete en santosh
  */
 
-
 document.addEventListener('DOMContentLoaded', start)
 
 function start() {
@@ -18,10 +17,10 @@ let password
 function getInfo() {
    userEmail = document.getElementById('user-username').value
     password = document.getElementById('user-password').value
+
     getDatabse()
 
 }
-let xhr = new XMLHttpRequest()
 
 function getDatabse() {
     //
@@ -30,7 +29,8 @@ function getDatabse() {
         let psw = data[0].password;
         let adm = data[0].isAdmin.data[0];
         if (psw === password) {
-            // sesion code7
+            // sesion code
+
             FYSCloud.Session.set("userID", data[0].userID);
             FYSCloud.Session.set("isAdmin", data[0].isAdmin.data[0]);
             if (adm === 1) {
