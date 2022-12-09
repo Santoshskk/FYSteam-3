@@ -41,32 +41,16 @@
         </div>
     </div>
     <div class="main">
-        <div class="main-top">
-            <h1>Mogelijke matches</h1>
-            <div class="dropdown">
-                <select name="geslacht" id="geslacht">
-                    <option selected disabled hidden value="geslacht">Geslacht</option>
-                    <option value="man">Man</option>
-                    <option value="vrouw">Vrouw</option>
-                    <option value="anders">Anders</option>
-                </select>
-                <select name="leeftijd" id="leeftijd">
-                    <option selected disabled hidden value="leeftijd">Leeftijd</option>
-                    <option value="18-25">18-25</option>
-                    <option value="26-30">26-30</option>
-                    <option value="31-35">31-35</option>
-                </select>
-            </div>
-        </div>
-        <div id="gebruikers" ></div>
+        <h1>Mogelijke matches:</h1>
+        <div id="potentialMatches" ></div>
+        <h1 id="matchVerzoekText">Match verzoeken:</h1>
     </div>
 </div>
 
-
 <template id="profiel-template">
-    <div class="profile" id="gebruiker">
-        <p id="naam">Gebruiker</p>
-        <img id="image" src="assets/img/blank-profile-picture-973460__480.webp" alt="profile-picture">
+    <div class="profile" id="">
+        <img class="potMatchImageClass" id="imagePotMatch" alt="profile-picture">
+        <p id="namePotMatch"></p>
     </div>
 </template>
 
