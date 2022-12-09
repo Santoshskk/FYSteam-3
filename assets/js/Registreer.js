@@ -12,16 +12,17 @@ const password2 = document.getElementById('password2');
 
 document.addEventListener('DOMContentLoaded', function (e) {
 
-
     form.addEventListener('submit', e => {
         e.preventDefault();
 
-        checkInputs();
+        checkInputs(); // form validation
+
+        // Check if email already exists
         FYSCloud.API.queryDatabase(
             "SELECT user.email FROM user WHERE email = (?)", [email.value],
         ).then(function (data) {
             console.log(data)
-            if (data.length >=1) {
+            if (data.length > 0) {
                 alert("Deze email adres is al bij ons bekend. Probeer in te loggen")
             } else {
                 emailDoesNotExist();
@@ -29,33 +30,26 @@ document.addEventListener('DOMContentLoaded', function (e) {
         })
 
         function emailDoesNotExist() {
-            FYSCloud.API.queryDatabase(
-                "SELECT userID FROM user WHERE email = (?)", [email.value]
-            ).then(() => {
-                    FYSCloud.API.queryDatabase(
-                        "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
-                        [0, firstname.value, lastname.value, email.value, password.value]
-                    ).then(() => {
-                        FYSCloud.API.queryDatabase(
-                            "SELECT userID FROM user WHERE email = (?)", [email.value]
-                        ).then(data => {
-                            console.log(data);
-                            FYSCloud.API.queryDatabase(
-                                "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
-                                [data[0].userID, null, null, null, null]
-                            ).then(() => {
-                                // window.location.assign('index.html')
-                            }).catch(err => {
-                                console.log(err);
-                            })
-                        }).catch(err => {
-                            console.log(err);
-                        })
-                    }).catch(err => {
-                        console.log(err);
-                    })
-                }
-            );
+             FYSCloud.API.queryDatabase(
+                 "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
+                 [0, firstname.value, lastname.value, email.value, password.value]
+             ).then(() => {
+                 FYSCloud.API.queryDatabase(
+                     "SELECT userID FROM user WHERE email = (?)", [email.value]
+                 ).then(data => {
+                     console.log(data);
+                     FYSCloud.API.queryDatabase(
+                         "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
+                         [data[0].userID, null, null, null, null]
+                     ).then(() => {
+                         window.location.assign('Login.html');
+                     }).catch(err => {
+                         console.log(err);
+                     })
+                 }).catch(err => {
+                     console.log(err);
+                 })
+             });
         }
 
         function checkInputs() {
@@ -81,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             if (emailValue === '') {
                 setErrorFor(email, 'Email kan niet leeg zijn');
             } else if (!isEmail(emailValue)) {
-                setErrorFor(email, 'Niet geldige email');
+                setErrorFor(email, 'Ongeldige email adres');
             } else {
                 setSuccessFor(email);
             }
@@ -93,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
 
             if (password2Value === '') {
-                setErrorFor(password2, 'Wachtwoord2 kan niet leeg zijn');
+                setErrorFor(password2, 'Dit veld mag niet leeg zijn');
             } else if (passwordValue !== password2Value) {
-                setErrorFor(password2, 'Wachtwoord komt niet overeen');
+                setErrorFor(password2, 'Wachtwoorden komen niet overeen');
             } else {
                 setSuccessFor(password2);
             }
