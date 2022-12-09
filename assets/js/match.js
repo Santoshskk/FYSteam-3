@@ -21,33 +21,23 @@ FYSCloud.API.queryDatabase(
 ).then(function (interests){
 
     let queryVar = "";
-        console.log(interests)
-    // let test = 0;
-    //
-    //     for (const [key, value] of Object.entries(interests[interests])) {
-    //
-    //         console.log(key+value)
-    //
-    //         test++
-    //     }
 
     interests.forEach(interest => {
         for (let key in interest){
-            if(Object.is(interest.length -1, key)){
+            if(interests[interests.length-1] === interest){
                 queryVar += interest[key]
+            }else {
+                queryVar += interest[key] + ","
             }
-            queryVar += interest[key] + ","
         }
     })
 
-    console.log(queryVar)
+    FYSCloud.API.queryDatabase(
+        "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != 1 AND i.interestID IN (1,2) AND (\"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate AND \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate ) AND t.location = \"Spanje\"",
+        [userID, queryVar]
+
+    )
 })
-
-FYSCloud.API.queryDatabase(
-    "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND i.interestID IN (?) AND \"2023-01-03 00:00:00\" BETWEEN t.startDate AND t.endDate AND t.location = Spanje",
-    [userID]
-
-)
 
 console.log("=======================================")
 
