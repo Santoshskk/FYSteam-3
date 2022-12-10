@@ -5,56 +5,34 @@ code could be made cleaner , but it works ;)
 */
 
 const userID = FYSCloud.Session.get("userID");
-let callingStoredProcedure = "CALL GetAllUserInformation()";
+const callingStoredProcedure = "CALL GetAllUserInformation()";
 let formProfilePage = document.getElementById('form1');
 let submittedValues = {};
+
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
-const arr = ["name", "lastName", "email", "nationality", "genderInput", "ageText", "descriptionText"];
+const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput","descriptionText"];
 
-//create object from submitted values input field. -edit profile
-function getValues(profileImage, inputIdArr) {
+//array with names profile page id
+const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "gender", "description"];
 
-    let submittedValues = {
-        profileImage: profileImage
-    };
-    //key names obj - array // must be same names in stored procedure
-    let arr2 = ["firstName", "lastName", "email", "nationality", "gender", "age", "discription"];
-    for (let i = 0; i <= inputIdArr.length -1 ; i++) {
-        const item = document.querySelector("#" + inputIdArr[i]).value;
-        submittedValues[arr2[i]] = item
-    }
-    return submittedValues;
-}
+////////////////
+
+//arrays with names SP (Stored procedure) Must be the same. to pass value to parameters
+let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "gender", "age", "discription"];
 
 //onclick form profile Page
 formProfilePage?.addEventListener("submit", function (e) {
     e.preventDefault();
-    UpdateDB(1, submittedValues);
+    UpdateDB(submittedValues);
 })
 
 //submit editProfile page
 form = document.getElementById('form2');
 
 form?.addEventListener("submit", function (e) {
-
     e.preventDefault();
-    FYSCloud.Utils.getDataUrl(document.querySelector("#fileUpload"))
-        .then(function (data) {
-            let name = "img.png";
-            FYSCloud.API.deleteFile(name);
-                FYSCloud.API.uploadFile(
-                    name,
-                    data.url
-                ).then(function (data) {
-                    newProfileImage = data;
-                    UpdateDB(getValues(newProfileImage, arr), false);
-                }).catch(function (reason) {
-                });
-
-        }).catch(function (reason) {
-        UpdateDB(getValues(null, arr));
-    });
-})
+    UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation);
+});
 
 function UpdateDB(CurrentUser) {
 
@@ -65,11 +43,6 @@ function UpdateDB(CurrentUser) {
     }
 }
 
-//array with names profile page id
-const ProfilePageId = ["userID", "nameText", "lastNameText", "emailText", "land", "age", "gender", "description"];
-//array with names profile page id
-const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality", "ageText", "genderInput","descriptionText"];
-
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", callingStoredProcedure, true, "img");
 } else {
@@ -77,5 +50,5 @@ if (location.href.includes("ProfilePage")) {
 }
 
 function DeleteProfileImage() {
-    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg", arr))
+    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg", EditProfilePageId, SPNames_UpdateUserInformation))
 }
