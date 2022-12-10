@@ -42,18 +42,17 @@ form?.addEventListener("submit", function (e) {
     FYSCloud.Utils
         .getDataUrl(document.querySelector("#fileUpload"))
         .then(function (data) {
-            let name;
-            FYSCloud.API.listDirectory().then(function (list) {
-                name = "ImgNumber" + (list.length + 1) + ".png";
+            let name = "img.png";
+            FYSCloud.API.deleteFile(name);
                 FYSCloud.API.uploadFile(
-                    name + ".png",
+                    name,
                     data.url
                 ).then(function (data) {
                     newProfileImage = data;
                     UpdateDB(getValues(newProfileImage, arr), false);
                 }).catch(function (reason) {
                 });
-            })
+
         }).catch(function (reason) {
         UpdateDB(getValues(null, arr));
     });
@@ -70,8 +69,8 @@ function UpdateDB(CurrentUser) {
 
 //array with names profile page id
 const ProfilePageId = ["userID", "nameText", "lastNameText", "emailText", "land", "age", "gender", "description"];
-//array with names edit profile page id
-const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality", "ageText", "genderInput", "descriptionText"];
+//array with names profile page id
+const EditProfilePageId = ["userIDInput", "name", "lastName", "email", "nationality", "ageText", "genderInput","descriptionText"];
 
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", callingStoredProcedure, true, "img");
