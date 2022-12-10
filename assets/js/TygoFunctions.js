@@ -41,25 +41,3 @@ function UpdateUserInformation(CurrentUser) {
     })
 }
 
-
-// function UploadImage() {
-//     var returnValue;
-//
-//        FYSCloud.Utils.getDataUrl(document.querySelector("#fileUpload"))
-//             .then(function (data) {
-//                 let name = "img.png"
-//                 FYSCloud.API.deleteFile(name);
-//                  test = FYSCloud.API.uploadFile(
-//                     name,
-//                     data.url
-//                 ).then(function (data){
-//
-//                  }).then(function (data) {
-//             return data;
-//         })
-//
-//
-//
-//
-//
-//         }

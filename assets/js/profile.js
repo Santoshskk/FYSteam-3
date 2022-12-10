@@ -7,7 +7,7 @@ code could be made cleaner , but it works ;)
 const userID = FYSCloud.Session.get("userID");
 let callingStoredProcedure = "CALL GetAllUserInformation()";
 let formProfilePage = document.getElementById('form1');
-
+let submittedValues = {};
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
 const arr = ["name", "lastName", "email", "nationality", "genderInput", "ageText", "descriptionText"];
 
@@ -17,7 +17,7 @@ function getValues(profileImage, inputIdArr) {
     let submittedValues = {
         profileImage: profileImage
     };
-    //key names obj - array
+    //key names obj - array // must be same names in stored procedure
     let arr2 = ["firstName", "lastName", "email", "nationality", "gender", "age", "discription"];
     for (let i = 0; i <= inputIdArr.length -1 ; i++) {
         const item = document.querySelector("#" + inputIdArr[i]).value;
@@ -29,18 +29,16 @@ function getValues(profileImage, inputIdArr) {
 //onclick form profile Page
 formProfilePage?.addEventListener("submit", function (e) {
     e.preventDefault();
-    let submittedValues = {};
     UpdateDB(1, submittedValues);
 })
 
-
 //submit editProfile page
 form = document.getElementById('form2');
+
 form?.addEventListener("submit", function (e) {
 
     e.preventDefault();
-    FYSCloud.Utils
-        .getDataUrl(document.querySelector("#fileUpload"))
+    FYSCloud.Utils.getDataUrl(document.querySelector("#fileUpload"))
         .then(function (data) {
             let name = "img.png";
             FYSCloud.API.deleteFile(name);
