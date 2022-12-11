@@ -55,8 +55,25 @@
     overflow: auto;
 }
 
-#matchVerzoekText{
+#sendRequestText{
     position: relative;
+}
+
+#receivedRequestText{
+    position: relative;
+}
+
+#matchButton{
+    background-color: #D9260F;
+    color: white;
+    padding: 15px 30px 15px 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 15px;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
 }
 
 #namePotMatch{
@@ -106,10 +123,6 @@
 .profile-user div label {
     padding: 0 10px;
     font-weight: bold;
-}
-
-.mogelijke-matches {
-    margin-top: 0px;
 }
 
 body {

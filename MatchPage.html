@@ -18,32 +18,21 @@
 
 <div class="row">
     <div class="side">
+        <h1>Trip Buddies:</h1>
         <div class="profile-user">
             <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
             <div>
                 <label>Username</label>
-                <label>Online</label>
-            </div>
-        </div>
-        <div class="profile-user">
-            <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
-            <div>
-                <label>Username</label>
-                <label>Online</label>
-            </div>
-        </div>
-        <div class="profile-user">
-            <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
-            <div>
-                <label>Username</label>
-                <label>Offline</label>
             </div>
         </div>
     </div>
     <div class="main">
-        <h1>Mogelijke matches:</h1>
+        <h1>Mogelijke Buddies:</h1>
+        <p id="potMatchInfoText">Onderstaande buddies zijn geselecteerd naar aanleiding van
+        de opgegeven trip informatie en persoonlijke interesses:</p>
         <div id="potentialMatches" ></div>
-        <h1 id="matchVerzoekText">Match verzoeken:</h1>
+        <h1 id="receivedRequestText">Ontvangen verzoeken:</h1>
+        <h1 id="sendRequestText">Verstuurde verzoeken:</h1>
     </div>
 </div>
 
@@ -63,8 +52,9 @@
         <p id="profileAge"></p>
         <p id="profileNat"></p>
         <p id="profileBio"></p>
-        <p id="profileIntrest">Interesse(s): </p>
+        <p id="profileIntrest"></p>
         <p id="profileTrip"></p>
+        <button type="button" id="matchButton">Maak Buddy!</button>
     </div>
 </div>
 

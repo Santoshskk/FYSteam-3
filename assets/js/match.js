@@ -101,16 +101,41 @@ FYSCloud.API.queryDatabase(
 
                         modal.querySelector("#profileTrip").innerHTML = "Trip info: In " + user.location + " van "
                         + startDate + " tot " + endDate;
-
-
-
-                        // interest nog
                     }
                 })
+
+                // ophalen interesses van potentiële match
+                FYSCloud.API.queryDatabase(
+                    "SELECT name FROM user_interest AS ui INNER JOIN interest AS i ON ui.interestID = i.interestID WHERE ui.userID = (?)",
+                    [potMatchId]
+                ).then(function (data){
+                    console.log(data)
+
+                    let interests = "";
+                    let modal = document.querySelector('#profileModal');
+
+                    for (let interest of data){
+                        if (interest === data[data.length - 1]){
+                            interests += interest.name
+                        }else {
+                            interests += interest.name + ", "
+                        }
+                    }
+
+                    console.log(interests) // temp log
+
+                    modal.querySelector("#profileIntrest").innerHTML = "Interesse(s): " + interests;
+                })
+
             })
         })
     })
 })
+
+document.querySelector("#matchButton").addEventListener("click",function (){
+    console.log("NU MOET ER MAGIE GEBEUREN!")
+})
+
 
 
 
