@@ -65,46 +65,28 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
             if (firstnameValue === '') {
                 setErrorFor(firstname, 'Voornaam kan niet leeg zijn');
-            } else {
-            }
-
-            if (lastnameValue === '') {
+            } else if (lastnameValue === '') {
                 setErrorFor(lastname, 'Achternaam kan niet leeg zijn')
-            } else {
-
-            }
-
-            if (emailValue === '') {
+            } else if (emailValue === '') {
                 setErrorFor(email, 'Email kan niet leeg zijn');
             } else if (!isEmail(emailValue)) {
                 setErrorFor(email, 'Ongeldige email adres');
             }else if (!EmailCheck(emailValue)){
                 setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
-            }
-            else {
-
-            }
-
-            if (passwordValue === '') {
+            } else if (passwordValue === '') {
                 setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
-            } else {
-
-            }
-
-            if (password2Value === '') {
+            } else if (password2Value === '') {
                 setErrorFor(password2, 'Dit veld mag niet leeg zijn');
             } else if (passwordValue !== password2Value) {
                 setErrorFor(password2, 'Wachtwoorden komen niet overeen');
             } else {
-
+                setSuccessFor(firstname);
+                setSuccessFor(lastname)
+                setSuccessFor(email);
+                setSuccessFor(password);
+                setSuccessFor(password2);
+                SignUp();
             }
-            setSuccessFor(firstname);
-            setSuccessFor(lastname)
-            setSuccessFor(email);
-            setSuccessFor(password);
-            setSuccessFor(password2);
-
-            SignUp();
         }
 
         function setErrorFor(input, message) {
