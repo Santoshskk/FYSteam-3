@@ -32,14 +32,30 @@
         de opgegeven trip informatie en persoonlijke interesses:</p>
         <div id="potentialMatches" ></div>
         <h1 id="receivedRequestText">Ontvangen verzoeken:</h1>
+        <div id="receivedMatches" ></div>
         <h1 id="sendRequestText">Verstuurde verzoeken:</h1>
+        <div id="sendMatches" ></div>
     </div>
 </div>
 
 <template id="profiel-template">
-    <div class="profile" id="">
+    <div class="profile">
         <img class="potMatchImageClass" id="imagePotMatch" alt="profile-picture">
         <p id="namePotMatch"></p>
+    </div>
+</template>
+
+<template id="send-profiel-template">
+    <div class="sendProfiles">
+        <img class="potMatchImageClass" id="imageSendMatch" alt="profile-picture">
+        <p id="nameSendMatch"></p>
+    </div>
+</template>
+
+<template id="received-profiel-template">
+    <div class="receivedProfiles">
+        <img class="potMatchImageClass" id="imageReceivedMatch" alt="profile-picture">
+        <p id="nameReceivedMatch"></p>
     </div>
 </template>
 

@@ -51,7 +51,7 @@
 
 /* Einde modal css */
 
-#potentialMatches{
+#potentialMatches, #sendMatches, #receivedMatches{
     overflow: auto;
 }
 
@@ -76,7 +76,7 @@
     cursor: pointer;
 }
 
-#namePotMatch{
+#namePotMatch, #nameSendMatch, #nameReceivedMatch{
     margin-bottom: 5px;
 }
 
@@ -87,7 +87,7 @@
     object-fit: contain;
 }
 
-.profile {
+.profile, .sendProfiles, .receivedProfiles{
     height: auto;
     width: 150px;
     border: 4px solid grey;
