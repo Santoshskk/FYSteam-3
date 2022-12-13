@@ -7,7 +7,6 @@ code could be made cleaner , but it works ;)
 const userID = FYSCloud.Session.get("userID");
 const callingStoredProcedure = "CALL GetAllUserInformation()";
 let formProfilePage = document.getElementById('form1');
-let submittedValues = {};
 
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
 const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput","descriptionText"];
@@ -54,3 +53,8 @@ function DeleteProfileImage() {
     UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg",
         EditProfilePageId, SPnames_SetProfileImageDefault), "SetProfileImage")
 }
+
+//
+
+
+

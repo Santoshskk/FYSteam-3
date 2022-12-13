@@ -1,4 +1,13 @@
+//Dynamic functions
+
 //function to GET data from database
+/*
+idArray = array with names of html tags. these are the items where you want to display the data database
+tagType = type of tag to display
+query = the SELECT query you want use to get from database
+HasImage = boolean. checks if page has a image
+ImgId = img url. not nessecary
+ */
     function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
 
     FYSCloud.API.queryDatabase(query).then(function(data) {
@@ -23,6 +32,11 @@
     );
 }
 
+//function to call SP and make changes to database
+/*
+Data = this is return value from getValues(). object with all values that user has submitted to fields
+expectedSP = stored procedure u want to use
+ */
 function UpdateDB(Data, expectedSP) {
 
     switch (expectedSP) {
@@ -36,6 +50,15 @@ function UpdateDB(Data, expectedSP) {
 }
 
 //function to upload image to fyscloud. and save in database with call to updateDB function
+
+/*
+parameters
+submittedValuesArr = array with submitted values to use in getValues() function
+fileUploadId = id of fileUpload tag in html.
+SPNamesArr = Stored procedure array with names to use in getValues()
+expectedSP = Stored procedure u want use.
+ */
+
 function UploadImage(submittedValuesArr, fileUploadId, SPNamesArr, expectedSP) {
 
     FYSCloud.Utils.getDataUrl(document.querySelector("#" + fileUploadId))
