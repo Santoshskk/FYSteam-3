@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                          "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
                          [data[0].userID, null, null, null, null]
                      ).then(() => {
-                         window.location.assign('Login.html');
+                         // window.location.assign('Login.html');
                      }).catch(err => {
                          console.log(err);
                      })
