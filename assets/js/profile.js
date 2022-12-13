@@ -23,7 +23,7 @@ let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "national
 //onclick form profile Page
 formProfilePage?.addEventListener("submit", function (e) {
     e.preventDefault();
-    UpdateDB(submittedValues);
+    window.location.href = "EditProfile.html";
 })
 
 //submit editProfile page
@@ -31,17 +31,9 @@ form = document.getElementById('form2');
 
 form?.addEventListener("submit", function (e) {
     e.preventDefault();
-    UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation);
+    UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
 });
 
-function UpdateDB(CurrentUser) {
-
-    if (location.href.includes("ProfilePage")) {
-        window.location.href = "EditProfile.html";
-    } else {
-        UpdateUserInformation(CurrentUser);
-    }
-}
 
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", callingStoredProcedure, true, "img");
@@ -50,5 +42,6 @@ if (location.href.includes("ProfilePage")) {
 }
 
 function DeleteProfileImage() {
-    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg", EditProfilePageId, SPNames_UpdateUserInformation))
+    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg",
+        EditProfilePageId, SPNames_UpdateUserInformation))
 }

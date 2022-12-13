@@ -22,25 +22,18 @@
         }
     );
 }
-//function to call stored procedure to get all user information
-function UpdateUserInformation(CurrentUser) {
-    FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?,?,?)",
-        [CurrentUser.firstName,
-            CurrentUser.lastName,
-            CurrentUser.email,
-            CurrentUser.nationality,
-            CurrentUser.gender,
-            CurrentUser.profileImage,
-            CurrentUser.age,
-            CurrentUser.discription,
-            userID
-        ]).then(function () {
-        window.location.href = "ProfilePage.html";
-    })
+
+function UpdateDB(Data, expectedSP) {
+
+    switch (expectedSP) {
+        case "UpdateUserInformation":
+            UpdateUserInformation(Data);
+            break;
+    }
 }
 
-//function to upload image to fyscloud
-function UploadImage(submittedValuesArr, fileUploadId, SPNamesArr) {
+//function to upload image to fyscloud. and save in database with call to updateDB function
+function UploadImage(submittedValuesArr, fileUploadId, SPNamesArr, expectedSP) {
 
     FYSCloud.Utils.getDataUrl(document.querySelector("#" + fileUploadId))
         .then(function (data) {
@@ -51,16 +44,24 @@ function UploadImage(submittedValuesArr, fileUploadId, SPNamesArr) {
                 data.url
             ).then(function (data) {
                 newProfileImage = data;
-                UpdateDB(getValues(newProfileImage, submittedValuesArr, SPNamesArr), false);
+                UpdateDB(getValues(newProfileImage, submittedValuesArr, SPNamesArr), expectedSP);
             }).catch(function (reason) {
                 console.log(reason)
             });
         }).catch(function (reason) {
-        UpdateDB(getValues(null, submittedValuesArr,SPNamesArr));
+        UpdateDB(getValues(null, submittedValuesArr,SPNamesArr), expectedSP);
     });
 }
 
 //create object from submitted values for input field. to send to SP.
+/*
+parameters
+profileImage = if nessecary url to image. can be set to null
+inputIdArr = id names (in HTML) to get value from input fields
+storedProceduresVarNames = array with strings. must be the same name as stored procedure parameters
+                           want to use. to create object to call SP
+
+ */
 function getValues(profileImage, inputIdArr, storedProceduresVarNames) {
 
     let submittedValues = {
