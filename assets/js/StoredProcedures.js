@@ -1,4 +1,6 @@
-//function to call stored procedure to get all user information
+//script with all Stored procedures
+//Tygo
+
 function UpdateUserInformation(CurrentUser) {
     FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?,?,?)",
         [CurrentUser.firstName,
