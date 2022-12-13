@@ -29,6 +29,9 @@ function UpdateDB(Data, expectedSP) {
         case "UpdateUserInformation":
             UpdateUserInformation(Data);
             break;
+        case "SetProfileImage":
+            SetProfileImage(Data);
+            break;
     }
 }
 
@@ -37,11 +40,13 @@ function UploadImage(submittedValuesArr, fileUploadId, SPNamesArr, expectedSP) {
 
     FYSCloud.Utils.getDataUrl(document.querySelector("#" + fileUploadId))
         .then(function (data) {
-            let name = "img.png";
-            FYSCloud.API.deleteFile(name);
-            FYSCloud.API.uploadFile(
-                name,
-                data.url
+            let name;
+            FYSCloud.API.listDirectory().then(function (list) {
+                name = "ImgNumber" + (list.length + 1) + ".png";
+
+                FYSCloud.API.uploadFile(
+                    name + ".png",
+                    data.url
             ).then(function (data) {
                 newProfileImage = data;
                 UpdateDB(getValues(newProfileImage, submittedValuesArr, SPNamesArr), expectedSP);
@@ -51,7 +56,7 @@ function UploadImage(submittedValuesArr, fileUploadId, SPNamesArr, expectedSP) {
         }).catch(function (reason) {
         UpdateDB(getValues(null, submittedValuesArr,SPNamesArr), expectedSP);
     });
-}
+})}
 
 //create object from submitted values for input field. to send to SP.
 /*
@@ -65,8 +70,12 @@ storedProceduresVarNames = array with strings. must be the same name as stored p
 function getValues(profileImage, inputIdArr, storedProceduresVarNames) {
 
     let submittedValues = {
-        profileImage: profileImage
     };
+
+    if(profileImage != null) {
+        submittedValues["profileImage"] = profileImage;
+    }
+
     for (let i = 0; i <= inputIdArr.length -1 ; i++) {
         const item = document.querySelector("#" + inputIdArr[i]).value;
         submittedValues[storedProceduresVarNames[i]] = item

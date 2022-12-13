@@ -18,7 +18,9 @@ const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "
 ////////////////
 
 //arrays with names SP (Stored procedure) Must be the same. to pass value to parameters
-let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "gender", "age", "discription"];
+let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age","gender", "discription"];
+let SPnames_SetProfileImageDefault = "profileImg";
+
 
 //onclick form profile Page
 formProfilePage?.addEventListener("submit", function (e) {
@@ -31,8 +33,15 @@ form = document.getElementById('form2');
 
 form?.addEventListener("submit", function (e) {
     e.preventDefault();
-    UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
-});
+    let uploadImage = document.getElementById("fileUpload");
+
+    if(uploadImage.files.length === 0) {
+        UpdateDB(getValues(null, EditProfilePageId, SPNames_UpdateUserInformation), "UpdateUserInformation");
+    }
+    else {
+        UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
+    }
+    });
 
 
 if (location.href.includes("ProfilePage")) {
@@ -43,5 +52,5 @@ if (location.href.includes("ProfilePage")) {
 
 function DeleteProfileImage() {
     UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg",
-        EditProfilePageId, SPNames_UpdateUserInformation))
+        EditProfilePageId, SPnames_SetProfileImageDefault), "SetProfileImage")
 }

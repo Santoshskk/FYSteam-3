@@ -6,9 +6,19 @@ function UpdateUserInformation(CurrentUser) {
             CurrentUser.email,
             CurrentUser.nationality,
             CurrentUser.gender,
-            CurrentUser.profileImage,
             CurrentUser.age,
             CurrentUser.discription,
+            CurrentUser.profileImage,
+            userID
+        ]).then(function () {
+        window.location.href = "ProfilePage.html";
+    })
+}
+
+function SetProfileImage(CurrentUser) {
+    FYSCloud.API.queryDatabase("CALL SetProfileImage(?,?)",
+        [
+            CurrentUser.profileImage,
             userID
         ]).then(function () {
         window.location.href = "ProfilePage.html";
