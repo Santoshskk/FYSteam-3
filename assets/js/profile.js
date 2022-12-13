@@ -9,7 +9,7 @@ const callingStoredProcedure = "CALL GetAllUserInformation()";
 let formProfilePage = document.getElementById('form1');
 
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
-const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput","descriptionText"];
+const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput", "descriptionText"];
 
 //array with names profile page id
 const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "gender", "description"];
@@ -17,7 +17,7 @@ const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "
 ////////////////
 
 //arrays with names SP (Stored procedure) Must be the same. to pass value to parameters
-let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age","gender", "discription"];
+let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age", "gender", "discription"];
 let SPnames_SetProfileImageDefault = "profileImg";
 
 
@@ -34,13 +34,12 @@ form?.addEventListener("submit", function (e) {
     e.preventDefault();
     let uploadImage = document.getElementById("fileUpload");
 
-    if(uploadImage.files.length === 0) {
+    if (uploadImage.files.length === 0) {
         UpdateDB(getValues(null, EditProfilePageId, SPNames_UpdateUserInformation), "UpdateUserInformation");
-    }
-    else {
+    } else {
         UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
     }
-    });
+});
 
 
 if (location.href.includes("ProfilePage")) {

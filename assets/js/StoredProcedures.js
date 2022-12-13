@@ -1,6 +1,12 @@
 //script with all Stored procedures
 //Tygo
 
+function GetAllUserInformation() {
+    FYSCloud.API.queryDatabase("CALL GetAllUserInformation(?)",
+        [
+            userID
+        ])
+}
 function UpdateUserInformation(CurrentUser) {
     FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?,?,?)",
         [CurrentUser.firstName,
@@ -16,6 +22,8 @@ function UpdateUserInformation(CurrentUser) {
         window.location.href = "ProfilePage.html";
     })
 }
+
+
 
 function SetProfileImage(CurrentUser) {
     FYSCloud.API.queryDatabase("CALL SetProfileImage(?,?)",
