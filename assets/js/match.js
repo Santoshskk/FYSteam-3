@@ -1,7 +1,3 @@
-/*
-Ophalen data van interest
- */
-
 // user is nu nog 1, geen link met login
 const userID = 1     //FYSCloud.Session.get("userID")
 
@@ -193,7 +189,25 @@ FYSCloud.API.queryDatabase(
         const sendProfiles = document.querySelectorAll(".sendProfiles");
         sendProfiles.forEach(sendProfile=> {
             sendProfile.addEventListener("click", function (e) {
-                console.log("AHHHHHHHHHHHH")
+                // krijg modal
+                let modal = document.querySelector('#sendMatchModal');
+
+                // wanneer user op profiel klikt open modal
+                modal.style.display = "block";
+
+                let span = document.querySelector("#closeSpanSend");
+
+                // wanneer user op kruisje klikt, sluiten
+                span.addEventListener("click", function () {
+                    modal.style.display = "none";
+                })
+
+                // wanneer user naast modal klikt, modal sluiten
+                window.onclick = function (event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                }
             })
         })
     }
@@ -233,7 +247,25 @@ FYSCloud.API.queryDatabase(
         const receivedProfiles = document.querySelectorAll(".receivedProfiles");
         receivedProfiles.forEach(receivedProfile=> {
             receivedProfile.addEventListener("click", function (e) {
-                console.log("AHHHHHHHHHHHH")
+                // krijg modal
+                let modal = document.querySelector('#receivedMatchModal');
+
+                // wanneer user op profiel klikt open modal
+                modal.style.display = "block";
+
+                let span = document.querySelector("#closeSpanReceived");
+
+                // wanneer user op kruisje klikt, sluiten
+                span.addEventListener("click", function () {
+                    modal.style.display = "none";
+                })
+
+                // wanneer user naast modal klikt, modal sluiten
+                window.onclick = function (event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                }
             })
         })
     }
