@@ -3,7 +3,7 @@
  * @type {HTMLElement}
  */
 
-let form = document.getElementById('form');
+const form = document.getElementById('form');
 const firstname = document.getElementById('firstname');
 const lastname = document.getElementById('lastname');
 const email = document.getElementById('email');
@@ -12,24 +12,27 @@ const password2 = document.getElementById('password2');
 
 document.addEventListener('DOMContentLoaded', function (e) {
 
+
     form.addEventListener('submit', e => {
         e.preventDefault();
 
         checkInputs(); // form validation
 
         // Check if email already exists
-        FYSCloud.API.queryDatabase(
-            "SELECT user.email FROM user WHERE email = (?)", [email.value],
-        ).then(function (data) {
-            console.log(data)
-            if (data.length > 0) {
-                alert("Deze email adres is al bij ons bekend. Probeer in te loggen")
-            } else {
-                emailDoesNotExist();
-            }
-        })
+        function EmailCheck() {
+            FYSCloud.API.queryDatabase(
+                "SELECT user.email FROM user WHERE email = (?)", [email.value],
+            ).then(function (data) {
+                console.log(data)
+                if (data.length > 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+        }
 
-        function emailDoesNotExist() {
+        function SignUp() {
              FYSCloud.API.queryDatabase(
                  "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
                  [0, firstname.value, lastname.value, email.value, password.value]
@@ -42,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                          "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
                          [data[0].userID, null, null, null, null]
                      ).then(() => {
-                         window.location.assign('Login.html');
+                         window.location.assign('index.html');
                      }).catch(err => {
                          console.log(err);
                      })
@@ -62,36 +65,27 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
             if (firstnameValue === '') {
                 setErrorFor(firstname, 'Voornaam kan niet leeg zijn');
-            } else {
-                setSuccessFor(firstname);
-            }
-
-            if (lastnameValue === '') {
+            } else if (lastnameValue === '') {
                 setErrorFor(lastname, 'Achternaam kan niet leeg zijn')
-            } else {
-                setSuccessFor(lastname)
-            }
-
-            if (emailValue === '') {
+            } else if (emailValue === '') {
                 setErrorFor(email, 'Email kan niet leeg zijn');
             } else if (!isEmail(emailValue)) {
                 setErrorFor(email, 'Ongeldige email adres');
-            } else {
-                setSuccessFor(email);
-            }
-
-            if (passwordValue === '') {
+            }else if (!EmailCheck(emailValue)){
+                setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
+            } else if (passwordValue === '') {
                 setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
-            } else {
-                setSuccessFor(password);
-            }
-
-            if (password2Value === '') {
+            } else if (password2Value === '') {
                 setErrorFor(password2, 'Dit veld mag niet leeg zijn');
             } else if (passwordValue !== password2Value) {
                 setErrorFor(password2, 'Wachtwoorden komen niet overeen');
             } else {
+                setSuccessFor(firstname);
+                setSuccessFor(lastname)
+                setSuccessFor(email);
+                setSuccessFor(password);
                 setSuccessFor(password2);
+                SignUp();
             }
         }
 
