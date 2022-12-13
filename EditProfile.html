@@ -10,7 +10,7 @@
 
     <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
     <script src="assets/js/config.js"></script>
-    <script src="assets/js/logout.js"></script>
+
 
 </head>
 <body>
@@ -30,15 +30,15 @@
         <div class="column">
             <table>
                 <tr>
-                        <input type="hidden" class="inputText" id="userIDInput" autocomplete="off">
+                        <input type="hidden" class="inputText" id="userIDInput">
                     <td>
                         <label>Voornaam</label>
-                        <input type="text" class="inputText" id="name" autocomplete="off">
+                        <input type="text" class="inputText" id="name">
                     </td>
 
                     <td>
                         <label>Achternaam</label>
-                        <input type="text" class="inputText" id="lastName" autocomplete="off">
+                        <input type="text" class="inputText" id="lastName">
                     </td>
 
                 </tr>
@@ -46,33 +46,45 @@
                 <tr>
                     <td>
                         <label>email</label>
-                        <input type="email" class="inputText" id="email" autocomplete="off">
+                        <input type="email" class="inputText" id="email">
                     </td>
 
                     <td>
+                        <label>age</label>
+                        <input type="text" class="inputText" id="ageText">
+                    </td>
+                    <td>
                         <label>Nationaliteit</label>
-                        <input type="text" class="inputText" id="nationality" autocomplete="off">
+                        <input type="text" class="inputText" id="nationality">
+                    </td>
+                    <td>
+                        <select id="genderInput">
+                            <option value="Man">Man</option>
+                            <option value="Vrouw">Vrouw</option>
+                            <option value="anders">anders</option>
+                        </select>
+                        <label>Gender</label>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label>ProfielFoto</label>
-                        <input  type="file" id="fileUpload" class="inputText" autocomplete="off">
-                    </td>
 
+                    <td>
+
+                        <textarea id="descriptionText"></textarea>
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
-    <button type="button" onclick="DeleteProfileImage()" id="test"> verwijder profiel foto </button>
+
+    <button type="button" onclick="DeleteProfileImage()">Delete profiel foto</button>
+    <input  type="file" id="fileUpload" class="form-control">
     <input type="submit" value="Save" class="inputButton" name="name">
 </form>
 
 
-
-
-
 <div class="nav-footer"></div>
+<script src="assets/js/TygoFunctions.js"></script>
 <script src="assets/js/profile.js"></script>
 <script src="assets/js/SharedStyling.js"></script>
 

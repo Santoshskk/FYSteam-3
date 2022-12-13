@@ -12,39 +12,50 @@ const password2 = document.getElementById('password2');
 
 document.addEventListener('DOMContentLoaded', function (e) {
 
+
     form.addEventListener('submit', e => {
         e.preventDefault();
 
-        kiop();
-            FYSCloud.API.queryDatabase(
-                "SELECT userID FROM user WHERE email = (?)", [ email.value]
-            ).then(() => {
-                    FYSCloud.API.queryDatabase(
-                        "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
-                        [0, firstname.value, lastname.value, email.value, password.value]
-                    ).then(() => {
-                        FYSCloud.API.queryDatabase(
-                            "SELECT userID FROM user WHERE email = (?)", [email.value]
-                        ).then(data => {
-                            console.log(data);
-                            FYSCloud.API.queryDatabase(
-                                "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
-                                [data[0].userID, null, null, null, null]
-                            ).then(() => {
-                                // window.location.assign('index.html')
-                            }).catch(err => {
-                                console.log(err);
-                            })
-                        }).catch(err => {
-                            console.log(err);
-                        })
-                    }).catch(err => {
-                        console.log(err);
-                    })
-                }
-            );
+        checkInputs(); // form validation
 
-        function kiop() {
+        // Check if email already exists
+        function EmailCheck() {
+            FYSCloud.API.queryDatabase(
+                "SELECT user.email FROM user WHERE email = (?)", [email.value],
+            ).then(function (data) {
+                console.log(data)
+                if (data.length > 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+        }
+
+        function SignUp() {
+             FYSCloud.API.queryDatabase(
+                 "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
+                 [0, firstname.value, lastname.value, email.value, password.value]
+             ).then(() => {
+                 FYSCloud.API.queryDatabase(
+                     "SELECT userID FROM user WHERE email = (?)", [email.value]
+                 ).then(data => {
+                     console.log(data);
+                     FYSCloud.API.queryDatabase(
+                         "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
+                         [data[0].userID, null, null, null, null]
+                     ).then(() => {
+                         window.location.assign('index.html');
+                     }).catch(err => {
+                         console.log(err);
+                     })
+                 }).catch(err => {
+                     console.log(err);
+                 })
+             });
+        }
+
+        function checkInputs() {
             // trim to remove the whitespaces
             const firstnameValue = firstname.value.trim();
             const lastnameValue = lastname.value.trim();
@@ -55,44 +66,45 @@ document.addEventListener('DOMContentLoaded', function (e) {
             if (firstnameValue === '') {
                 setErrorFor(firstname, 'Voornaam kan niet leeg zijn');
             } else {
-                setSuccessFor(firstname);
             }
-
 
             if (lastnameValue === '') {
                 setErrorFor(lastname, 'Achternaam kan niet leeg zijn')
             } else {
-                setSuccessFor(lastname)
-            }
 
+            }
 
             if (emailValue === '') {
                 setErrorFor(email, 'Email kan niet leeg zijn');
-            }
-            else if (!isEmail(emailValue)) {
-                setErrorFor(email, 'Niet geldige email');
-            } else if (email.value === "SELECT userID FROM user WHERE email = (?)", [ email.value]){
-                setErrorFor(email,'Deze email is al geregistreerd, probeer in te loggen')
+            } else if (!isEmail(emailValue)) {
+                setErrorFor(email, 'Ongeldige email adres');
+            }else if (!EmailCheck(emailValue)){
+                setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
             }
             else {
-                setSuccessFor(email);
-            }
 
+            }
 
             if (passwordValue === '') {
                 setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
             } else {
-                setSuccessFor(password);
-            }
 
+            }
 
             if (password2Value === '') {
-                setErrorFor(password2, 'Wachtwoord2 kan niet leeg zijn');
+                setErrorFor(password2, 'Dit veld mag niet leeg zijn');
             } else if (passwordValue !== password2Value) {
-                setErrorFor(password2, 'Wachtwoord komt niet overeen');
+                setErrorFor(password2, 'Wachtwoorden komen niet overeen');
             } else {
-                setSuccessFor(password2);
+
             }
+            setSuccessFor(firstname);
+            setSuccessFor(lastname)
+            setSuccessFor(email);
+            setSuccessFor(password);
+            setSuccessFor(password2);
+
+            SignUp();
         }
 
         function setErrorFor(input, message) {

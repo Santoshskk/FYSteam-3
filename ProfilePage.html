@@ -14,14 +14,13 @@
     <script src="assets/js/logout.js"></script>
 </head>
 <body>
-
 <div class="nav-header"></div>
 
 <form id="form1" action="EditProfile.html">
 
     <div class="userProfile">
 
-        <img class="profileImg" src="https://www.showflipper.com/blog/images/default.jpg" alt="...">
+        <img id="img" class="profileImg" src="" alt="...">
 
 
         <p style="display: none" id = "userID"></p>
@@ -37,12 +36,23 @@
         <p class="infoTextUser">Land: </p>
         <p class="Uservalue" id="land"></p>
 
+
+        <p class="infoTextUser">Gender: </p>
+        <p class="Uservalue" id="gender"></p>
+
+        <p class="infoTextUser">age: </p>
+        <p class="Uservalue" id="age"></p>
+
+        <p class="infoTextUser">Biografie: </p>
+        <p class="Uservalue" id="description"></p>
+
         <input id="submit" type="submit" value="Edit profile" class="inputText" name="name">
     </div>
 
 </form>
 
 <div class="nav-footer"></div>
+<script src="assets/js/TygoFunctions.js"></script>
 <script src="assets/js/profile.js"></script>
 <script src="assets/js/SharedStyling.js"></script>
 </body>
