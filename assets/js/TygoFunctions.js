@@ -4,6 +4,11 @@
 /*
 idArray = array with names of html tags. these are the items where you want to display the data database
 tagType = type of tag to display
+1. HTMLTEXT = all text type. [<h1>, <p> etc]
+2. inputText = input fields of type text
+3. log = set values from database in console
+4. dropdown = select fields (dropdown)
+
 query = the SELECT query you want use to get from database. is type array. index 0 is query to call SP. rest is parameters
 HasImage = boolean. checks if page has a image
 ImgId = img url. not nessecary if there is no image
