@@ -21,7 +21,7 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
     FYSCloud.API.queryDatabase(query[0], [paramaters]).then(function (data) {
             data = data[0];
         let array = [];
-            if(data.length < 99) {
+            if(data.length === 1) {
                 data = data[0];
             }
             let counter = 1;
@@ -40,7 +40,11 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                         console.log(value.name);
                         break;
                     case "dropdown":
-                        array.push(value.name);
+
+
+                            array.push(value.name);
+
+
                         if(array.length === data.length) {
                             populateDropdown(idArray, array)
                         }
@@ -126,11 +130,11 @@ function getValues(profileImage, inputIdArr, storedProceduresVarNames) {
 }
 
 function populateDropdown(inputId ,OptionsArr) {
-    var select = document.getElementById(inputId);
+    const select = document.getElementById(inputId);
 
-    for(var i = 0; i < OptionsArr.length; i++) {
-        var opt = OptionsArr[i];
-        var el = document.createElement("option");
+    for(let i = 0; i < OptionsArr.length; i++) {
+        const opt = OptionsArr[i];
+        const el = document.createElement("option");
         el.textContent = opt;
         el.value = opt;
         select.appendChild(el);

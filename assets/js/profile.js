@@ -64,8 +64,11 @@ editTripBtn?.addEventListener("click", function (e) {
     window.location.href = "EditTrip.html";
 })
 
+
+
 if(location.href.includes("EditTrip")) {
-    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
+    //GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
+    GetFromDatabase("interestSelect", "dropdown", GetAllInterest(), false, null);
 }
 
 

@@ -41,3 +41,7 @@ function SetProfileImage(CurrentUser) {
 function GetAllCountry() {
     return ["CALL GetAllCountry"];
 }
+
+function GetAllInterest() {
+    return ["CALL GetAllInterests"];
+}
