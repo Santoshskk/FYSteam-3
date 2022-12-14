@@ -4,17 +4,23 @@
 /*
 idArray = array with names of html tags. these are the items where you want to display the data database
 tagType = type of tag to display
-query = the SELECT query you want use to get from database
+query = the SELECT query you want use to get from database. is type array. index 0 is query to call SP. rest is parameters
 HasImage = boolean. checks if page has a image
 ImgId = img url. not nessecary if there is no image
  */
 function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
-
-    FYSCloud.API.queryDatabase(query).then(function (data) {
-            data = data[0]
+    let paramaters = query[1];
+    if(query.length === 1) {
+        paramaters = null;
+    }
+    FYSCloud.API.queryDatabase(query[0], [paramaters]).then(function (data) {
+            data = data[0];
+        let array = [];
+            if(data.length < 99) {
+                data = data[0];
+            }
             let counter = 1;
-            for (const [key, value] of Object.entries(data[userID - 1])) {
-                console.log(key)
+            for (const [key, value] of Object.entries(data)) {
                 if (HasImage && key === "profileImage") {
                     document.getElementById(ImgId).src = value;
                 }
@@ -25,7 +31,15 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                     case "inputText":
                         document.getElementById(idArray[counter - 1]).value = value;
                         break;
-                }
+                    case "log":
+                        console.log(value.name);
+                        break;
+                    case "dropdown":
+                        array.push(value.name);
+                        if(array.length === data.length) {
+                            populateDropdown(idArray, array)
+                        }
+                        }
                 counter++;
             }
         }
@@ -104,4 +118,16 @@ function getValues(profileImage, inputIdArr, storedProceduresVarNames) {
         submittedValues[storedProceduresVarNames[i]] = item
     }
     return submittedValues;
+}
+
+function populateDropdown(inputId ,OptionsArr) {
+    var select = document.getElementById(inputId);
+
+    for(var i = 0; i < OptionsArr.length; i++) {
+        var opt = OptionsArr[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+    }
 }

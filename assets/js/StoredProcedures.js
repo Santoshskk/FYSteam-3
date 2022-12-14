@@ -1,12 +1,17 @@
 //script with all Stored procedures
 //Tygo
 
+
+//returns array.
+/*
+1: call to store procedure
+2: parameters SP
+ */
 function GetAllUserInformation() {
-    FYSCloud.API.queryDatabase("CALL GetAllUserInformation(?)",
-        [
-            userID
-        ])
+   return ["CALL GetAllUserInformation(?)",userID];
 }
+
+
 function UpdateUserInformation(CurrentUser) {
     FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?,?,?)",
         [CurrentUser.firstName,
@@ -23,8 +28,6 @@ function UpdateUserInformation(CurrentUser) {
     })
 }
 
-
-
 function SetProfileImage(CurrentUser) {
     FYSCloud.API.queryDatabase("CALL SetProfileImage(?,?)",
         [
@@ -33,4 +36,8 @@ function SetProfileImage(CurrentUser) {
         ]).then(function () {
         window.location.href = "ProfilePage.html";
     })
+}
+
+function GetAllCountry() {
+    return ["CALL GetAllCountry"];
 }

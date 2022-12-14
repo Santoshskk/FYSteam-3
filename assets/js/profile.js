@@ -5,7 +5,7 @@ code could be made cleaner , but it works ;)
 */
 
 const userID = FYSCloud.Session.get("userID");
-const callingStoredProcedure = "CALL GetAllUserInformation()";
+let callingStoredProcedure = GetAllUserInformation(userID);
 let formProfilePage = document.getElementById('form1');
 
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
@@ -44,7 +44,9 @@ form?.addEventListener("submit", function (e) {
 
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", callingStoredProcedure, true, "img");
-} else {
+}
+
+if (location.href.includes("EditProfile")) {
     GetFromDatabase(EditProfilePageId, "inputText", callingStoredProcedure, false, null);
 }
 
@@ -53,7 +55,22 @@ function DeleteProfileImage() {
         EditProfilePageId, SPnames_SetProfileImageDefault), "SetProfileImage")
 }
 
-//
+//edit trip
+
+const editTripBtn = document.getElementById("editTripBtn");
+
+editTripBtn?.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = "EditTrip.html";
+})
+
+if(location.href.includes("EditTrip")) {
+    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
+}
+
+
+
+
 
 
 
