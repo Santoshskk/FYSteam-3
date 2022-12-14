@@ -8,7 +8,9 @@
 2: parameters SP
  */
 function GetAllUserInformation() {
-   return ["CALL GetAllUserInformation(?)",userID];
+   return ["CALL GetAllUserInformation(?)",
+           userID
+       ];
 }
 
 
@@ -44,4 +46,8 @@ function GetAllCountry() {
 
 function GetAllInterest() {
     return ["CALL GetAllInterests"];
+}
+
+function GetTripInfoDates() {
+    return ["CALL GetTripInfoDates(?)", userID]
 }

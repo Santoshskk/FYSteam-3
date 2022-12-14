@@ -64,13 +64,22 @@ editTripBtn?.addEventListener("click", function (e) {
     window.location.href = "EditTrip.html";
 })
 
-
-
+let formtripPage = document.getElementById('form3');
+let dateArray = ["startDate", "endDate"];
 if(location.href.includes("EditTrip")) {
-    //GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
+    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
     GetFromDatabase("interestSelect", "dropdown", GetAllInterest(), false, null);
+    GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
 }
 
+
+
+formtripPage?.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+
+
+})
 
 
 

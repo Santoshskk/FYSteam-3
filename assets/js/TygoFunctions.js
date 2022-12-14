@@ -40,14 +40,15 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                         console.log(value.name);
                         break;
                     case "dropdown":
-
-
                             array.push(value.name);
-
-
                         if(array.length === data.length) {
                             populateDropdown(idArray, array)
                         }
+                       break;
+                    case "date":
+                        const newValue = value.split("T");
+                        document.getElementById(idArray[counter - 1]).value = newValue[0];
+                        break;
                         }
                 counter++;
             }
