@@ -3,7 +3,7 @@
  * @type {HTMLElement}
  */
 
-let form = document.getElementById('form');
+const form = document.getElementById('form');
 const firstname = document.getElementById('firstname');
 const lastname = document.getElementById('lastname');
 const email = document.getElementById('email');
@@ -17,26 +17,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
         e.preventDefault();
 
         checkInputs(); // form validation
-
-        // Check if email already exists
-        function EmailCheck() {
-            const emailExists = FYSCloud.API.queryDatabase(
-                "SELECT user.email FROM user WHERE email = (?)", [email.value],
-            ).then(response => {
-                console.log("res: " + response);
-                response.json();
-            });
-
-
-            const printEmail = async () => {
-                const a = await emailExists;
-                console.log(a);
-            };
-
-            printEmail();
-
-
-        }
 
         function SignUp() {
              FYSCloud.API.queryDatabase(
