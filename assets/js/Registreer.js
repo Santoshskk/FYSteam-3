@@ -18,20 +18,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
         checkInputs(); // form validation
 
-        // Check if email already exists
-        function EmailCheck() {
-            FYSCloud.API.queryDatabase(
-                "SELECT user.email FROM user WHERE email = (?)", [email.value],
-            ).then(function (data) {
-                console.log(data)
-                if (data.length > 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            })
-        }
-
         function SignUp() {
              FYSCloud.API.queryDatabase(
                  "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
