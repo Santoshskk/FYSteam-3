@@ -9,9 +9,15 @@
  */
 function GetAllUserInformation() {
    return ["CALL GetAllUserInformation(?)",
-           userID
+       userID
        ];
 }
+
+function GetAllTripInfo() {
+    return ["CALL GetAllTripInfo(?)",
+    userID]
+}
+
 
 
 function UpdateUserInformation(CurrentUser) {
@@ -39,6 +45,16 @@ function SetProfileImage(CurrentUser) {
         window.location.href = "ProfilePage.html";
     })
 }
+
+function UpdateTripInfo(CurrentData) {
+    FYSCloud.API.queryDatabase("CALL UpdateTripInfo(?,?,?,?)",
+        [
+            userID
+        ]).then(function () {
+        window.location.href = "ProfilePage.html";
+    })
+}
+
 
 function GetAllCountry() {
     return ["CALL GetAllCountry"];

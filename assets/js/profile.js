@@ -11,13 +11,15 @@ let formProfilePage = document.getElementById('form1');
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
 const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput", "descriptionText"];
 
-//array with names profile page id
+//array with names profile page id (edit user)
 const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "gender", "description"];
 
+//array with names profile page id (edit trip)
+const profilePageId2 = ["locatie", "startDate", "endDate"]
 ////////////////
 
 //arrays with names SP (Stored procedure) Must be the same. to pass value to parameters
-let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age", "gender", "discription"];
+let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age", "gender", "discription", "locatie"];
 let SPnames_SetProfileImageDefault = "profileImg";
 
 
@@ -41,9 +43,9 @@ form?.addEventListener("submit", function (e) {
     }
 });
 
-
 if (location.href.includes("ProfilePage")) {
-    GetFromDatabase(ProfilePageId, "HTMLText", callingStoredProcedure, true, "img");
+    GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img");
+    GetFromDatabase(profilePageId2, "HTMLText", GetAllTripInfo(userID), false, null);
 }
 
 if (location.href.includes("EditProfile")) {
@@ -72,17 +74,7 @@ if(location.href.includes("EditTrip")) {
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
 }
 
-
-
 formtripPage?.addEventListener("submit", function (e) {
     e.preventDefault();
 
-
-
 })
-
-
-
-
-
-

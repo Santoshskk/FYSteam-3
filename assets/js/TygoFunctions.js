@@ -37,7 +37,7 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                         document.getElementById(idArray[counter - 1]).value = value;
                         break;
                     case "log":
-                        console.log(value.name);
+                            console.log(value)
                         break;
                     case "dropdown":
                             array.push(value.name);
@@ -130,6 +130,12 @@ function getValues(profileImage, inputIdArr, storedProceduresVarNames) {
     return submittedValues;
 }
 
+
+//function to populate a dropdown field.
+/*
+inputId = id of input field
+OptionsArr = array with options
+ */
 function populateDropdown(inputId ,OptionsArr) {
     const select = document.getElementById(inputId);
 
