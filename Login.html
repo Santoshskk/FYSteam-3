@@ -11,7 +11,9 @@
     <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
     <script src="assets/js/config.js"></script>
     <script src="assets/js/Login.js"></script>
+
 </head>
+
 <body>
 <div class="container">
     <div class="header">
@@ -21,20 +23,25 @@
             <p class="center3">Terug naar hoofdpagina</p></a>
 
     </div>
-
-
     <form id="form" class="form">
+
         <div class="form-control">
-            <input type="email" placeholder="johndoe@email.com" required="" id="user-username">
-            <small>Error message</small>
+            <small id="psw-error"></small>
+        </div>
+
+        <div class="form-control">
+            <input type="email" placeholder="johndoe@email.com" id="user-username">
+            <small></small>
 
         </div>
         <div class="form-control">
-            <input type="password" placeholder="Wachtwoord" required="" id="user-password">
+            <input type="password" placeholder="Wachtwoord" id="user-password">
+            <small></small>
 
         </div>
 
         <a id="login">Login</a>
+
         <div class="container">
             <p class="center2">Heeft u nog geen account? <a href="Register.html">Registreer hier!</a></p>
         </div>

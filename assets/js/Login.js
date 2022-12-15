@@ -10,15 +10,17 @@ function start() {
 }
 
 let userEmail
-let password
+let userPassword
 
 function getInfo() {
     userEmail = document.getElementById('user-username').value
-    password = document.getElementById('user-password').value
-    getDatabse()
+    userPassword = document.getElementById('user-password').value
+    formValidation(userEmail, userPassword);
 }
 
 function getDatabse() {
+
+
     //Login function
     FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [userEmail]
     ).then(data => {
@@ -34,11 +36,44 @@ function getDatabse() {
                 window.location.assign('ProfilePage.html')
             }
         } else {
-            alert('Foute gegevens')
+            setError();
             evt.preventDefault();
         }
     }).catch(err => {
+        setError();
         console.log(err);
     })
 }
+function formValidation(emailVal,passwordVal){
 
+    let countError = 0;
+
+    if (emailVal === '') {
+        setEmpty(userEmail);
+        countError++;
+    }
+    if (passwordVal === '') {
+        setEmpty(userPassword);
+        countError++;
+    }
+    if (countError === 0) {
+        getDatabse()
+    }
+
+    function setEmpty(input){
+        let message = "Dit veld mag niet leeg zijn"
+        const formControl = input.parentElement;
+        const small = formControl.querySelector('small');
+        formControl.className = 'form-control error';
+        small.innerText = message;
+    }
+
+    function setError(){
+        let message = "Controleer of je het juiste e-mailadres en wachtwoord gebruikt hebt en probeer het nog eens."
+        const small = document.querySelector('#psw-error');
+        small.parentElement.className = 'form-control error';
+        small.innerText = message;
+    }
+
+
+}
