@@ -15,7 +15,7 @@ Same design for all HTML pages
 
 body {
 
-    background-image: url("https://i.imgur.com/94LUEzH.png");
+    background-image: url(https://hotelpetitpalacealcalatorre.com/wp-content/uploads/2019/05/Adventure-Travel-Vacation.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -26,6 +26,8 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+    box-shadow: inset 2000px 0 0 0 rgb(0 0 0 / 50%);
+    border-color: rgba(0, 0, 0, 1);
 }
 a:link {
     color: indianred;

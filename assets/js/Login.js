@@ -6,8 +6,8 @@
 document.addEventListener('DOMContentLoaded', start)
 
 function start() {
-    document.getElementById('login').addEventListener('click', getInfo)
-    // document.getElementById('logout').addEventListener('click', logOut)
+    document.getElementById('login').addEventListener('submit', getInfo)
+
 }
 
 let userEmail
