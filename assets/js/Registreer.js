@@ -93,15 +93,24 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 setErrorFor(email, 'Ongeldige email adres');
                 countError++;
             } else {
-                setSuccessFor(email);
+                FYSCloud.API.queryDatabase(
+                    "SELECT user.email FROM user WHERE email = (?)", [emailValue],
+                ).then(data => {
+                    if (data.length > 0) {
+                        setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
+                        countError++;
+                    } else {
+                        setSuccessFor(email);
+                    }
+                });
             }
 
-            if (!EmailCheck()){
-                setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
-                countError++;
-            }  else {
-                setSuccessFor(email);
-            }
+            // if (!EmailCheck()){
+            //     setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
+            //     countError++;
+            // }  else {
+            //     setSuccessFor(email);
+            // }
             if (passwordValue === '') {
                 setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
                 countError++;
