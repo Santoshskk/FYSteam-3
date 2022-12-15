@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         // Check if email already exists
         function EmailCheck() {
             FYSCloud.API.queryDatabase(
-                "SELECT user.email FROM user WHERE email = (?)", [email.value],
+                "SELECT user.email FROM user WHERE email = (?)", [email.value]
             ).then(function (data) {
                 console.log(data)
                 if (data.length > 0) {
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 setErrorFor(email, 'Email kan niet leeg zijn');
             } else if (!isEmail(emailValue)) {
                 setErrorFor(email, 'Ongeldige email adres');
-            }else if (!EmailCheck(emailValue)){
+            } else if (!EmailCheck(emailValue)){
                 setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
             } else if (passwordValue === '') {
                 setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
