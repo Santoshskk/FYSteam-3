@@ -19,12 +19,7 @@
 <div class="row">
     <div class="side">
         <h1>Trip Buddies:</h1>
-        <div class="profile-user">
-            <img class="profile-picture" src="assets/img/blank-profile-picture-973460__480.webp" alt=""/>
-            <div>
-                <label>Username</label>
-            </div>
-        </div>
+        <div id="madeMatches"></div>
     </div>
     <div class="main">
         <h1>Mogelijke Buddies:</h1>
@@ -34,9 +29,16 @@
         <h1 id="receivedRequestText">Ontvangen verzoeken:</h1>
         <div id="receivedMatches" ></div>
         <h1 id="sendRequestText">Verstuurde verzoeken:</h1>
-        <div id="sendMatches" ></div>
+        <div id="sendMatches"></div>
     </div>
 </div>
+
+<template id="match-template">
+    <div class="profile-user">
+        <img class="profile-picture" id="matchImage" alt="profile-picture">
+        <p id="matchName"></p>
+    </div>
+</template>
 
 <template id="profiel-template">
     <div class="profile">
@@ -59,6 +61,12 @@
     </div>
 </template>
 
+<div id="matchModal" class="modal">
+    <div class="match-modal-content">
+        <span class="close" id="matchSpan">&times;</span>
+    </div>
+</div>
+
 <div id="profileModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeSpan">&times;</span>
@@ -77,6 +85,7 @@
 <div id="sendMatchModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeSpanSend">&times;</span>
+        <p>De gebruiker heeft uw verzoek ontvangen, maar nog niet gereageerd</p>
         <button type="button" id="sendButton">Ok</button>
         <button type="button" id="sendCancelButton">Annuleer verzoek</button>
     </div>
@@ -85,13 +94,21 @@
 <div id="receivedMatchModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeSpanReceived">&times;</span>
+        <img id="receivedMatchModalImg" alt="">
+        <p id="receivedProfileName"></p>
+        <p id="receivedProfileGender"></p>
+        <p id="receivedProfileAge"></p>
+        <p id="receivedProfileNat"></p>
+        <p id="receivedProfileBio"></p>
+        <p id="receivedProfileIntrest"></p>
+        <p id="receivedProfileTrip"></p>
         <button type="button" id="receivedButton">Accepteren</button>
         <button type="button" id="receivedCancelButton">Afwijzen</button>
     </div>
 </div>
 
 <!-- footer -->
-<div class="nav-footer"></div>
+<!--<div class="nav-footer"></div>-->
 <script src="assets/js/match.js"></script>
 <script src="assets/js/SharedStyling.js"></script>
 </body>
