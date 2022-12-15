@@ -19,16 +19,25 @@ FYSCloud.API.queryDatabase(
 
     /*
     // startdatum, einddatum en locatie trip, van ingelogde user, nog in query verwerken
-    // zorgen dat verzonden en ontvangen users er niet inkomen
      */
 
     // gegevens ophalen mogelijke matches voor de ingelogde user
     FYSCloud.API.queryDatabase(
-        "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND i.interestID IN (?) AND (\"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate AND \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate ) AND t.location = \"Spanje\"",
+        "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND (\"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate AND \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate ) AND t.location = \"Spanje\"",
         [userID, queryVar]
     ).then(function (data) {
+        if (data.length === 0){
+            let potMatchDiv = document.querySelector("#potentialMatches");
+            const p = document.createElement("p")
+            const text = document.createTextNode("Helaas, er zijn geen mogelijke matches gevonden.")
+
+            p.appendChild(text)
+
+            potMatchDiv.appendChild(p)
+        }
         // html template ophalen
         let template = document.querySelector('#profiel-template').content
+
         // voor elke mogelijke match html template vullen
         for (let user of data){
             let matchProfile = template.cloneNode(true)
@@ -343,7 +352,7 @@ function cancelSendRequest(){
 
     // 1 word userID
     FYSCloud.API.queryDatabase(
-        "DELETE FROM `match` WHERE requestID = (?) AND receiveID = (?)",
+        "DELETE FROM `match` WHERE requestID = (?) AND receiveID = (?) AND status = 1",
         [sendingUser, requestedUserId]
     ).then(function (){
         location.reload();
@@ -375,10 +384,9 @@ document.querySelector("#sendButton").addEventListener("click", function (e) {
 
 // krijg gemaakte matches
 FYSCloud.API.queryDatabase(
-    "SELECT CONCAT(u.firstName, \" \", u.lastName) AS fullName, u.profileImage, u.email FROM user AS u INNER JOIN `match` AS m ON u.userID = m.requestID WHERE m.receiveID = (?) AND m.status = 2",
+    "SELECT CONCAT(u.firstName, \" \", u.lastName) AS fullName, u.profileImage, u.userID FROM user AS u INNER JOIN `match` AS m ON u.userID = m.requestID WHERE m.receiveID = (?) AND m.status = 2",
     [userID]
 ).then(function (data) {
-    console.log(data)
     if (data.length === 0){
         let matchDiv = document.querySelector("#madeMatches");
         const p = document.createElement("p")
@@ -395,15 +403,103 @@ FYSCloud.API.queryDatabase(
             let matchProfile = template.cloneNode(true)
             let name = user.fullName;
             let img = user.profileImage;
-            let email = user.email;
+            let userID = user.userID;
 
             matchProfile.querySelector("#matchName").innerHTML = name
             matchProfile.querySelector("#matchImage").src = img
-            matchProfile.querySelector(".profile-user").id = email
+            matchProfile.querySelector(".profile-user").id = userID
 
             document.querySelector("#madeMatches").append(matchProfile)
 
+            const matchProfiles = document.querySelectorAll(".profile-user");
+            matchProfiles.forEach(matchProfile=> {
+                matchProfile.addEventListener("click", function (e) {
+                    let matchModal = document.querySelector('#matchModal');
 
+                    let img = matchProfile.querySelector("#matchImage").src;
+                    let name = matchProfile.querySelector("#matchName").innerHTML;
+
+                    matchModal.querySelector("#madeMatchImg").src = img;
+                    matchModal.querySelector("#madeMatchName").innerHTML = "Naam: " + name;
+
+                    let matchID = matchProfile.id;
+
+                    FYSCloud.API.queryDatabase(
+                        "SELECT ui.gender, ui.age, ui.nationality, ui.discription, t.location, t.startDate, t.endDate FROM user AS u INNER JOIN userinfo AS ui ON u.userID = ui.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE u.userID = (?)",
+                        [matchID]
+                    ).then(function (data){
+                        let modal = document.querySelector('#matchModal');
+
+                        for (let user of data){
+                            modal.querySelector("#madeMatchGender").innerHTML = "Geslacht: " + user.gender;
+                            modal.querySelector("#madeMatchAge").innerHTML = "Leeftijd: " + user.age;
+                            modal.querySelector("#madeMatchNat").innerHTML = "Nationaliteit: " + user.nationality;
+                            modal.querySelector("#madeMatchBio").innerHTML = "Bio: " + user.discription;
+
+                            let startMatchText = user.startDate.slice(0,10);
+                            const startMatchDateArr = startMatchText.split('-');
+                            let startMatchDate = startMatchDateArr[2] + "-" + startMatchDateArr[1] + "-" + startMatchDateArr[0];
+
+                            let endMatchText = user.endDate.slice(0,10);
+                            const endMatchDateArr = endMatchText.split('-');
+                            let endMatchDate = endMatchDateArr[2] + "-" + endMatchDateArr[1] + "-" + endMatchDateArr[0];
+
+                            modal.querySelector("#madeMatchTrip").innerHTML = "Trip info: In " + user.location + " van "
+                                + startMatchDate + " tot " + endMatchDate;
+                        }
+                    })
+
+                    // ophalen interesses van potentiële match
+                    FYSCloud.API.queryDatabase(
+                        "SELECT name FROM user_interest AS ui INNER JOIN interest AS i ON ui.interestID = i.interestID WHERE ui.userID = (?)",
+                        [matchID]
+                    ).then(function (interests){
+
+                        let interestString = "";
+                        let modal = document.querySelector('#matchModal');
+
+                        for (let interest of interests){
+                            if (interest === interests[interests.length - 1]){
+                                interestString += interest.name
+                            }else {
+                                interestString += interest.name + ", "
+                            }
+                        }
+
+                        modal.querySelector("#madeMatchIntrest").innerHTML = "Interesse(s): " + interestString;
+                    })
+
+                    // wanneer user op profiel klikt open modal
+                    matchModal.style.display = "block";
+
+                    let span = document.querySelector("#matchSpan");
+
+                    // wanneer user op kruisje klikt, sluiten
+                    span.addEventListener("click", function () {
+                        matchModal.style.display = "none";
+                    })
+
+                    // wanneer user naast modal klikt, modal sluiten
+                    window.onclick = function (event) {
+                        if (event.target === matchModal) {
+                            matchModal.style.display = "none";
+                        }
+                    }
+                })
+            })
         }
     }
+})
+
+document.querySelector("#removeButton").addEventListener("click", function (){
+    let requestedUserId = document.querySelector(".profile-user").id;
+    let loggedUserID = 1;
+
+    // 1 word userID
+    FYSCloud.API.queryDatabase(
+        "DELETE FROM `match` WHERE requestID = (?) AND receiveID = (?) AND status = 2",
+        [requestedUserId, loggedUserID]
+    ).then(function (){
+        location.reload()
+    })
 })
