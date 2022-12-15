@@ -52,51 +52,50 @@ document.addEventListener('DOMContentLoaded', function (e) {
             let countError = 0;
 
             if (firstnameValue === '') {
-                setErrorFor(firstname, 'Voornaam kan niet leeg zijn');
+                setErrorFor(firstname, 'Dit veld mag niet leeg zijn');
                 countError++;
             } else {
                 setSuccessFor(firstname);
             }
             if (lastnameValue === '') {
-                setErrorFor(lastname, 'Achternaam kan niet leeg zijn');
+                setErrorFor(lastname, 'Dit veld mag niet leeg zijn');
                 countError++;
             }  else {
                 setSuccessFor(lastname);
             }
             if (emailValue === '') {
-                setErrorFor(email, 'Email kan niet leeg zijn');
+                setErrorFor(email, 'Dit veld mag niet leeg zijn');
                 countError++;
             }  else {
-                setSuccessFor(email);
-            }
-            if (!isEmail(emailValue)) {
-                setErrorFor(email, 'Ongeldige email adres');
-                countError++;
-            } else {
-                FYSCloud.API.queryDatabase(
-                    "SELECT user.email FROM user WHERE email = (?)", [emailValue],
-                ).then(data => {
-                    if (data.length > 0) {
-                        setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
-                        countError++;
-                    } else {
-                        setSuccessFor(email);
-                    }
-                });
+                if (!isEmail(emailValue)) {
+                    setErrorFor(email, 'Ongeldige email adres');
+                    countError++;
+                } else {
+                    FYSCloud.API.queryDatabase(
+                        "SELECT user.email FROM user WHERE email = (?)", [emailValue],
+                    ).then(data => {
+                        if (data.length > 0) {
+                            setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
+                            countError++;
+                        } else {
+                            setSuccessFor(email);
+                        }
+                    });
+                }
             }
 
-            // if (!EmailCheck()){
-            //     setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
-            //     countError++;
-            // }  else {
-            //     setSuccessFor(email);
-            // }
+
             if (passwordValue === '') {
-                setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
+                setErrorFor(password, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }  else {
+            }else if(!passwordChecker(passwordValue)){
+                setPswErorr(password,'Wachtwoord moet bestaan uit minimaal 6 karakters,' +
+                    ' 1 hoofdletter, 1 kleine letter en 1 cijfer.')
+                countError++;
+            }else {
                 setSuccessFor(password);
             }
+
             if (password2Value === '') {
                 setErrorFor(password2, 'Dit veld mag niet leeg zijn');
                 countError++;
@@ -123,6 +122,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
             small.innerText = message;
         }
 
+        function setPswErorr(input, message) {
+            const small = document.querySelector('#psw-error');
+            small.parentElement.className = 'form-control error';
+            input.parentElement.className = 'form-control error';
+            small.innerText = message;
+        }
+
         function setSuccessFor(input) {
             const formControl = input.parentElement;
             formControl.className = 'form-control success';
@@ -132,6 +138,17 @@ document.addEventListener('DOMContentLoaded', function (e) {
             let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             //Execution
             if (email.match(regex)) {
+                console.log("valid");
+                return true;
+            } else {
+                console.log("Invalid");
+                return false;
+            }
+        }
+        function passwordChecker(password){
+            let regexPasword= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,255}$/
+            //Execution passwordcheck
+            if (password.match(regexPasword)) {
                 console.log("valid");
                 return true;
             } else {
