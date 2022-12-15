@@ -8,6 +8,8 @@
 
         <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
         <script src="../assets/js/config.js"></script>
+        <script src="../assets/js/logout.js"></script>
+
         <script src="../assets/js/Admin/getProfile.js"></script>
 
         <script src="https://kit.fontawesome.com/a3aad2d743.js" crossorigin="anonymous"></script>
@@ -159,30 +161,3 @@
     </body>
 </html>
 <script src="../assets/js/Admin/sharedStyle.js"></script>
-<script>
-    function myFunction() {
-        if (confirm("Are you sure you want to log out?")) {
-            // Save it!
-            console.log("Logged out!");
-        } else {
-            // Do nothing!
-            console.log("Not logged out.");
-        }
-    }
-</script>
-<script>
-    var btn = document.querySelector(".toggle");
-    var modal = document.getElementById("sidebar");
-    var btnst = true;
-    btn.onclick = function () {
-        if (btnst == true) {
-            document.querySelector(".toggle span").classList.add("toggle");
-            document.getElementById("sidebar").classList.add("sidebarshow");
-            btnst = false;
-        } else if (btnst == false) {
-            document.querySelector(".toggle span").classList.remove("toggle");
-            document.getElementById("sidebar").classList.remove("sidebarshow");
-            btnst = true;
-        }
-    };
-</script>

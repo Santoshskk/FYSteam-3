@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         // Check if email already exists
         function EmailCheck() {
             FYSCloud.API.queryDatabase(
-                "SELECT user.email FROM user WHERE email = (?)", [email.value]
+                "SELECT user.email FROM user WHERE email = (?)", [email.value],
             ).then(function (data) {
                 console.log(data)
                 if (data.length > 0) {
@@ -63,30 +63,71 @@ document.addEventListener('DOMContentLoaded', function (e) {
             const passwordValue = password.value.trim();
             const password2Value = password2.value.trim();
 
+            let countError = 0;
+
             if (firstnameValue === '') {
                 setErrorFor(firstname, 'Voornaam kan niet leeg zijn');
-            } else if (lastnameValue === '') {
-                setErrorFor(lastname, 'Achternaam kan niet leeg zijn')
-            } else if (emailValue === '') {
-                setErrorFor(email, 'Email kan niet leeg zijn');
-            } else if (!isEmail(emailValue)) {
-                setErrorFor(email, 'Ongeldige email adres');
-            } else if (!EmailCheck(emailValue)){
-                setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
-            } else if (passwordValue === '') {
-                setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
-            } else if (password2Value === '') {
-                setErrorFor(password2, 'Dit veld mag niet leeg zijn');
-            } else if (passwordValue !== password2Value) {
-                setErrorFor(password2, 'Wachtwoorden komen niet overeen');
+                countError++;
             } else {
                 setSuccessFor(firstname);
-                setSuccessFor(lastname)
+            }
+            if (lastnameValue === '') {
+                setErrorFor(lastname, 'Achternaam kan niet leeg zijn');
+                countError++;
+            }  else {
+                setSuccessFor(lastname);
+            }
+            if (emailValue === '') {
+                setErrorFor(email, 'Email kan niet leeg zijn');
+                countError++;
+            }  else {
                 setSuccessFor(email);
+            }
+            if (!isEmail(emailValue)) {
+                setErrorFor(email, 'Ongeldige email adres');
+                countError++;
+            } else {
+                FYSCloud.API.queryDatabase(
+                    "SELECT user.email FROM user WHERE email = (?)", [emailValue],
+                ).then(data => {
+                    if (data.length > 0) {
+                        setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
+                        countError++;
+                    } else {
+                        setSuccessFor(email);
+                    }
+                });
+            }
+
+            // if (!EmailCheck()){
+            //     setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
+            //     countError++;
+            // }  else {
+            //     setSuccessFor(email);
+            // }
+            if (passwordValue === '') {
+                setErrorFor(password, 'Wachtwoord kan niet leeg zijn');
+                countError++;
+            }  else {
                 setSuccessFor(password);
-                setSuccessFor(password2);
+            }
+            if (password2Value === '') {
+                setErrorFor(password2, 'Dit veld mag niet leeg zijn');
+                countError++;
+            }  else {
+                if (passwordValue !== password2Value) {
+                    setErrorFor(password2, 'Wachtwoorden komen niet overeen');
+                    countError++;
+                }  else {
+                    setSuccessFor(password2);
+                }
+            }
+
+            console.log("Count: " + countError);
+            if (countError === 0) {
                 SignUp();
             }
+
         }
 
         function setErrorFor(input, message) {
