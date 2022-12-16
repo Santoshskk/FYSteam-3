@@ -12,14 +12,15 @@ window.onload = () => {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        checkInputs(email, password);
+
+        checkInputs(email.value, password.value);
 
         function SignIn() {
-            FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [email]
+            FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [email.value]
             ).then(data => {
                 let psw = data[0].password;
                 let adm = data[0].isAdmin.data[0];
-                if (psw === password) {
+                if (psw === password.value) {
                     // start sesion - set session for user id & admin id.
                     FYSCloud.Session.set("userID", data[0].userID);
                     FYSCloud.Session.set("isAdmin", data[0].isAdmin.data[0]);
@@ -37,7 +38,7 @@ window.onload = () => {
                 console.log(err);
             });
 
-            function setError(){
+            function setError() {
                 let message = "Controleer of je het juiste e-mailadres en wachtwoord gebruikt hebt en probeer het nog eens."
                 const small = document.querySelector('#psw-error');
                 small.parentElement.className = 'form-control error';
