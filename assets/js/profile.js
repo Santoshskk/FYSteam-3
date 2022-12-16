@@ -5,17 +5,27 @@ code could be made cleaner , but it works ;)
 */
 
 const userID = FYSCloud.Session.get("userID");
-let callingStoredProcedure = GetAllUserInformation(userID);
 let formProfilePage = document.getElementById('form1');
 
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
 const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput", "descriptionText"];
 
 //array with names profile page id (edit user)
-const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "gender", "description"];
-
+const ProfilePageId = [
+    "nameText",
+    "lastNameText",
+    "emailText",
+    "land",
+    "age",
+    "gender",
+    "description"
+];
 //array with names profile page id (edit trip)
-const profilePageId2 = ["locatie", "startDate", "endDate"]
+const profilePageId2 = [
+    "locatie",
+    "startDate",
+    "endDate"
+]
 ////////////////
 
 //arrays with names SP (Stored procedure) Must be the same. to pass value to parameters
@@ -35,7 +45,6 @@ form = document.getElementById('form2');
 form?.addEventListener("submit", function (e) {
     e.preventDefault();
     let uploadImage = document.getElementById("fileUpload");
-
     if (uploadImage.files.length === 0) {
         UpdateDB(getValues(null, EditProfilePageId, SPNames_UpdateUserInformation), "UpdateUserInformation");
     } else {
@@ -49,7 +58,7 @@ if (location.href.includes("ProfilePage")) {
 }
 
 if (location.href.includes("EditProfile")) {
-    GetFromDatabase(EditProfilePageId, "inputText", callingStoredProcedure, false, null);
+    GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null);
 }
 
 function DeleteProfileImage() {
