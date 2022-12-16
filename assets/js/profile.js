@@ -21,17 +21,15 @@ const ProfilePageId = [
     "description"
 ];
 //array with names profile page id (edit trip)
-const profilePageId2 = [
-    "locatie",
-    "startDate",
-    "endDate"
-]
+const profilePageId2 = ["startDate1", "endDate1"]
+
+const test = ["locatie"]
 ////////////////
 
 //arrays with names SP (Stored procedure) Must be the same. to pass value to parameters
 let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age", "gender", "discription", "locatie"];
 let SPnames_SetProfileImageDefault = "profileImg";
-
+let SPnames_UpdateTripInfo = ["country", "startDate", "endDate", "userID"];
 
 //onclick form profile Page
 formProfilePage?.addEventListener("submit", function (e) {
@@ -54,7 +52,8 @@ form?.addEventListener("submit", function (e) {
 
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img");
-    GetFromDatabase(profilePageId2, "HTMLText", GetAllTripInfo(userID), false, null);
+    GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null);
+    GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null);
 }
 
 if (location.href.includes("EditProfile")) {
@@ -83,7 +82,11 @@ if(location.href.includes("EditTrip")) {
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
 }
 
+const editTripId = ["countrySelect", "startDate", "endDate"]
+
 formtripPage?.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    UpdateDB(getValues(null, editTripId, SPnames_UpdateTripInfo), "UpdateTripInfo");
 
 })

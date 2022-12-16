@@ -49,6 +49,9 @@ function SetProfileImage(CurrentUser) {
 function UpdateTripInfo(CurrentData) {
     FYSCloud.API.queryDatabase("CALL UpdateTripInfo(?,?,?,?)",
         [
+            CurrentData.country,
+            CurrentData.startDate,
+            CurrentData.endDate,
             userID
         ]).then(function () {
         window.location.href = "ProfilePage.html";

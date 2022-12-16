@@ -49,6 +49,11 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                         const newValue = value.split("T");
                         document.getElementById(idArray[counter - 1]).value = newValue[0];
                         break;
+
+                    case "dateText":
+                        const newValue2 = value.split("T");
+                        document.getElementById(idArray[counter - 1]).innerHTML = newValue2[0];
+                        break;
                         }
                 counter++;
             }
@@ -69,6 +74,9 @@ function UpdateDB(Data, expectedSP) {
             break;
         case "SetProfileImage":
             SetProfileImage(Data);
+            break;
+        case "UpdateTripInfo":
+            UpdateTripInfo(Data);
             break;
     }
 }
