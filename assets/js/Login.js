@@ -13,7 +13,7 @@ window.onload = () => {
         e.preventDefault();
 
 
-        checkInputs(email.value, password.value);
+        checkInputs(email, password);
 
         function SignIn() {
             FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [email.value]
