@@ -27,7 +27,7 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
             let counter = 1;
             for (const [key, value] of Object.entries(data)) {
                 if (HasImage && key === "profileImage") {
-                    document.getElementById(ImgId).src = value;
+                     document.getElementById(ImgId).src = value;
                 }
                 switch (tagType) {
                     case "HTMLText":
