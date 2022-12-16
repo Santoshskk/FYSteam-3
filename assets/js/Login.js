@@ -18,15 +18,18 @@ window.onload = () => {
             FYSCloud.API.queryDatabase("SELECT * FROM user WHERE email = (?)", [email.value]
             ).then(data => {
                 let psw = data[0].password;
+                let uid = data[0].userID;
                 let adm = data[0].isAdmin.data[0];
+                let act = data[0].isActive.data[0];
                 if (psw === password.value) {
                     // start sesion - set session for user id & admin id.
-                    FYSCloud.Session.set("userID", data[0].userID);
-                    FYSCloud.Session.set("isAdmin", data[0].isAdmin.data[0]);
+                    FYSCloud.Session.set("userID", uid);
+                    FYSCloud.Session.set("isAdmin", adm);
+                    FYSCloud.Session.set("isActive", act);
                     if (adm === 1) {
-                        window.location.assign('admin/AdminDashboard.html')
+                        window.location.assign('admin/AdminDashboard.html');
                     } else {
-                        window.location.assign('ProfilePage.html')
+                        window.location.assign('ProfilePage.html');
                     }
                 } else {
                     setError();

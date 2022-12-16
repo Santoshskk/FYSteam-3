@@ -1,6 +1,5 @@
-
-if (userId == null) {
-    window.location.assign('index.html')
+if (userId == null || isActive === 1) {
+    window.location.assign('index.html');
 }
 
 document.addEventListener("DOMContentLoaded" ,function() {
