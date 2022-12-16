@@ -26,7 +26,7 @@ function getDatabse() {
     ).then(data => {
         let psw = data[0].password;
         let adm = data[0].isAdmin.data[0];
-        if (psw === password) {
+         if (psw === userPassword) {
             // start sesion - set session for user id & admin id.
             FYSCloud.Session.set("userID", data[0].userID);
             FYSCloud.Session.set("isAdmin", data[0].isAdmin.data[0]);
@@ -36,11 +36,11 @@ function getDatabse() {
                 window.location.assign('ProfilePage.html')
             }
         } else {
-            setError();
+           // setError();
             evt.preventDefault();
         }
     }).catch(err => {
-        setError();
+       // setError();
         console.log(err);
     })
 }
@@ -68,12 +68,12 @@ function formValidation(emailVal,passwordVal){
         small.innerText = message;
     }
 
-    function setError(){
-        let message = "Controleer of je het juiste e-mailadres en wachtwoord gebruikt hebt en probeer het nog eens."
-        const small = document.querySelector('#psw-error');
-        small.parentElement.className = 'form-control error';
-        small.innerText = message;
-    }
+    // function setError(){
+    //     let message = "Controleer of je het juiste e-mailadres en wachtwoord gebruikt hebt en probeer het nog eens."
+    //     const small = document.querySelector('#psw-error');
+    //     small.parentElement.className = 'form-control error';
+    //     small.innerText = message;
+    // }
 
 
 }

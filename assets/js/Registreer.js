@@ -67,21 +67,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 setErrorFor(email, 'Dit veld mag niet leeg zijn');
                 countError++;
             }  else {
-                if (!isEmail(emailValue)) {
-                    setErrorFor(email, 'Ongeldige email adres');
-                    countError++;
-                } else {
-                    FYSCloud.API.queryDatabase(
-                        "SELECT user.email FROM user WHERE email = (?)", [emailValue],
-                    ).then(data => {
-                        if (data.length > 0) {
-                            setErrorFor(email, 'Deze email is al geregistreerd, probeer in te loggen');
-                            countError++;
-                        } else {
-                            setSuccessFor(email);
-                        }
-                    });
-                }
+                setSuccessFor(email);
             }
 
 
@@ -101,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 countError++;
             }  else {
                 if (passwordValue !== password2Value) {
-                    setErrorFor(password2, 'Wachtwoorden komen niet overeen');
+                    setErrorFor(password2, 'Wachtwoord komt niet overeen');
                     countError++;
                 }  else {
                     setSuccessFor(password2);
