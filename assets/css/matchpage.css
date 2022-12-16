@@ -62,7 +62,12 @@
     position: relative;
 }
 
-#matchButton, #receivedButton, #receivedCancelButton, #sendCancelButton, #removeButton, #mailButton, #sendButton{
+#mailText{
+    width: 100%;
+    height: 150px;
+}
+
+#matchButton, #receivedButton, #receivedCancelButton, #sendCancelButton, #removeButton, #mailButton, #sendMailButton, #sendButton{
     background-color: #D9260F;
     color: white;
     padding: 15px 30px 15px 30px;
@@ -74,6 +79,13 @@
     font-size: 17px;
     cursor: pointer;
 }
+#sendMailButton{
+    margin-bottom: 0px;
+}
+
+#mailMessage{
+    color: red;
+}
 
 #receivedCancelButton, #sendCancelButton, #removeButton {
     background-color: white;
@@ -83,12 +95,14 @@
 
 #namePotMatch, #nameSendMatch, #nameReceivedMatch{
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .potMatchImageClass{
     width: 100px;
     height: 100px;
     margin-top: 10px;
+    margin-bottom: 5px;
     object-fit: contain;
 }
 
@@ -155,7 +169,6 @@ body {
     border: 3px solid black;
     border-radius: 5px;
     margin-top: 5px;
-
 }
 
 /* Main column */
@@ -190,7 +203,6 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-
 }
 
 .btn.signout {

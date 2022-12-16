@@ -23,7 +23,7 @@ FYSCloud.API.queryDatabase(
 
     // gegevens ophalen mogelijke matches voor de ingelogde user
     FYSCloud.API.queryDatabase(
-        "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND (\"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate AND \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate ) AND t.location = \"Spanje\"",
+        "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND (\"2023-01-01\" BETWEEN t.startDate AND t.endDate OR \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate AND \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate ) AND t.location = \"Spanje\"",
         [userID, queryVar]
     ).then(function (data) {
         if (data.length === 0){
@@ -419,6 +419,7 @@ FYSCloud.API.queryDatabase(
                     let img = matchProfile.querySelector("#matchImage").src;
                     let name = matchProfile.querySelector("#matchName").innerHTML;
 
+                    matchModal.querySelector(".match-modal-content").id = matchProfile.id
                     matchModal.querySelector("#madeMatchImg").src = img;
                     matchModal.querySelector("#madeMatchName").innerHTML = "Naam: " + name;
 
@@ -492,7 +493,7 @@ FYSCloud.API.queryDatabase(
 })
 
 document.querySelector("#removeButton").addEventListener("click", function (){
-    let requestedUserId = document.querySelector(".profile-user").id;
+    let requestedUserId = document.querySelector(".match-modal-content").id;
     let loggedUserID = 1;
 
     // 1 word userID
@@ -501,5 +502,96 @@ document.querySelector("#removeButton").addEventListener("click", function (){
         [requestedUserId, loggedUserID]
     ).then(function (){
         location.reload()
+    })
+})
+
+document.querySelector("#mailButton").addEventListener("click", function (e){
+    let modal = document.querySelector("#mailModal")
+    let modalMatch = document.querySelector("#matchModal")
+
+    modalMatch.style.display = "none"
+    modal.style.display = "block"
+
+    let profile = document.querySelector(".profile-user")
+    let name = profile.querySelector("#matchName").innerHTML
+    modal.querySelector("#mailName").innerHTML = "Stuur " + name + " een bericht!";
+
+    let span = document.querySelector("#closeSpanMail");
+
+    // wanneer user op kruisje klikt, sluiten
+    span.addEventListener("click", function () {
+        modal.style.display = "none";
+        modal.querySelector("#mailText").value = "";
+        if (modal.querySelector("#errorMessage")){
+            modal.querySelector("#errorMessage").remove();
+        }
+    })
+
+    // wanneer user naast modal klikt, modal sluiten
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            modal.querySelector("#mailText").value = "";
+            if (modal.querySelector("#errorMessage")){
+                modal.querySelector("#errorMessage").remove();
+            }
+        }
+    }
+})
+
+document.querySelector("#sendMailButton").addEventListener("click", function (e) {
+    let modal = document.querySelector("#mailModal")
+    let mailText = modal.querySelector("#mailText").value;
+
+    let userID = document.querySelector(".profile-user").id
+
+    let name;
+    let email;
+
+    FYSCloud.API.queryDatabase(
+        "SELECT CONCAT(firstName, \" \", lastName) AS fullName, email FROM user WHERE userID = (?)",
+        [userID]
+    ).then(function (data) {
+
+        for (let user of data){
+            name = user.fullName;
+            email = user.email;
+        }
+
+        if (mailText !== ""){
+            FYSCloud.API.sendEmail({
+                from: {
+                    name: "Groep3",
+                    address: "Groep3@fys.cloud"
+                },
+                to: [
+                    {
+                        name: name,
+                        address: email
+                    }
+                ],
+                subject: "Bericht vanuit TripBuddy",
+                html: "<h1>Hallo " + name + "!</h1>" +
+                    "<p>" + mailText + "</p>"
+            }).then(function(data) {
+                console.log(data);
+            }).catch(function(reason) {
+                console.log(reason);
+            });
+
+            modal.style.display = "none";
+            modal.querySelector("#mailText").value = "";
+            if (modal.querySelector("#errorMessage")){
+                modal.querySelector("#errorMessage").remove();
+            }
+        }else{
+            let mailDiv = document.querySelector("#mailMessage");
+            const p = document.createElement("p")
+            const text = document.createTextNode("Bericht kan niet leeg zijn!")
+
+            p.appendChild(text)
+            p.id = "errorMessage";
+            mailDiv.appendChild(p)
+        }
     })
 })
