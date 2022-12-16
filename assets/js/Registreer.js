@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 setErrorFor(email, 'Dit veld mag niet leeg zijn');
                 countError++;
             }  else if(!isEmail(emailValue)){
-                setErrorFor(email,'Email bestaat al, probeer login');
+                setErrorFor(email,'Geen geldige Email.');
                 countError++;
             }else {
                 setSuccessFor(email);
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 countError++;
             }
             else if(!passwordChecker(passwordValue)){
-                setPswErorr(password,'Wachtwoord moet bestaan uit minimaal 6 karakters,' +
+                setPswError(password,'Wachtwoord moet bestaan uit minimaal 6 karakters,' +
                     ' 1 hoofdletter, 1 kleine letter en 1 cijfer.')
                 countError++;
             }else {
@@ -106,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 }
             }
 
-            console.log("Count: " + countError);
             if (countError === 0) {
                 SignUp();
             }
@@ -119,13 +118,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
             small.innerText = message;
         }
 
-        function setPswErorr(input, message) {
+        function setPswError(input, message) {
             const small = document.querySelector('#psw-error');
             small.parentElement.className = 'form-control error';
             input.parentElement.className = 'form-control error';
             small.innerText = message;
         }
-
         function setSuccessFor(input) {
             const formControl = input.parentElement;
             formControl.className = 'form-control success';
