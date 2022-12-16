@@ -27,11 +27,20 @@ document.addEventListener('DOMContentLoaded', function (e) {
                      "SELECT userID FROM user WHERE email = (?)", [email.value]
                  ).then(data => {
                      console.log(data);
+                     let userID = data[0].userID;
                      FYSCloud.API.queryDatabase(
                          "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
-                         [data[0].userID, null, null, null, null]
+                         [userID, null, null, null, null]
                      ).then(() => {
-                         window.location.assign('index.html');
+                         console.log(data);
+                         FYSCloud.API.queryDatabase(
+                             "INSERT INTO tripinfo (userID, location, startDate, endDate) VALUES (?, ?, ?, ?);",
+                             [userID, null, null, null]
+                         ).then(() => {
+                             window.location.assign('index.html');
+                         }).catch(err => {
+                             console.log(err);
+                         })
                      }).catch(err => {
                          console.log(err);
                      })

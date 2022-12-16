@@ -12,7 +12,6 @@ window.onload = () => {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-
         checkInputs(email, password);
 
         function SignIn() {
