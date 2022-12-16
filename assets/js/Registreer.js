@@ -72,18 +72,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }  else {
                 setSuccessFor(lastname);
             }
+
             if (emailValue === '') {
                 setErrorFor(email, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }  else {
+            }  else if(!isEmail(emailValue)){
+                setErrorFor(email,'Email bestaat al, probeer login');
+                countError++;
+            }else {
                 setSuccessFor(email);
             }
-
 
             if (passwordValue === '') {
                 setErrorFor(password, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }else if(!passwordChecker(passwordValue)){
+            }
+            else if(!passwordChecker(passwordValue)){
                 setPswErorr(password,'Wachtwoord moet bestaan uit minimaal 6 karakters,' +
                     ' 1 hoofdletter, 1 kleine letter en 1 cijfer.')
                 countError++;
@@ -94,9 +98,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             if (password2Value === '') {
                 setErrorFor(password2, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }  else {
-                if (passwordValue !== password2Value) {
-                    setErrorFor(password2, 'Wachtwoord komt niet overeen');
+            }  else if (passwordValue !== password2Value) {
+                     setErrorFor(password2, 'Wachtwoord komt niet overeen');
                     countError++;
                 }  else {
                     setSuccessFor(password2);
@@ -108,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 SignUp();
             }
 
-        }
 
         function setErrorFor(input, message) {
             const formControl = input.parentElement;
