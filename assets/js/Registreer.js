@@ -27,11 +27,20 @@ document.addEventListener('DOMContentLoaded', function (e) {
                      "SELECT userID FROM user WHERE email = (?)", [email.value]
                  ).then(data => {
                      console.log(data);
+                     let userID = data[0].userID;
                      FYSCloud.API.queryDatabase(
                          "INSERT INTO userinfo (userID, nationality, gender, age, discription) VALUES (?, ?, ?, ?, ?);",
-                         [data[0].userID, null, null, null, null]
+                         [userID, null, null, null, null]
                      ).then(() => {
-                         window.location.assign('index.html');
+                         console.log(data);
+                         FYSCloud.API.queryDatabase(
+                             "INSERT INTO tripinfo (userID, location, startDate, endDate) VALUES (?, ?, ?, ?);",
+                             [userID, null, null, null]
+                         ).then(() => {
+                             window.location.assign('index.html');
+                         }).catch(err => {
+                             console.log(err);
+                         })
                      }).catch(err => {
                          console.log(err);
                      })
@@ -63,19 +72,23 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }  else {
                 setSuccessFor(lastname);
             }
+
             if (emailValue === '') {
                 setErrorFor(email, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }  else {
+            }  else if(!isEmail(emailValue)){
+                setErrorFor(email,'Geen geldige Email.');
+                countError++;
+            }else {
                 setSuccessFor(email);
             }
-
 
             if (passwordValue === '') {
                 setErrorFor(password, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }else if(!passwordChecker(passwordValue)){
-                setPswErorr(password,'Wachtwoord moet bestaan uit minimaal 6 karakters,' +
+            }
+            else if(!passwordChecker(passwordValue)){
+                setPswError(password,'Wachtwoord moet bestaan uit minimaal 6 karakters,' +
                     ' 1 hoofdletter, 1 kleine letter en 1 cijfer.')
                 countError++;
             }else {
@@ -85,21 +98,18 @@ document.addEventListener('DOMContentLoaded', function (e) {
             if (password2Value === '') {
                 setErrorFor(password2, 'Dit veld mag niet leeg zijn');
                 countError++;
-            }  else {
-                if (passwordValue !== password2Value) {
-                    setErrorFor(password2, 'Wachtwoord komt niet overeen');
+            }  else if (passwordValue !== password2Value) {
+                     setErrorFor(password2, 'Wachtwoord komt niet overeen');
                     countError++;
                 }  else {
                     setSuccessFor(password2);
                 }
             }
 
-            console.log("Count: " + countError);
             if (countError === 0) {
                 SignUp();
             }
 
-        }
 
         function setErrorFor(input, message) {
             const formControl = input.parentElement;
@@ -108,13 +118,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
             small.innerText = message;
         }
 
-        function setPswErorr(input, message) {
+        function setPswError(input, message) {
             const small = document.querySelector('#psw-error');
             small.parentElement.className = 'form-control error';
             input.parentElement.className = 'form-control error';
             small.innerText = message;
         }
-
         function setSuccessFor(input) {
             const formControl = input.parentElement;
             formControl.className = 'form-control success';
