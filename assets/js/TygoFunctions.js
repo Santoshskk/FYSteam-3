@@ -10,7 +10,7 @@ tagType = type of tag to display
 4. dropdown = select fields (dropdown)
 
 query = the SELECT query you want use to get from database. is type array. index 0 is query to call SP. rest is parameters
-HasImage = boolean. checks if page has a image
+HasImage = boolean. checks if page has an image
 ImgId = img url. not nessecary if there is no image
  */
 function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
@@ -21,6 +21,8 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
     FYSCloud.API.queryDatabase(query[0], [paramaters]).then(function (data) {
             data = data[0];
         let array = [];
+
+
             if(data.length === 1) {
                 data = data[0];
             }
@@ -31,7 +33,12 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                 }
                 switch (tagType) {
                     case "HTMLText":
-                        document.getElementById(idArray[counter - 1]).innerHTML = value;
+                        if(typeof value === 'object') {
+                            document.getElementById(idArray[counter - 1]).innerHTML = value.name;
+                        }
+                        else {
+                            document.getElementById(idArray[counter - 1]).innerHTML = value;
+                        }
                         break;
                     case "inputText":
                         document.getElementById(idArray[counter - 1]).value = value;
@@ -49,7 +56,6 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                         const newValue = value.split("T");
                         document.getElementById(idArray[counter - 1]).value = newValue[0];
                         break;
-
                     case "dateText":
                         const newValue2 = value.split("T");
                         document.getElementById(idArray[counter - 1]).innerHTML = newValue2[0];

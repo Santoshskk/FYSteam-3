@@ -22,7 +22,6 @@ const ProfilePageId = [
 ];
 //array with names profile page id (edit trip)
 const profilePageId2 = ["startDate1", "endDate1"]
-
 const test = ["locatie"]
 ////////////////
 
@@ -49,11 +48,14 @@ form?.addEventListener("submit", function (e) {
         UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
     }
 });
-
+const interessesId = ["interesses"];
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img");
     GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null);
     GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null);
+
+    GetFromDatabase(interessesId, "HTMLText", GetUserInterest(userID), false , null)
+
 }
 
 if (location.href.includes("EditProfile")) {
@@ -86,7 +88,5 @@ const editTripId = ["countrySelect", "startDate", "endDate"]
 
 formtripPage?.addEventListener("submit", function (e) {
     e.preventDefault();
-
     UpdateDB(getValues(null, editTripId, SPnames_UpdateTripInfo), "UpdateTripInfo");
-
 })
