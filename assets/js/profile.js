@@ -54,7 +54,7 @@ if (location.href.includes("ProfilePage")) {
     GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null);
     GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null);
 
-    GetFromDatabase(interessesId, "HTMLText", GetUserInterest(userID), false , null)
+    GetFromDatabase(interessesId, "list", GetUserInterest(userID), false , null)
 
 }
 

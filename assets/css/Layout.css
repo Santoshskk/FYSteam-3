@@ -58,15 +58,6 @@ body {
     padding-right: 50px;
 }
 
-
-li {
-    list-style: none;
-    display: inline-block;
-    padding-right: 15px;
-    color: white;
-    font-size: 25px;
-    font-weight: bold;
-}
 a {
     text-decoration: none;
     color: white;

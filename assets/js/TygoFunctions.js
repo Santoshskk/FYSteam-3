@@ -22,7 +22,6 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
             data = data[0];
         let array = [];
 
-
             if(data.length === 1) {
                 data = data[0];
             }
@@ -33,15 +32,16 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                 }
                 switch (tagType) {
                     case "HTMLText":
-                        if(typeof value === 'object') {
-                            document.getElementById(idArray[counter - 1]).innerHTML = value.name;
-                        }
-                        else {
                             document.getElementById(idArray[counter - 1]).innerHTML = value;
-                        }
                         break;
                     case "inputText":
                         document.getElementById(idArray[counter - 1]).value = value;
+                        break;
+                    case "list":
+                        var list = document.getElementById("list");
+                        var entry = document.createElement('li');
+                        entry.appendChild(document.createTextNode(value.name));
+                        list.appendChild(entry);
                         break;
                     case "log":
                             console.log(value)
