@@ -27,7 +27,7 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-.modal-content, .match-modal-content {
+.modal-content, .match-modal-content, .received-modal-content, .send-modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
