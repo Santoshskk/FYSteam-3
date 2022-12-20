@@ -9,11 +9,9 @@
 }
 
 .navLine {
-    /* height: 20px; */
+    height: auto;
     background-color: #D9260F;
-
     display: flex;
-    justify-content: row;
     padding: 5px 10px;
 }
 
