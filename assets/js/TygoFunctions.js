@@ -13,7 +13,7 @@ query = the SELECT query you want use to get from database. is type array. index
 HasImage = boolean. checks if page has an image
 ImgId = img url. not nessecary if there is no image
  */
-function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
+function GetFromDatabase(idArray, tagType, query, HasImage, ImgId, numberValue) {
     let paramaters = query[1];
     if(query.length === 1) {
         paramaters = null;
@@ -35,7 +35,9 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                             document.getElementById(idArray[counter - 1]).innerHTML = value;
                         break;
                     case "inputText":
-                        document.getElementById(idArray[counter - 1]).value = value;
+                        if(key != "profileImage") {
+                            document.getElementById(idArray[counter - 1]).value = value;
+                        }
                         break;
                     case "list":
                         var list = document.getElementById("list");
@@ -49,7 +51,7 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId) {
                     case "dropdown":
                             array.push(value.name);
                         if(array.length === data.length) {
-                            populateDropdown(idArray, array)
+                            populateDropdown(idArray, array, numberValue)
                         }
                        break;
                     case "date":
@@ -150,14 +152,21 @@ function getValues(profileImage, inputIdArr, storedProceduresVarNames) {
 inputId = id of input field
 OptionsArr = array with options
  */
-function populateDropdown(inputId ,OptionsArr) {
+function populateDropdown(inputId ,OptionsArr, numberValue) {
     const select = document.getElementById(inputId);
 
     for(let i = 0; i < OptionsArr.length; i++) {
-        const opt = OptionsArr[i];
-        const el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-    }
+
+            const opt = OptionsArr[i];
+            const el = document.createElement("option");
+            el.textContent = opt;
+        if(numberValue) {
+            el.value = (i+1);
+        }
+        else {
+            el.value = opt;
+        }
+            select.appendChild(el);
+
+        }
 }

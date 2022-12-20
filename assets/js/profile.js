@@ -49,6 +49,7 @@ form?.addEventListener("submit", function (e) {
     }
 });
 const interessesId = ["interesses"];
+const interessesId2 = ["interessesBox"];
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img");
     GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null);
@@ -59,6 +60,7 @@ if (location.href.includes("ProfilePage")) {
 }
 
 if (location.href.includes("EditProfile")) {
+    GetFromDatabase("1", "dropdown", GetAllInterest(), false, null, true);
     GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null);
 }
 
@@ -79,8 +81,7 @@ editTripBtn?.addEventListener("click", function (e) {
 let formtripPage = document.getElementById('form3');
 let dateArray = ["startDate", "endDate"];
 if(location.href.includes("EditTrip")) {
-    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
-    GetFromDatabase("interestSelect", "dropdown", GetAllInterest(), false, null);
+    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null, false);
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
 }
 
