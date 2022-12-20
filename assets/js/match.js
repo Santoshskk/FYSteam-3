@@ -20,20 +20,151 @@ FYSCloud.API.queryDatabase(
         }
     })
 
-    /*
-    // startdatum, einddatum en locatie trip, van ingelogde user, nog in query verwerken
-    */
-
-    // gegevens ophalen mogelijke matches voor de ingelogde user
     FYSCloud.API.queryDatabase(
-        "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND (\"2023-01-01\" BETWEEN t.startDate AND t.endDate OR \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate OR \"2023-01-01 00:00:00\" BETWEEN t.startDate AND t.endDate AND \"2023-01-09 00:00:00\" BETWEEN t.startDate AND t.endDate ) AND t.location = \"Spanje\"",
-        [userID, queryVar]
+        "SELECT startDate, endDate, location FROM tripinfo WHERE userID = (?)",
+        [userID]
     ).then(function (data) {
+        let startDate;
+        let endDate;
+        let location;
 
-        // bericht weergeven bij geen mogelijke matches
-        if (data.length === 0){
+        // data trip info van ingelogde gebruiker ophalen en in variabele plaatsen
+        for (let user of data){
+            startDate = user.startDate;
+            endDate = user.endDate;
+            location = user.location;
+        }
 
-            // html element aanmaken in het gedeelde van mogelijke matches
+        // datums juiste format geven
+        startDate = startDate.slice(0, 10);
+        endDate = endDate.slice(0, 10);
+
+        // gegevens ophalen mogelijke matches voor de ingelogde user
+        FYSCloud.API.queryDatabase(
+            "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND ((?) BETWEEN t.startDate AND t.endDate OR (?) BETWEEN t.startDate AND t.endDate OR (?) BETWEEN t.startDate AND t.endDate AND (?) BETWEEN t.startDate AND t.endDate ) AND t.location = (?)",
+            [userID, queryVar, startDate, endDate, startDate, endDate, location]
+        ).then(function (data) {
+
+            // bericht weergeven bij geen mogelijke matches
+            if (data.length === 0){
+
+                // html element aanmaken in het gedeelde van mogelijke matches
+                let potMatchDiv = document.querySelector("#potentialMatches");
+                const p = document.createElement("p")
+                const text = document.createTextNode("Helaas, er zijn geen mogelijke matches gevonden.")
+
+                p.appendChild(text)
+
+                potMatchDiv.appendChild(p)
+            }
+            // html template ophalen voor mogelijke matches
+            let template = document.querySelector('#profiel-template').content
+
+            // voor elke mogelijke match html template vullen
+            for (let user of data){
+                let matchProfile = template.cloneNode(true)
+
+                // variabele uit data halen
+                let name = user.firstName + " " + user.lastName;
+                let img = user.profileImage;
+                let id = user.userID;
+
+                // variabele toevoegen aan het template per mogelijke match
+                matchProfile.querySelector("#namePotMatch").innerHTML = name
+                matchProfile.querySelector("#imagePotMatch").src = img
+                matchProfile.querySelector(".profile").id = id
+
+                document.querySelector("#potentialMatches").append(matchProfile)
+            }
+
+            // mogelijke match profielen als element krijgen
+            const profiles = document.querySelectorAll(".profile");
+
+            // voor iedere mogelijke match een eventListener toevoegen, zodat je bij click het profiel kunt zien
+            profiles.forEach(profile=>{
+                profile.addEventListener("click", function (e) {
+                    // krijg model element, waar het profiel zichtbaar in komt
+                    let modal = document.querySelector("#profileModal");
+
+                    // krijg userID van potentiële match
+                    let potMatchId = profile.id.valueOf();
+
+                    // gegevens van mogelijke match ophalen en in modal plaatsen
+                    FYSCloud.API.queryDatabase(
+                        "SELECT u.profileImage, CONCAT(u.firstName, ' ', u.lastName) AS fullName, ui.gender, ui.age, ui.nationality, ui.discription, t.location, t.startDate, t.endDate FROM user AS u INNER JOIN userinfo AS ui ON u.userID = ui.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE u.userID = (?)",
+                        [potMatchId]
+                    ).then(function (data){
+
+                        // krijg modal element
+                        let modal = document.querySelector('#profileModal');
+
+                        for (let user of data){
+                            // alle data van de user toevoegen aan het profiel modal
+                            modal.querySelector(".modal-content").id = potMatchId;
+                            modal.querySelector("#potMatchModalImg").src = user.profileImage;
+                            modal.querySelector("#profileName").innerHTML = "Naam: " + user.fullName;
+                            modal.querySelector("#profileGender").innerHTML = "Geslacht: " + user.gender;
+                            modal.querySelector("#profileAge").innerHTML = "Leeftijd: " + user.age;
+                            modal.querySelector("#profileNat").innerHTML = "Nationaliteit: " + user.nationality;
+                            modal.querySelector("#profileBio").innerHTML = "Bio: " + user.discription;
+
+                            // de trip info juiste format geven
+                            let startText = user.startDate.slice(0,10);
+                            const startDateArr = startText.split('-');
+                            let startDate = startDateArr[2] + "-" + startDateArr[1] + "-" + startDateArr[0];
+
+                            let endText = user.endDate.slice(0,10);
+                            const endDateArr = endText.split('-');
+                            let endDate = endDateArr[2] + "-" + endDateArr[1] + "-" + endDateArr[0];
+
+                            // trip info ook toevoegen aan profiel modal
+                            modal.querySelector("#profileTrip").innerHTML = "Trip info: In " + user.location + " van "
+                                + startDate + " tot " + endDate;
+                        }
+                    })
+
+                    // ophalen interesses van potentiële match
+                    FYSCloud.API.queryDatabase(
+                        "SELECT name FROM user_interest AS ui INNER JOIN interest AS i ON ui.interestID = i.interestID WHERE ui.userID = (?)",
+                        [potMatchId]
+                    ).then(function (data){
+                        let interests = "";
+
+                        // modal element krijgen, waar het profiel op staat
+                        let modal = document.querySelector('#profileModal');
+
+                        // omdat er meerdere interesse kunnen zijn zorgen dat ze de juiste format hebben
+                        for (let interest of data){
+                            if (interest === data[data.length - 1]){
+                                interests += interest.name
+                            }else {
+                                interests += interest.name + ", "
+                            }
+                        }
+
+                        modal.querySelector("#profileIntrest").innerHTML = "Interesse(s): " + interests;
+                    })
+
+                    // wanneer user op profiel klikt open modal
+                    modal.style.display = "block";
+
+                    let span = document.querySelector("#closeSpan");
+
+                    // wanneer user op kruisje klikt, sluiten
+                    span.addEventListener("click", function () {
+                        modal.style.display = "none";
+                    })
+
+                    // wanneer user naast modal klikt, modal sluiten
+                    window.onclick = function (event) {
+                        if (event.target === modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                })
+            })
+        }).catch(function () {
+            // als er geen matches zijn een message weer geven
             let potMatchDiv = document.querySelector("#potentialMatches");
             const p = document.createElement("p")
             const text = document.createTextNode("Helaas, er zijn geen mogelijke matches gevonden.")
@@ -41,122 +172,7 @@ FYSCloud.API.queryDatabase(
             p.appendChild(text)
 
             potMatchDiv.appendChild(p)
-        }
-        // html template ophalen voor mogelijke matches
-        let template = document.querySelector('#profiel-template').content
-
-        // voor elke mogelijke match html template vullen
-        for (let user of data){
-            let matchProfile = template.cloneNode(true)
-
-            // variabele uit data halen
-            let name = user.firstName + " " + user.lastName;
-            let img = user.profileImage;
-            let id = user.userID;
-
-            // variabele toevoegen aan het template per mogelijke match
-            matchProfile.querySelector("#namePotMatch").innerHTML = name
-            matchProfile.querySelector("#imagePotMatch").src = img
-            matchProfile.querySelector(".profile").id = id
-
-            document.querySelector("#potentialMatches").append(matchProfile)
-        }
-
-        // mogelijke match profielen als element krijgen
-        const profiles = document.querySelectorAll(".profile");
-
-        // voor iedere mogelijke match een eventListener toevoegen, zodat je bij click het profiel kunt zien
-        profiles.forEach(profile=>{
-            profile.addEventListener("click", function (e) {
-                // krijg model element, waar het profiel zichtbaar in komt
-                let modal = document.querySelector("#profileModal");
-
-                // krijg userID van potentiële match
-                let potMatchId = profile.id.valueOf();
-
-                // gegevens van mogelijke match ophalen en in modal plaatsen
-                FYSCloud.API.queryDatabase(
-                    "SELECT u.profileImage, CONCAT(u.firstName, ' ', u.lastName) AS fullName, ui.gender, ui.age, ui.nationality, ui.discription, t.location, t.startDate, t.endDate FROM user AS u INNER JOIN userinfo AS ui ON u.userID = ui.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE u.userID = (?)",
-                    [potMatchId]
-                ).then(function (data){
-
-                    // krijg modal element
-                    let modal = document.querySelector('#profileModal');
-
-                    for (let user of data){
-                        // alle data van de user toevoegen aan het profiel modal
-                        modal.querySelector(".modal-content").id = potMatchId;
-                        modal.querySelector("#potMatchModalImg").src = user.profileImage;
-                        modal.querySelector("#profileName").innerHTML = "Naam: " + user.fullName;
-                        modal.querySelector("#profileGender").innerHTML = "Geslacht: " + user.gender;
-                        modal.querySelector("#profileAge").innerHTML = "Leeftijd: " + user.age;
-                        modal.querySelector("#profileNat").innerHTML = "Nationaliteit: " + user.nationality;
-                        modal.querySelector("#profileBio").innerHTML = "Bio: " + user.discription;
-
-                        // de trip info juiste format geven
-                        let startText = user.startDate.slice(0,10);
-                        const startDateArr = startText.split('-');
-                        let startDate = startDateArr[2] + "-" + startDateArr[1] + "-" + startDateArr[0];
-
-                        let endText = user.endDate.slice(0,10);
-                        const endDateArr = endText.split('-');
-                        let endDate = endDateArr[2] + "-" + endDateArr[1] + "-" + endDateArr[0];
-
-                        // trip info ook toevoegen aan profiel modal
-                        modal.querySelector("#profileTrip").innerHTML = "Trip info: In " + user.location + " van "
-                        + startDate + " tot " + endDate;
-                    }
-                })
-
-                // ophalen interesses van potentiële match
-                FYSCloud.API.queryDatabase(
-                    "SELECT name FROM user_interest AS ui INNER JOIN interest AS i ON ui.interestID = i.interestID WHERE ui.userID = (?)",
-                    [potMatchId]
-                ).then(function (data){
-                    let interests = "";
-
-                    // modal element krijgen, waar het profiel op staat
-                    let modal = document.querySelector('#profileModal');
-
-                    // omdat er meerdere interesse kunnen zijn zorgen dat ze de juiste format hebben
-                    for (let interest of data){
-                        if (interest === data[data.length - 1]){
-                            interests += interest.name
-                        }else {
-                            interests += interest.name + ", "
-                        }
-                    }
-
-                    modal.querySelector("#profileIntrest").innerHTML = "Interesse(s): " + interests;
-                })
-
-                // wanneer user op profiel klikt open modal
-                modal.style.display = "block";
-
-                let span = document.querySelector("#closeSpan");
-
-                // wanneer user op kruisje klikt, sluiten
-                span.addEventListener("click", function () {
-                    modal.style.display = "none";
-                })
-
-                // wanneer user naast modal klikt, modal sluiten
-                window.onclick = function (event) {
-                    if (event.target === modal) {
-                        modal.style.display = "none";
-                    }
-                }
-            })
         })
-    }).catch(function () {
-        // als er geen matches zijn een message weer geven
-        let potMatchDiv = document.querySelector("#potentialMatches");
-        const p = document.createElement("p")
-        const text = document.createTextNode("Helaas, er zijn geen mogelijke matches gevonden.")
-
-        p.appendChild(text)
-
-        potMatchDiv.appendChild(p)
     })
 })
 
@@ -437,8 +453,8 @@ document.querySelector("#sendButton").addEventListener("click", function (e) {
 // code voor het verkrijgen van de gemaakte matches
 */
 FYSCloud.API.queryDatabase(
-    "SELECT CONCAT(u.firstName, \" \", u.lastName) AS fullName, u.profileImage, u.userID FROM user AS u INNER JOIN `match` AS m ON u.userID = m.requestID WHERE m.receiveID = (?) AND m.status = 2",
-    [userID]
+    "SELECT CONCAT(u.firstName, \" \", u.lastName) AS fullName, u.profileImage, u.userID FROM user AS u INNER JOIN `match` AS m ON u.userID = m.requestID WHERE m.receiveID = (?) AND m.status = 2 UNION SELECT CONCAT(u.firstName, \" \", u.lastName) AS fullName, u.profileImage, u.userID FROM user AS u INNER JOIN `match` AS m ON u.userID = m.receiveID WHERE m.requestID = (?) AND m.status = 2 ",
+    [userID, userID]
 ).then(function (data) {
     // check voor geen gemaakte matches
     if (data.length === 0){
@@ -560,9 +576,18 @@ FYSCloud.API.queryDatabase(
 document.querySelector("#removeButton").addEventListener("click", function (){
     let requestedUserId = document.querySelector(".match-modal-content").id;
 
+    // query voor als ingelogde gebruiker de ontvangende id is
     FYSCloud.API.queryDatabase(
         "DELETE FROM `match` WHERE requestID = (?) AND receiveID = (?) AND status = 2",
         [requestedUserId, userID]
+    ).then(function (){
+        location.reload()
+    })
+
+    // query voor als ingelogde gebruiker de verzoekende id is
+    FYSCloud.API.queryDatabase(
+        "DELETE FROM `match` WHERE requestID = (?) AND receiveID = (?) AND status = 2",
+        [userID, requestedUserId]
     ).then(function (){
         location.reload()
     })
