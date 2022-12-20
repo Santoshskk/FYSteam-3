@@ -164,7 +164,7 @@ body {
 .row {
     display: flex;
     flex-wrap: wrap;
-    height: 83.3vh;
+    height: 100%;
 }
 
 /* Create two unequal columns that sits next to each other */
