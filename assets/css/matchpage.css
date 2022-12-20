@@ -3,27 +3,215 @@
     box-sizing: border-box;
 }
 
-.fake-persona {
-    height: 200px;
-    width: 200px;
-    display: inline;
-    border: 4px solid #666;
-    padding: 10px;
-    border-radius: 2em;
-    margin-right: 20px;
-
-}
-
-.fake-persona2 {
-    height: 150px;
+/* Modal css */
+#potMatchModalImg, #receivedMatchModalImg ,#madeMatchImg {
     width: 150px;
-    display: inline;
-    border: 4px solid #666;
-    padding: 10px;
-    border-radius: 2em;
-    margin-right: 20px;
+    height: 150px;
+    margin-top: 10px;
+    margin-right: 15%;
+    object-fit: contain;
+    float: right;
 }
 
-.mogelijke-matches {
-    margin-top: 300px;
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 99 !important;
+    padding-top: 300px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
+
+.modal-content, .match-modal-content, .received-modal-content, .send-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    overflow: auto;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#potentialMatches, #sendMatches, #madeMatches, #receivedMatches{
+    overflow: auto;
+}
+
+#sendRequestText{
+    position: relative;
+}
+
+#receivedRequestText{
+    position: relative;
+}
+
+#mailText{
+    width: 100%;
+    height: 150px;
+}
+
+#matchButton, #receivedButton, #receivedCancelButton, #sendCancelButton, #removeButton, #mailButton, #sendMailButton, #sendButton{
+    background-color: #D9260F;
+    color: white;
+    padding: 15px 30px 15px 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 15px;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+#sendMailButton{
+    margin-bottom: 0px;
+}
+
+#mailMessage{
+    color: red;
+}
+
+#receivedCancelButton, #sendCancelButton, #removeButton {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+#namePotMatch, #nameSendMatch, #nameReceivedMatch{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.potMatchImageClass{
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    object-fit: contain;
+}
+
+.profile, .sendProfiles, .receivedProfiles{
+    height: auto;
+    width: 150px;
+    border: 4px solid grey;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+    float: left;
+    cursor: pointer;
+}
+
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 15%;
+    border: 1px solid #000;
+    object-fit: contain;
+    background-color: white;
+    margin-right: 5px;
+}
+
+.profile-user {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 5px;
+    border: 3px solid black;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.profile-user div {
+    padding: 0;
+    display: grid;
+}
+.profile-user div label {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Column container */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 83.3vh;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    flex: 25%;
+    background-color: #BBB8B7;
+    padding: 20px;
+    border: 3px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* Main column */
+.main {
+    flex: 75%;
+    background-color: white;
+    padding: 20px;
+}
+
+.navTop {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.navTop img {
+    width: 280px;
+}
+
+.navLine {
+    height: 20px;
+    background-color: #D9260F;
+}
+
+.btn {
+    margin: 10px 0;
+    padding: 10px 30px;
+    border: 1px solid #00BCE2;
+    border-radius: 7px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.btn.signout {
+    background-color: #fff;
+    color: #00BCE2;
+}
+
+.btn:hover {
+    background-color: #00BCE2;
+    color: #fff;
+}
+

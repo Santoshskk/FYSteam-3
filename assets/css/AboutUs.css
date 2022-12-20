@@ -29,6 +29,25 @@ html {
     color: white;
 }
 
+.about-title {
+    font-size: 69px;
+}
+
+.about-text {
+    border-style: dashed;
+}
+
+.about-border {
+    padding: 20px;
+}
+
+.cause-section {
+    padding: 50px;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
 .container {
     padding: 0 16px;
 }
