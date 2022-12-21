@@ -1,0 +1,37 @@
+h1 {
+  margin-top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+  background: #65656558;
+}
+
+.pagination-number,
+.pagination-button{
+  font-size: 1.1rem;
+  background-color: transparent;
+  border: none;
+  margin: 0.25rem 0.25rem;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 7px;
+}
+
+.pagination-number:hover,
+.pagination-button:not(.disabled):hover {
+  background: #d9270f58;
+}
+
+.pagination-number.active {
+  color: #fff;
+  background: #D9260F;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../js/sideNav.js"></script>
+</head>
+
+<nav>
+    <!-- Smartphone header/nav with togglable sidebar -->
+    <div class="navTop">
+        <a href="index.html">
+            <img src="assets/img/tripbuddylogo1.png" alt="logo" />
+        </a>
+        <button onclick="logOut()" class="btn signout">Log out</button>
+    </div>
+    <div class="navLine">
+        <button type="button" class="toggle">
+            <span></span>
+        </button>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="profileCard">
+            <img class="profileImg" src="assets/img/profileimg.png"
+                alt="" />
+            <div>
+                <label class="fullName1" style="font-weight: bold"></label>
+                <label class="email1" ></label>
+            </div>
+        </div>
+
+        <br /> <hr /> <br />
+
+        <div class="sideLinks">
+            <a href="index.html" class="sideLink active">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                Users
+            </a>
+
+            <a href="reports.html" class="sideLink">
+                <i class="fa fa-flag" aria-hidden="true"></i>
+                Reports
+            </a>
+
+            <a href="#" class="sideLink">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                Settings
+            </a>
+        </div>
+    </div>
+</nav>

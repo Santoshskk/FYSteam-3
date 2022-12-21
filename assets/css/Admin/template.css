@@ -1,0 +1,33 @@
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+ul li {
+    border-radius: 3px;
+    background-color: #ddd;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+ul li div {
+  display: inline;
+  justify-content: center;
+  align-items: center;  
+}
+
+.imgc {
+    
+}
+
+.nameC {
+    display: inline-grid;
+    position: absolute;
+}
+
+.btnC {
+    float: right;
+    justify-content: center;
+    align-items: center;
+}

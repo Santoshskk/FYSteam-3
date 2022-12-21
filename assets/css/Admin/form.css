@@ -1,53 +1,132 @@
-/* Add padding to containers */
-.container {
-    padding: 16px;
-    background-color: white;
-  }
-  
-  /* Full-width input fields */
-  input[type=text], input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
+.form {
+    padding: 32px 45px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 85%);
+}
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.form-control label {
     display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
-  
-  input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-  
-  /* Overwrite default styles of hr */
-  hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-  }
-  
-  /* Set a style for the submit button */
-  .registerbtn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
     width: 100%;
-    opacity: 0.9;
-  }
-  
-  .registerbtn:hover {
-    opacity: 1;
-  }
-  
-  /* Add a blue text color to links */
-  a {
-    color: dodgerblue;
-  }
-  
-  /* Set a grey background color and center the text of the "sign in" section */
-  .signin {
-    background-color: #f1f1f1;
+}
+
+.form-control input:focus {
+    outline: 0;
+    border-color: #777;
+}
+
+.form-control.success input {
+    border-color: #2ecc71;
+}
+
+.form-control.error input {
+    border-color: #e74c3c;
+}
+
+.form-control i {
+    visibility: hidden;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+.form-control.success i.fa-check-circle {
+    color: #2ecc71;
+    visibility: visible;
+}
+
+.form-control.error i.fa-exclamation-circle {
+    color: #e74c3c;
+    visibility: visible;
+}
+
+.form-control small {
+    color: #e74c3c;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small {
+    visibility: visible;
+}
+
+.form button {
+    background-color: #D9260F;
+    border: 2px solid #D9260F;
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.center2 {
     text-align: center;
-  }
+}
+
+#login {
+    background-color: #D9260F;
+    border: 2px solid #D9260F;
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+#confirm {
+    display: none;
+    border: 1px solid;
+    position: fixed;
+    width: 250px;
+    left: 50%;
+    margin-left: -100px;
+    padding: 25px;
+    text-align: center;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+
+}
+.first {
+    flex: 1;
+    width: auto;
+    float:left; /* add this */
+    margin-right: 1px;
+}
+.second {
+    flex: 1;
+    width: auto;
+    margin-left: 1px;
+    float: left; /* add this */
+}

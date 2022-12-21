@@ -1,19 +1,18 @@
 function search() {
 
-    var input, filter, table, tr, td, i, txtValue;
 
-    input = document.getElementById("myInput");
+    var input = document.getElementById("myInput");
 
-    filter = input.value.toUpperCase();
+    var filter = input.value.toUpperCase();
 
-    table = document.getElementById("myTable");
+    var div = document.getElementById("profiles");
 
-    tr = table.getElementsByTagName("tr");
+    var tr = div.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
+        var td = tr[i].getElementsByTagName("td")[1];
         if (td) {
-            txtValue = td.textContent || td.innerText;
+            var txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
             } else {
