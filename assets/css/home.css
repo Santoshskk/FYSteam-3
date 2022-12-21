@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
     font-family: "Open Sans", sans-serif;
+
 }
 
 /* images home page styling */
@@ -50,7 +51,6 @@ body {
     height: 600px;
     text-align: center;
     margin-left: 25%;
-    margin-top: 625px;
     color: #666;
 }
 
@@ -92,10 +92,14 @@ body {
 
 /* Home text styling */
 .homeTextContainer{
-    width: 220px;
-    margin-left: 27%;
-    margin-top: 95px;
-    margin-bottom: 50px;
+    text-align: center;
     position: absolute;
-    color: #666;
+    color: white;
+}
+
+.main-top {
+    background-image: url(../img/sunset.png);
+    background-size: contain;
+    background-size: cover;
+    height: 800px;
 }

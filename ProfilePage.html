@@ -18,11 +18,16 @@
 <form id="form1" action="EditProfile.html">
     <script src="assets/js/logout.js"></script>
 
+    <img id="img" class="profileImg" src="" alt="...">
+
+    <div id="buttonDiv">
+        <input id="submit" type="submit" value="Edit Profiel" class="inputText" name="name">
+        <input id="editTripBtn" type="button" value="Edit trip" class="inputText" name="name">
+    </div>
+
     <div class="userProfile">
 
-        <img id="img" class="profileImg" src="" alt="...">
-
-
+        <div class="user-info">
         <p style="display: none" id = "userID"></p>
 
         <h1 id="nameText" class="Uservalue"></h1>
@@ -40,30 +45,34 @@
         <p class="infoTextUser">Gender: </p>
         <p class="Uservalue" id="gender"></p>
 
-        <p class="infoTextUser">age: </p>
+        <p class="infoTextUser">Leeftijd: </p>
         <p class="Uservalue" id="age"></p>
 
+        <p class="infoTextUser">interesses: </p>
+        <ol class="Uservalue" id="list"></ol>
+
+        </div>
+
+        <div class="biography">
         <p class="infoTextUser">Biografie: </p>
         <p class="Uservalue" id="description"></p>
 
-        <h3 class="infoTextUser">tripInfo: </h3>
+        <h3 class="infoTextUser">TripInfo: </h3>
 
         <p class="infoTextUser">Locatie: </p>
         <p class="Uservalue" id="locatie"></p>
 
-        <p class="infoTextUser">startDate: </p>
+        <p class="infoTextUser">Startdatum: </p>
         <p class="Uservalue" id="startDate1"></p>
 
-        <p class="infoTextUser">endDate: </p>
+        <p class="infoTextUser">Einddatum: </p>
         <p class="Uservalue" id="endDate1"></p>
+        </div>
 
-        <p class="infoTextUser">interesses: </p>
 
-        <ol id="list"></ol>
-
-        <input id="submit" type="submit" value="Edit Profiel" class="inputText" name="name">
-        <input id="editTripBtn" type="button" value="Edit trip" class="inputText" name="name">
     </div>
+
+
 
 </form>
 
