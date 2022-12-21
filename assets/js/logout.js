@@ -1,5 +1,8 @@
 if (userId == null || isActive === 1) {
     window.location.assign('index.html');
+    if (isActive === 1) {
+        alert("This account has been disabled.");
+    }
 }
 
 document.addEventListener("DOMContentLoaded" ,function() {
