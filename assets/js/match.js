@@ -41,8 +41,8 @@ FYSCloud.API.queryDatabase(
 
         // gegevens ophalen mogelijke matches voor de ingelogde user
         FYSCloud.API.queryDatabase(
-            "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND ((?) BETWEEN t.startDate AND t.endDate OR (?) BETWEEN t.startDate AND t.endDate OR (?) BETWEEN t.startDate AND t.endDate AND (?) BETWEEN t.startDate AND t.endDate ) AND t.location = (?)",
-            [userID, queryVar, startDate, endDate, startDate, endDate, location]
+            "SELECT DISTINCT u.userID, u.firstName, u.lastName, u.profileImage FROM user AS u INNER JOIN user_interest AS i ON u.userID = i.userID INNER JOIN tripinfo AS t ON u.userID = t.userID WHERE i.userID != (?) AND u.userID not in (select m.requestID from `match` AS m) AND u.userID not in (select m.receiveID from `match` AS m) AND i.interestID IN (?) AND ((?) BETWEEN t.startDate AND t.endDate OR (?) BETWEEN t.startDate AND t.endDate OR (?) BETWEEN t.startDate AND t.endDate AND (?) BETWEEN t.startDate AND t.endDate OR t.startDate BETWEEN (?) AND (?) AND t.endDate BETWEEN (?) AND (?) OR t.endDate BETWEEN (?) AND (?) OR t.startDate BETWEEN (?) AND (?)) AND t.location = (?)",
+            [userID, queryVar, startDate, endDate, startDate, endDate, startDate, endDate, startDate, endDate, startDate, endDate, startDate, endDate, location]
         ).then(function (data) {
 
             // bericht weergeven bij geen mogelijke matches
