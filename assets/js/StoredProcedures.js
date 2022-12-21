@@ -30,7 +30,7 @@ function UpdateUserInformation(CurrentUser) {
             CurrentUser.profileImage,
             userID
         ]).then(function () {
-        window.location.href = "ProfilePage.html";
+      window.location.href = "ProfilePage.html";
     })
 }
 
@@ -66,4 +66,13 @@ function GetAllInterest() {
 
 function GetTripInfoDates() {
     return ["CALL GetTripInfoDates(?)", userID]
+}
+
+
+function InsertUserInterest(CurrentData) {
+    FYSCloud.API.queryDatabase("CALL InsertUserInterest(?,?)",
+        [
+            CurrentData.interestID,
+            userID
+    ])
 }
