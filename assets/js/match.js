@@ -431,11 +431,10 @@ document.querySelector("#receivedButton").addEventListener("click", function (e)
 // methode voor het accepteren van een ontvangen match verzoek
 function updateReceivedRequest(){
     let requestingUser = document.querySelector(".received-modal-content").id;
-    let receivingUser = 1; // 1 word userID
 
     FYSCloud.API.queryDatabase(
         "UPDATE `match` SET status = 2 WHERE requestID = (?) AND receiveID = (?)",
-        [requestingUser, receivingUser]
+        [requestingUser, userID]
     ).then(function (){
         location.reload();
     })
