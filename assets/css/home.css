@@ -51,6 +51,7 @@ body {
     height: 600px;
     text-align: center;
     margin-left: 25%;
+    margin-top: 625px;
     color: #666;
 }
 
@@ -92,14 +93,10 @@ body {
 
 /* Home text styling */
 .homeTextContainer{
-    text-align: center;
+    width: 220px;
+    margin-left: 27%;
+    margin-top: 95px;
+    margin-bottom: 50px;
     position: absolute;
-    color: white;
-}
-
-.main-top {
-    background-image: url(../img/sunset.png);
-    background-size: contain;
-    background-size: cover;
-    height: 800px;
+    color: #666;
 }
