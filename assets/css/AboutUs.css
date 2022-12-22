@@ -3,10 +3,8 @@ body {
 }
 
 .row {
-    background-image: url(../img/sunsetbeach.png);
-    color: white;
-    box-shadow: inset 2000px 0 0 0 rgb(217 38 15 / 20%);
-
+    background-color: white !important;
+    color: black;
 }
 
 html {
@@ -30,7 +28,6 @@ html {
 }
 
 .about-section {
-    background-image: url(../img/sunsetbeach.png);
     border: 3px solid black;
     padding: 50px;
     text-align: center;
@@ -90,5 +87,11 @@ html {
         width: 100%;
         display: block;
     }
+}
+
+h2{
+    margin: auto;
+    text-align: center;
+    padding: 20px;
 }
 
