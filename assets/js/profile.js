@@ -93,9 +93,12 @@ editTripBtn?.addEventListener("click", function (e) {
 
 let formtripPage = document.getElementById('form3');
 let dateArray = ["startDate", "endDate"];
+
 if(location.href.includes("EditTrip")) {
     GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null, false);
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
+    GetFromDatabase("countrySelect", "valueDropdown",  GetCurrentCountry(userID), false, null, false);
+
 }
 
 const editTripId = ["countrySelect", "startDate", "endDate"]

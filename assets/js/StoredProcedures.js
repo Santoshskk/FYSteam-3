@@ -91,3 +91,9 @@ function GetCurrentUserInterest(CurrentData) {
             userID
         ]
 }
+
+function GetCurrentCountry(CurrentData) {
+    return ["CALL GetCurrentCountry(?)",
+        userID
+    ]
+}

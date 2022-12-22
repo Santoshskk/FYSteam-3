@@ -66,6 +66,9 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId, numberValue) 
                         const newValue2 = value.split("T");
                         document.getElementById(idArray[counter - 1]).innerHTML = newValue2[0];
                         break;
+                    case "valueDropdown":
+                        document.getElementById(idArray).value = value;
+                        break;
                     case "checkbox":
                         const div = document.getElementById(idArray);
                         const checkBox = document.createElement('input')
@@ -82,8 +85,6 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId, numberValue) 
                                 }
                             }
                         })
-
-
                         checkBox.addEventListener('change', function () {
                             if (this.checked) {
                                 console.log("checked")
