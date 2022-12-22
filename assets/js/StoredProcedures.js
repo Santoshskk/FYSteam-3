@@ -74,5 +74,20 @@ function InsertUserInterest(CurrentData) {
         [
             CurrentData.interestID,
             userID
-    ])
+        ])
+}
+
+function DeleteUserInterests(CurrentData) {
+    FYSCloud.API.queryDatabase("CALL DeleteUserInterests(?,?)",
+        [
+            CurrentData.interestID,
+            userID
+        ])
+}
+
+function GetCurrentUserInterest(CurrentData) {
+    return ["CALL GetCurrentUserInterest(?,?)",
+            CurrentData,
+            userID
+        ]
 }

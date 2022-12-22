@@ -53,19 +53,7 @@ form?.addEventListener("submit", function (e) {
         UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
     }
 
-    //vult array with id
-    FYSCloud.API.queryDatabase(GetAllInterest()
-    ).then(function (data) {
-        data = data[0];
-    for(let i = 1; i<= data.length; i++) {
-        InterestId.push(i);
-        }
-    let test2 = getValues(null,InterestId,SPnames_InsertUserInterest, "checkbox");
 
-    for(let i = 0; i <  Object.keys(test2).length; i++) {
-        UpdateDB(test2, "InsertUserInterest");
-    }
-    })
 
     //
 });
@@ -76,17 +64,17 @@ form?.addEventListener("submit", function (e) {
 const interessesId = ["interesses"];
 const interessesId2 = ["interessesBox"];
 if (location.href.includes("ProfilePage")) {
-    GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img");
-    GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null);
-    GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null);
+    GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img", false);
+    GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null, false);
+    GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null, false);
 
-    GetFromDatabase(interessesId, "list", GetUserInterest(userID), false , null)
+    GetFromDatabase(interessesId, "list", GetUserInterest(userID), false , null, false)
 
 }
 
 if (location.href.includes("EditProfile")) {
     GetFromDatabase("checkboxie", "checkbox", GetAllInterest(), false, null, true);
-    GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null);
+    GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null, false);
 }
 
 function DeleteProfileImage() {
