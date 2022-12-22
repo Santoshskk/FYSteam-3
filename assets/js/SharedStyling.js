@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded" ,function() {
 
 //set header all page
     if (header != null) {
-        fetch('assets/temp/header.html')
+        fetch('../assets/temp/Admin/header.html')
             .then(function (response) {
                 return response.text();
             })
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded" ,function() {
 
 //set footer all pages
     if (footer != null) {
-        fetch('assets/temp/footer.html')
+        fetch('../assets/temp/Admin/footer.html')
             .then(function (response) {
                 return response.text();
             })

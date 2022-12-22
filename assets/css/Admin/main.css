@@ -131,9 +131,11 @@ body {
     background-color: rgba(27, 90, 248, 0.6);
 
 }
+
 .tableTxt {
     display: none;
 }
+
 .empty {
     display: flex;
 }
@@ -167,6 +169,7 @@ table tr td {
     .side {
         display: none;
     }
+
     .main {
         flex: 100%;
     }
@@ -176,15 +179,15 @@ table tr td {
         border-radius: 0px;
         background-color: rgb(217, 38, 15);
     }
-    
+
     .profileCard div label {
         color: #fff;
     }
-    
+
     .profileImg {
         border: 0;
     }
-    
+
     .sideLink {
         margin: 5px;
         border-radius: 5px;
@@ -193,16 +196,25 @@ table tr td {
         font-weight: bold;
         color: #fff;
     }
-    
+
     .sideLink:hover {
         background-color: rgba(217, 38, 15, 0.4);
     }
-    
+
     .sideLink.active {
         background-color: rgba(217, 38, 15, 0.5);
     }
-    
+
     .sideLink.active:hover {
         background-color: rgba(217, 38, 15, 0.7);
+    }
+}
+
+
+
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 768px) {
+    .main {
+        flex: 65%;
     }
 }

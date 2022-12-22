@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         function SignUp() {
             FYSCloud.API.queryDatabase(
                 "INSERT INTO user (isAdmin, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?);",
-                [0, firstname.value, lastname.value, email.value, password.value]
+                [1, firstname.value, lastname.value, email.value, password.value]
             ).then(() => {
                 FYSCloud.API.queryDatabase(
                     "SELECT userID FROM user WHERE email = (?)", [email.value]
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                             "INSERT INTO tripinfo (userID, location, startDate, endDate) VALUES (?, ?, ?, ?);",
                             [userID, null, null, null]
                         ).then(() => {
-                            window.location.assign('index.html');
+                            window.location.assign('AdminDashboard.html');
                         }).catch(err => {
                             console.log(err);
                         })

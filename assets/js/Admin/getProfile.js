@@ -1,6 +1,8 @@
+const userID = FYSCloud.Session.get("userID");
+const isAdmin = FYSCloud.Session.get("isAdmin");
+const isActive = FYSCloud.Session.get("isActive");
+
 document.addEventListener('DOMContentLoaded', function () {
-    // const userID = FYSCloud.Session.get("userID");
-    const userID = 4;
 
     FYSCloud.API.queryDatabase("SELECT * FROM user WHERE userID = (?)", [userID]
     ).then(data => {

@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="../js/sideNav.js"></script>
 </head>
 
 <nav>
     <!-- Smartphone header/nav with togglable sidebar -->
     <div class="navTop">
-        <a href="index.html">
-            <img src="assets/img/tripbuddylogo1.png" alt="logo" />
+        <a href="">
+            <img src="../assets/img/tripbuddylogo1.png" alt="logo" />
         </a>
-        <button onclick="logOut()" class="btn signout">Log out</button>
+        <button type="button" class="btn signout" id="logout">Log out</button>
     </div>
     <div class="navLine">
-        <button type="button" class="toggle">
-            <span></span>
+        <button type="button" class="toggle" id="toggleBtn">
+            <span id="toggleSpan"></span>
         </button>
     </div>
     <div class="sidebar" id="sidebar">
         <div class="profileCard">
-            <img class="profileImg" src="assets/img/profileimg.png"
+            <img class="profileImg" src="../assets/img/profileimg.png"
                 alt="" />
             <div>
                 <label class="fullName1" style="font-weight: bold"></label>
@@ -30,7 +29,7 @@
         <br /> <hr /> <br />
 
         <div class="sideLinks">
-            <a href="index.html" class="sideLink active">
+            <a href="AdminDashboard.html" class="sideLink active">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 Users
             </a>
