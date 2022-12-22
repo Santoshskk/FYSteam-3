@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Edit profile</title>
     <link rel="stylesheet" href="assets/css/Layout.css">
-    <link rel="stylesheet" href="assets/css/EditProfile.css">
+    <link rel="stylesheet" href="assets/css/EditTrip.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -15,34 +15,37 @@
 </head>
 <body>
 
-<div class="huis2">
-    <div class="nav-header"></div>
-</div>
-<div class="editText">
-    <h1>Bewerk trip</h1>
-</div>
+<div class="nav-header"></div>
 
 <form id= "form3" >
     <div class="row">
-        <div class="column">
-            <table>
-                <tr>
-                    <label>Selecteer land</label>
-                    <select id="countrySelect">
-                        <option>Choose a country</option>
-                    </select>
+        <div class="side">
+            <div class="editText">
+                <h1>Bewerk Trip</h1>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-content">
+                <table>
+                    <tr>
+                        <label class="infoText">Selecteer land: </label>
+                        <select class="value" id="countrySelect">
+                            <option>Kies een land</option>
+                        </select>
+                    </tr>
 
-                </tr>
-                <tr>
-                    <label>start datum</label>
-                    <input type="date" value="" id="startDate" />
-                </tr>
-                <label>eind datum</label>
-                <input type="date" value="" id="endDate" />
-            </table>
+                    <tr>
+                        <label class="infoText">Start datum: </label>
+                        <input class="value" type="date" value="" id="startDate" />
+                    </tr>
+                    <label class="infoText">Eind datum: </label>
+                    <input class="value" type="date" value="" id="endDate" />
+                </table>
+                <input type="submit" value="Save" class="inputButton" name="name">
+            </div>
         </div>
     </div>
-    <input type="submit" value="Save" class="inputButton" name="name">
+
 </form>
 
 

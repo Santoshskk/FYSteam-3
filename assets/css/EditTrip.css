@@ -1,19 +1,3 @@
-/*.upload  {*/
-/*    display:block;*/
-/*}*/
-
-/*form {*/
-/*    margin-left: 100px;*/
-/*}*/
-
-#fileUpload {
-    font-weight: bold;
-    color: dodgerblue;
-    padding: 0.5em;
-    border: thin solid grey;
-    border-radius: 3px;
-}
-
 /* Column container */
 .row {
     display: flex;
@@ -49,23 +33,7 @@
     overflow: auto;
 }
 
-.imgButton, ::file-selector-button{
-    background-color: rgba(0, 0, 0, 0.2);
-    border: 2px solid black;
-    transition-duration: 0.2s;
-    cursor: pointer;
-    color: black;
-    outline: none;
-    padding: 0.5em;
-    border-radius:10px;
-}
-
-.imgButton:hover, ::file-selector-button:hover{
-    background-color: #db3c28;
-    color: white;
-}
-
-.saveButton {
+.inputButton {
     background-color: rgba(0, 0, 0, 0.2);
     border: 2px solid black;
     transition-duration: 0.2s;
@@ -79,28 +47,16 @@
     margin-top: 120px;
 }
 
-.saveButton:hover {
+.inputButton:hover {
     background-color: #db3c28;
     color: white;
-}
-
-.inputText{
-    border-radius: 5px;
-    border: 1px solid black;
-    min-height: 25px;
-    padding-left: 5px;
-    height: auto;
-}
-
-input[type="checkbox"]{
-    margin-right: 15px;
-    scale: 125%;
 }
 
 .infoText {
     font-weight: bold;
     color: black;
     margin-top: 10px;
+    display: inherit;
 }
 .value {
     margin-top: 10px;
@@ -109,26 +65,4 @@ input[type="checkbox"]{
 
 .editText {
     margin-top: 20%;
-}
-
-td{
-    display: inherit;
-}
-
-label{
-    width: 110px;
-    display: inherit;
-    font-weight: bold;
-}
-
-#checkboxie{
-    display: inherit;
-}
-
-#descriptionText{
-    width: 200px;
-}
-
-#text{
-    display: inherit;
 }
