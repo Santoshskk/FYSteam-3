@@ -1,63 +1,84 @@
-.userProfile {
-    margin-top: 5%;
-    padding-left: 10%;
-    padding-top: 3%;
-    padding-bottom: 10%;
-    overflow: auto;
-    background-image: url(../img/italie.png);
-    background-repeat: no-repeat;
+/* Column container */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    flex: 20%;
+    background-color: #BBB8B7;
+    text-align: center;
+}
+
+/* Main column */
+.main {
+    flex: 60%;
+    padding: 40px;
+    background-image:  url("../img/italie.png");
     background-size: cover;
-    border: 1px outset #db3c28;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.userProfile {
+    width: 57%;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid black;
+    overflow: auto;
 }
 
 .profileImg {
-    margin-top: 5%;
-    height: 300px;
-    border: 3px solid #db3c28;
-    border-radius: 10px;
-    float: left;
-    position: absolute;
-    width: 300px;
+    margin-top: 30%;
+    height: 200px;
+    border: 3px solid black;
+    border-radius: 15px;
+    width: 200px;
     object-fit: contain;
 }
 .infoTextUser {
     font-weight: bold;
     padding-left: 25%;
-    text-decoration: underline;
     color: black;
 }
 .Uservalue {
     padding-left: 25%;
+    margin-top: 0;
 }
 
 .user-info {
     float: left;
     padding-right: 20%;
-    margin-top: 5%;
 }
 
-.biography {
-    margin-top: 5%;
-    margin-right: 5%;
-    border: 2px solid black;
-    padding-bottom: 20%;
-    background-color: white;
+.biography{
+    width: auto;
+    margin-top: 66px;
 }
 
 #buttonDiv{
-    float: left;
-    margin-top: 400px;
-    left: 0;
-    position: relative;
+    margin-top: 25px;
+    width: 206px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .inputText {
-    background-color: transparent;
-    border: 3px solid #db3c28;
-    transition-duration: 0.4s;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 3px solid black;
+    transition-duration: 0.2s;
     cursor: pointer;
-    color: #db3c28
+    color: black;
+    width: 206px;
+    font-size: 1em;
+    outline: none;
+    padding: 0.5em;
+    border-radius:10px;
+    margin-top: 10px;
 }
 
 .inputText:hover {
