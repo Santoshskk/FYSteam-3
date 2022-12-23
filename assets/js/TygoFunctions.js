@@ -72,11 +72,15 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId, numberValue) 
                         break;
                     case "checkbox":
                         const div = document.getElementById(idArray);
-                        const checkBox = document.createElement('input')
+                        const checkBox = document.createElement('input');
                         checkBox.setAttribute("type", "checkbox");
                         div.appendChild(document.createTextNode(value.name));
                         div.appendChild(checkBox);
                         checkBox.id = (counter);
+
+                        br = document.createElement("span");
+                        br.innerHTML = "<br/>";
+                        div.appendChild(br);
 
                         let sp = GetCurrentUserInterest(parseInt(checkBox.id));
                         FYSCloud.API.queryDatabase(sp[0], [sp[1], sp[2]]).then(function (data2){
