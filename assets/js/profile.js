@@ -3,7 +3,6 @@ Tygo
 Javascript script for POST request from profile page to edit profile page
 code could be made cleaner , but it works ;)
 */
-
 const userID = FYSCloud.Session.get("userID");
 let formProfilePage = document.getElementById('form1');
 
@@ -12,14 +11,7 @@ const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText"
 const InterestId = [];
 
 //array with names profile page id (edit user)
-const ProfilePageId = [
-    "nameText",
-    "lastNameText",
-    "emailText",
-    "land",
-    "age",
-    "gender",
-    "description"
+const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "gender", "description"
 ];
 //array with names profile page id (edit trip)
 const profilePageId2 = ["startDate1", "endDate1"]
@@ -45,41 +37,25 @@ form = document.getElementById('form2');
 
 form?.addEventListener("submit", function (e) {
     e.preventDefault();
-
     let uploadImage = document.getElementById("fileUpload");
     if (uploadImage.files.length === 0) {
         UpdateDB(getValues(null, EditProfilePageId, SPNames_UpdateUserInformation, "input"), "UpdateUserInformation");
     } else {
         UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
     }
-
-
-
-    //
 });
 
-
-
-
 const interessesId = ["interesses"];
-const interessesId2 = ["interessesBox"];
 if (location.href.includes("ProfilePage")) {
     GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img", false);
     GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null, false);
     GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null, false);
-
     GetFromDatabase(interessesId, "list", GetUserInterest(userID), false , null, false)
-
 }
 
 if (location.href.includes("EditProfile")) {
     GetFromDatabase("checkboxie", "checkbox", GetAllInterest(), false, null, true);
     GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null, false);
-}
-
-function DeleteProfileImage() {
-    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg",
-        EditProfilePageId, SPnames_SetProfileImageDefault, "input"), "SetProfileImage")
 }
 
 //edit trip

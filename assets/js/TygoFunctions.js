@@ -225,3 +225,8 @@ function getValues(profileImage, inputIdArr, storedProceduresVarNames, typeInput
             }
         }
     }
+
+function DeleteProfileImage() {
+    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg",
+        EditProfilePageId, SPnames_SetProfileImageDefault, "input"), "SetProfileImage")
+}
