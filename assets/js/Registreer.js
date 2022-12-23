@@ -79,7 +79,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }  else if(!isEmail(emailValue)){
                 setErrorFor(email,'Geen geldige Email.');
                 countError++;
-            }else {
+            }else if (!EmailCheck(emailValue)){
+                setErrorFor(email,'Deze email is geregistreerd, probeer login');
+                countError++;
+            } else{
                 setSuccessFor(email);
             }
 
@@ -129,6 +132,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
             formControl.className = 'form-control success';
         }
 
+          function EmailCheck(){
+              FYSCloud.API.queryDatabase(
+                  "SELECT userID FROM user WHERE email = (?)", [email.value],
+                  ).then(function (data){
+                  console.log(data)
+                  if (data.length>0){
+                      return false;
+                  }else {
+                      return true;
+                  }
+              })
+
+
+          }
+
+
         function isEmail(email) {
             let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             //Execution
@@ -139,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 console.log("Invalid");
                 return false;
             }
+
         }
         function passwordChecker(password){
             let regexPasword= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,255}$/
