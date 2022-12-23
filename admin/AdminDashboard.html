@@ -1,163 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>TripBuddy</title>
 
-        <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
-        <script src="../assets/js/config.js"></script>
-        <script src="../assets/js/logout.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripBuddy</title>
 
-<!--        <script src="../assets/js/Admin/getProfile.js"></script>-->
+    <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/Admin/getProfile.js"></script>
+    <script src="../assets/js/logout.js"></script>
 
-        <script src="https://kit.fontawesome.com/a3aad2d743.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a3aad2d743.js" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="../assets/css/Admin/main.css" />
-        <link rel="stylesheet" href="../assets/css/Admin/adminNav.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/main.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/adminNav.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/sideNav.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/template.css" />
 
-        <link rel="stylesheet" href="../assets/css/Admin/sideNav.css" />
 
-        <link rel="stylesheet" href="../assets/css/Admin/dropdown.css" />
-        <script src="../assets/js/Admin/dropdown.js"></script>
+</head>
 
-        <script src="../assets/js/Admin/search.js"></script>
-    </head>
+<body>
+    <div class="header"></div>
 
-    <body>
-        <nav>
-            <!-- Smartphone header/nav with togglable sidebar -->
-            <div class="navTop">
-                <a href="AdminDashboard.html">
-                    <img src="../assets/img/tripbuddylogo1.png" alt="logo" />
-                </a>
-                <button onclick="myFunction()" class="btn signout">Log out</button>
-            </div>
-            <div class="navLine">
-                <button type="button" class="toggle" id="toggle">
-                    <span></span>
-                </button>
-            </div>
-            <div class="sidebar" id="sidebar">
-                <div class="profileCard">
-                    <img class="profileImg" src="../assets/img/no-profile-pic.png"
-                        alt="" />
-                    <div>
-                        <label style="font-weight: bold">John Doe</label>
-                        <label>j.doe@gmail.com</label>
-                    </div>
-                </div>
+    <div class="row">
 
-                <br /> <hr /> <br />
+        <div class="sidenav"></div>
 
-                <div class="sideLinks">
-                    <a href="AdminDashboard.html" class="sideLink active">
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        Users
-                    </a>
-
-                    <a href="reports.html" class="sideLink">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        Reports
-                    </a>
-
-                    <a href="#" class="sideLink">
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                        Settings
+        <div class="main">
+            <div class="tableParent">
+                <div class="tableHeader">
+                    <label class="userAmount"></label>
+                    <a href="userRegistration.html" class="table-btn">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Register user
                     </a>
                 </div>
-            </div>
-        </nav>
 
-        <div class="row">
-            <div class="side">
-                <div class="profileCard">
-                    <img class="profileImg" src="../assets/img/no-profile-pic.png"
-                        alt="" />
-                    <div>
-                        <label style="font-weight: bold">John Doe</label>
-                        <label>j.doe@gmail.com</label>
-                    </div>
-                </div>
-
-                <br />
                 <hr />
-                <br />
 
-                <div class="sideLinks">
-                    <a href="AdminDashboard.html" class="sideLink active">
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        Users
-                    </a>
-
-                    <a href="reports.html" class="sideLink">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        Reports
-                    </a>
-
-                    <a href="#" class="sideLink">
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                        Settings
-                    </a>
-                </div>
-            </div>
-
-            <div class="main">
-                <div class="tableParent">
-                    <div class="tableHeader">
-                        <label>Werknemers - 3</label>
-                        <a href="userRegistration.html" class="table-btn">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Register user
-                        </a>
-                    </div>
-
-                    <hr />
-                    <input
-                        type="text"
-                        class="search-bar"
-                        id="myInput"
-                        onkeyup="search()"
-                        placeholder="Search"
-                        />
-                    <hr />
-
-                    <br />
-
-                    <div style="overflow-x: auto">
-                        <table id="myTable">
-                            <tr>
-                                <td class="td-img">
-                                    <img
-                                        class="profileImg small"
-                                        src="../assets/img/no-profile-pic.png"
-                                        alt=""
-                                        />
-                                </td>
-                                <td class="td-name">Jill Smith</td>
-                                <td class="dropdown">
-                                    <button class="dropbtn"
-                                        onclick="myFunction()">
-                                        <i
-                                            class="fa fa-ellipsis-h"
-                                            aria-hidden="true"
-                                            style="pointer-events: none"></i>
-                                    </button>
-                                    <div class="dropdown-content"
-                                        id="myDropdown">
-                                        <a href="#">View</a>
-                                        <a href="#">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                <div style="overflow-x: auto">
+                    <div id="profiles"></div>
+                    <table id="myTable">
+                        <p class="tableTxt">No users were found.</p>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="footer"></div>
-    </body>
-</html>
+    <template id="profileTemp">
+        <div class="profile">
+            <ul>
+                <li>
+                    <div class="imgc">
+                        <img class="profileImg small" id="profileImg" alt="profile-picture"
+                            src="https://mockup-is102-3.fys.cloud/uploads/ImgNumber220.png.png" />
+                    </div>
+                    <div class="nameC">
+                        <span id="profileName">fullname</span>
+                        <span id="profileEmail">email@email.com</span>
+                    </div>
+                    <div class="btnC">
+                        <button class="Ban" id="banBtn">Ban</button>
+                        <button class="Del">Del</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </template>
+
+    <div class="footer"></div>
+</body>
 <script src="../assets/js/Admin/sharedStyle.js"></script>
+<script src="../assets/js/Admin/sideNav.js"></script>
+
+</html>

@@ -1,166 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>TripBuddy</title>
 
-        <script
-            src="https://kit.fontawesome.com/a3aad2d743.js"
-            crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripBuddy</title>
 
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <link rel="stylesheet" href="assets/css/adminNav.css" />
+    <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
+    <script src="../assets/js/Admin/config.js"></script>
+    <script src="../assets/js/Admin/getProfile.js"></script>
 
-        <link rel="stylesheet" href="assets/css/dropdown.css" />
-        <script src="assets/js/dropdown.js"></script>
+    <script src="https://kit.fontawesome.com/a3aad2d743.js" crossorigin="anonymous"></script>
 
-        <script src="assets/js/search.js"></script>
+    <link rel="stylesheet" href="../assets/css/Admin/main.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/adminNav.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/sideNav.css" />
+    <link rel="stylesheet" href="../assets/css/Admin/form.css" />
 
-        <link rel="stylesheet" href="assets/css/sideNav.css" />
-        <link rel="stylesheet" href="assets/css/form.css" />
-    </head>
 
-    <body>
-        <nav>
-            <!-- Smartphone header/nav with togglable sidebar -->
-            <div class="navTop">
-                <a href="index.html">
-                    <img src="assets/img/tripbuddylogo1.png" alt="logo" />
-                </a>
-                <button onclick="myFunction()" class="btn signout">Log out</button>
+</head>
+
+<body>
+    <div class="header"></div>
+
+    <div class="row">
+
+        <div class="sidenav"></div>
+
+        <form id="form" class="form">
+
+            <div class="form-control">
+                <small id="psw-error"></small>
             </div>
-            <div class="navLine">
-                <button type="button" class="toggle" id="toggle">
-                    <span></span>
-                </button>
-            </div>
-            <div class="sidebar" id="sidebar">
-                <div class="profileCard">
-                    <img class="profileImg" src="assets/img/profileimg.png"
-                        alt="" />
-                    <div>
-                        <label style="font-weight: bold">John Doe</label>
-                        <label>j.doe@gmail.com</label>
-                    </div>
+
+            <div class="wrapper">
+                <div class="form-control first">
+                    <label for="firstname">Voornaam</label>
+                    <input type="text" placeholder="John" id="firstname" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small></small>
                 </div>
 
-                <br />
-                <hr />
-                <br />
-
-                <div class="sideLinks">
-                    <a href="index.html" class="sideLink active">
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        Users
-                    </a>
-
-                    <a href="reports.html" class="sideLink">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        Reports
-                    </a>
-
-                    <a href="#" class="sideLink">
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                        Settings
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <div class="row">
-            <div class="side">
-                <div class="profileCard">
-                    <img class="profileImg" src="assets/img/profileimg.png"
-                        alt="" />
-                    <div>
-                        <label style="font-weight: bold">John Doe</label>
-                        <label>j.doe@gmail.com</label>
-                    </div>
-                </div>
-
-                <br />
-                <hr />
-                <br />
-
-                <div class="sideLinks">
-                    <a href="index.html" class="sideLink active">
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        Users
-                    </a>
-
-                    <a href="reports.html" class="sideLink">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        Reports
-                    </a>
-
-                    <a href="#" class="sideLink">
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                        Settings
-                    </a>
+                <div class="form-control second">
+                    <label for="lastname">Achternaam</label>
+                    <input type="text" placeholder="Doe" id="lastname" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small></small>
                 </div>
             </div>
 
-            <div class="main">
-                <div class="tableParent">
-                    <form action="/action_page.php">
-                        <div class="container">
-                            <h1>Register</h1>
-                            <p>Please fill in this form to create an account.</p>
-                            <hr>
-                            
-                            <label for="fstn"><b>Firstname</b></label>
-                            <input type="text" placeholder="Enter Firstname" name="fstn" id="fstn" required>
-                        
-                            <label for="lstn"><b>Lastname</b></label>
-                            <input type="text" placeholder="Enter Lastname" name="lstn" id="lstn" required>
-                            
-                            <label for="email"><b>Email</b></label>
-                            <input type="text" placeholder="Enter Email" name="email" id="email" required>
-                        
-                            <label for="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-                        
-                            <label for="psw-repeat"><b>Repeat Password</b></label>
-                            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-                            <hr>
-                        
-                            <button type="submit" class="registerbtn">Register</button>
-                        </div>
-                    </form>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" placeholder="johndoe@email.com" id="email" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small> </small>
+            </div>
+            <div class="wrapper">
+                <div class="form-control first">
+                    <label for="password">Wachtwoord</label>
+                    <input type="password" placeholder="Wachtwoord" id="password" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small> </small>
+                </div>
+                <div class="form-control second">
+                    <label for="password2">Herhaal wachtwoord</label>
+                    <input type="password" placeholder="Herhaal wachtwoord" id="password2" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small></small>
                 </div>
             </div>
-        </div>
 
-        <div class="footer"></div>
-    </body>
+            <button type="submit"><span class="linkcolor">Registreer</span>
+            </button>
+
+        </form>
+    </div>
+
+
+    <div class="footer"></div>
+</body>
+<script src="../assets/js/Admin/sharedStyle.js"></script>
+<script src="../assets/js/Admin/signup.js"></script>
+<script src="../assets/js/Admin/sideNav.js"></script>
+
 </html>
-<script src="assets/js/sharedStyle.js"></script>
-<script>
-    function myFunction() {
-        if (confirm("Are you sure you want to log out?")) {
-            // Save it!
-            console.log("Logged out!");
-        } else {
-            // Do nothing!
-            console.log("Not logged out.");
-        }
-    }
-</script>
-<script>
-    var btn = document.querySelector(".toggle");
-    var modal = document.getElementById("sidebar");
-    var btnst = true;
-    btn.onclick = function () {
-        if (btnst == true) {
-            document.querySelector(".toggle span").classList.add("toggle");
-            document.getElementById("sidebar").classList.add("sidebarshow");
-            btnst = false;
-        } else if (btnst == false) {
-            document.querySelector(".toggle span").classList.remove("toggle");
-            document.getElementById("sidebar").classList.remove("sidebarshow");
-            btnst = true;
-        }
-    };
-</script>

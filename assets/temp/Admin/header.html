@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../assets/js/Login.js"></script>
+    <script src="../assets/js/logout.js"></script>
+</head>
+
+<nav>
+    <!-- Smartphone header/nav with togglable sidebar -->
+    <div class="navTop">
+        <a href="">
+            <img src="../assets/img/tripbuddylogo1.png" alt="logo" />
+        </a>
+        <button type="button" class="btn signout" id="logout">Log out</button>
+    </div>
+    <div class="navLine">
+        <button type="button" class="toggle" id="toggleBtn">
+            <span id="toggleSpan"></span>
+        </button>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <div class="profileCard">
+            <img class="profileImg" src="../assets/img/profileimg.png"
+                alt="" />
+            <div>
+                <label class="fullName1" style="font-weight: bold"></label>
+                <label class="email1" ></label>
+            </div>
+        </div>
+
+        <br /> <hr /> <br />
+
+        <div class="sideLinks">
+            <a href="AdminDashboard.html" class="sideLink active">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                Users
+            </a>
+            <button type="button" class="btn signout" id="logout2">Log out</button>
+        </div>
+    </div>
+</nav>
