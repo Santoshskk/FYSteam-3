@@ -3,7 +3,7 @@ Tygo
 Javascript script for POST request from profile page to edit profile page
 code could be made cleaner , but it works ;)
 */
-const userID = FYSCloud.Session.get("userID");
+
 let formProfilePage = document.getElementById('form1');
 
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func

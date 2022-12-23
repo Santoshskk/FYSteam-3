@@ -1,4 +1,4 @@
-if (!userId || isActive === 1) {
+if (!userID || isActive === 1) {
     if (isActive === 1) alert("This account has been disabled.");
     window.location.assign('index.html');
 }

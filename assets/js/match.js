@@ -1,5 +1,4 @@
-// user is nu nog 1, geen link met login
-const userID = FYSCloud.Session.get("userID")
+
 
 /*
 // code voor het ophalen van mogelijke matches
