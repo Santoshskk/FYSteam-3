@@ -95,10 +95,17 @@ let formtripPage = document.getElementById('form3');
 let dateArray = ["startDate", "endDate"];
 
 if(location.href.includes("EditTrip")) {
-    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null, false);
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
-    GetFromDatabase("countrySelect", "valueDropdown",  GetCurrentCountry(userID), false, null, false);
 
+    console.log("1");
+
+    const result = GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null, false);
+    result.then(function() {
+        console.log("3");
+        GetFromDatabase("countrySelect", "valueDropdown",  GetCurrentCountry(userID), false, null, false);
+    });
+
+    console.log("2");
 }
 
 const editTripId = ["countrySelect", "startDate", "endDate"]

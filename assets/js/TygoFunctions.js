@@ -18,7 +18,8 @@ function GetFromDatabase(idArray, tagType, query, HasImage, ImgId, numberValue) 
     if(query.length === 1) {
         paramaters = null;
     }
-    FYSCloud.API.queryDatabase(query[0], [paramaters]).then(function (data) {
+
+    return FYSCloud.API.queryDatabase(query[0], [paramaters]).then(function (data) {
             data = data[0];
         let array = [];
             if(data.length === 1) {
