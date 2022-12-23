@@ -54,9 +54,9 @@ if (location.href.includes("ProfilePage")) {
 }
 
 if (location.href.includes("EditProfile")) {
-    GetFromDatabase("checkboxie", "checkbox", GetAllInterest(), false, null, true);
     GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null, false);
-}
+    GetFromDatabase("checkboxie", "checkbox", GetAllInterest(), false, null, true);
+    }
 
 //edit trip
 
@@ -72,16 +72,10 @@ let dateArray = ["startDate", "endDate"];
 
 if(location.href.includes("EditTrip")) {
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
-
-    console.log("1");
-
     const result = GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null, false);
     result.then(function() {
-        console.log("3");
         GetFromDatabase("countrySelect", "valueDropdown",  GetCurrentCountry(userID), false, null, false);
     });
-
-    console.log("2");
 }
 
 const editTripId = ["countrySelect", "startDate", "endDate"]
