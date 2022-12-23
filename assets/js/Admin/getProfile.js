@@ -3,21 +3,24 @@ const isAdmin = FYSCloud.Session.get("isAdmin");
 const isActive = FYSCloud.Session.get("isActive");
 
 document.addEventListener('DOMContentLoaded', function () {
+        
+    function getProfile() {
+        return FYSCloud.API.queryDatabase("SELECT * FROM user WHERE userID = (?)", [userID]
+            ).then(data => {
+                var fullName = data[0].firstName + " " + data[0].lastName;
 
-    FYSCloud.API.queryDatabase("SELECT * FROM user WHERE userID = (?)", [userID]
-    ).then(data => {
-        var fullName = data[0].firstName + " " + data[0].lastName;
+                document.querySelector('.fullName1').innerText = fullName;
+                document.querySelector('.email1').innerText = data[0].email;
 
-        document.querySelector('.fullName1').innerText = fullName;
-        document.querySelector('.email1').innerText = data[0].email;
+                document.querySelector('.fullName2').innerText = fullName;
+                document.querySelector('.email2').innerText = data[0].email;
+            }).catch(err => {
+                console.log(err);
+        })
+    }
 
-        document.querySelector('.fullName2').innerText = fullName;
-        document.querySelector('.email2').innerText = data[0].email;
-
+    let test = getProfile().then(() => {
         GetUsers();
-
-    }).catch(err => {
-        console.log(err);
     })
 
     // Get users(not admin(1)) from db.
