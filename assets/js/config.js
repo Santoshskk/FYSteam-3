@@ -1,4 +1,4 @@
-const userId = FYSCloud.Session.get("userID");
+const userID = FYSCloud.Session.get("userID");
 const isActive = FYSCloud.Session.get("isActive");
 
 FYSCloud.API.configure({

@@ -1,6 +1,3 @@
-const userID = FYSCloud.Session.get("userID");
-const isAdmin = FYSCloud.Session.get("isAdmin");
-const isActive = FYSCloud.Session.get("isActive");
 
 document.addEventListener('DOMContentLoaded', function () {
         
@@ -43,13 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     let img = data[i].profileImage;
                     let email = data[i].email;
                     let id = data[i].userID;
-                    let isActive = data[i].isActive.data[0];
+                    let isactive = data[i].isActive.data[0];
 
                     matchProfile.querySelector(".profile").id = id;
                     matchProfile.querySelector("#profileName").innerHTML = fullName;
                     matchProfile.querySelector("#profileEmail").innerHTML = email;
 
-                    if (isActive != 0) {
+                    if (isactive != 0) {
                         matchProfile.querySelector("#banBtn").innerHTML = "Unban";
                     }
                     if (img) {
@@ -73,14 +70,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                     // Check active status.
                     FYSCloud.API.queryDatabase(
-                        "SELECT isActive FROM user WHERE userID = (?)",
+                        "SELECT isactive FROM user WHERE userID = (?)",
                         [uid]
                     ).then(data => {
-                        let isActive = data[0].isActive.data[0];
-                        const banQuery = "UPDATE user SET isActive = 1 WHERE userID = (?)";
-                        const unbanQuery = "UPDATE user SET isActive = 0 WHERE userID = (?)";
-                        if (isActive != 1) {
-                            // Set isActive to 1. (0: normal, 1: banned).
+                        let isactive = data[0].isactive.data[0];
+                        const banQuery = "UPDATE user SET isactive = 1 WHERE userID = (?)";
+                        const unbanQuery = "UPDATE user SET isactive = 0 WHERE userID = (?)";
+                        if (isactive != 1) {
+                            // Set isactive to 1. (0: normal, 1: banned).
                             FYSCloud.API.queryDatabase(
                                 banQuery,
                                 [uid]
@@ -91,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 console.log(err);
                             })
                         } else {
-                            // Set isActive to 1. (0: normal, 1: banned).
+                            // Set isactive to 1. (0: normal, 1: banned).
                             FYSCloud.API.queryDatabase(
                                 unbanQuery,
                                 [uid]
@@ -117,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         "Are you sure you want to delete this user?",
                         "This action is irreversible"
                     )) {
-                        // Set isActive to 1. (0: normal, 1: banned).
+                        // Set isactive to 1. (0: normal, 1: banned).
                         FYSCloud.API.queryDatabase(
                             "DELETE FROM user WHERE userID = (?)",
                             [uid]
