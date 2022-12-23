@@ -1,0 +1,68 @@
+/* Column container */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    flex: 20%;
+    background-color: #BBB8B7;
+    text-align: center;
+}
+
+/* Main column */
+.main {
+    flex: 60%;
+    padding: 40px;
+    background-image:  url("../img/italie.png");
+    background-size: cover;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.main-content {
+    min-height: 350px;
+    width: 57%;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+.inputButton {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    color: black;
+    width: 206px;
+    font-size: 1em;
+    outline: none;
+    padding: 0.5em;
+    border-radius:10px;
+    margin-top: 120px;
+}
+
+.inputButton:hover {
+    background-color: #db3c28;
+    color: white;
+}
+
+.infoText {
+    font-weight: bold;
+    color: black;
+    margin-top: 10px;
+    display: inherit;
+}
+.value {
+    margin-top: 10px;
+    width: 180px;
+}
+
+.editText {
+    margin-top: 20%;
+}

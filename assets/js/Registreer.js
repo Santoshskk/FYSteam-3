@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                              "INSERT INTO tripinfo (userID, location, startDate, endDate) VALUES (?, ?, ?, ?);",
                              [userID, null, null, null]
                          ).then(() => {
-                             window.location.assign('index.html');
+                             // window.location.assign('index.html');
                          }).catch(err => {
                              console.log(err);
                          })
@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
                  }).catch(err => {
                      console.log(err);
                  })
-             });
+             }).catch(err => {
+                 console.log(err);
+             })
         }
 
         function checkInputs() {
@@ -79,11 +81,18 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }  else if(!isEmail(emailValue)){
                 setErrorFor(email,'Geen geldige Email.');
                 countError++;
-            }else if (!EmailCheck(emailValue)){
-                setErrorFor(email,'Deze email is geregistreerd, probeer login');
-                countError++;
             } else{
-                setSuccessFor(email);
+                FYSCloud.API.queryDatabase(
+                    "SELECT userID FROM user WHERE email = (?)", [email.value],
+                ).then(data => {
+                    console.log(data.length)
+                    if(data.length>0){
+                        setErrorFor(email,'Deze email is geregistreerd, probeer login');
+                        countError++;
+                    }else {
+                        setSuccessFor(email);
+                    }
+                })
             }
 
             if (passwordValue === '') {
@@ -107,10 +116,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
                 }  else {
                     setSuccessFor(password2);
                 }
-            }
 
             if (countError === 0) {
                 SignUp();
+            }
+
             }
 
 
@@ -133,15 +143,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
         }
 
           function EmailCheck(){
-              FYSCloud.API.queryDatabase(
+               FYSCloud.API.queryDatabase(
                   "SELECT userID FROM user WHERE email = (?)", [email.value],
                   ).then(function (data){
                   console.log(data)
-                  if (data.length>0){
-                      return false;
-                  }else {
-                      return true;
-                  }
+                  return data.length <= 0;
               })
 
 
