@@ -5,39 +5,135 @@
     <title>Matchpagina</title>
     <link rel="stylesheet" href="assets/css/matchpage.css">
     <link rel="stylesheet" href="assets/css/Layout.css">
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
     <script src="assets/js/config.js"></script>
     <script src="assets/js/logout.js"></script>
-
 </head>
 <body>
 
 <!-- Header -->
 <div class="nav-header"></div>
 
-
-
-<div class="jouw-matches">
-    <h1>Jouw matches</h1>
-    <img  class="fake-persona" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto">
-    <img  class="fake-persona" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto">
-    <img  class="fake-persona" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto">
+<div class="row">
+    <div class="side">
+        <h1>Trip Buddies:</h1>
+        <div id="madeMatches"></div>
+    </div>
+    <div class="main">
+        <div id="main-content">
+            <h1>Mogelijke Buddies:</h1>
+            <p id="potMatchInfoText">Onderstaande buddies zijn geselecteerd naar aanleiding van
+                de opgegeven trip informatie en persoonlijke interesses:</p>
+            <div id="potentialMatches" ></div>
+            <h1 id="receivedRequestText">Ontvangen verzoeken:</h1>
+            <div id="receivedMatches" ></div>
+            <h1 id="sendRequestText">Verstuurde verzoeken:</h1>
+            <div id="sendMatches"></div>
+        </div>
+    </div>
 </div>
-<div class="mogelijke-matches">
-    <h1>Mogelijke matches</h1>
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
-    <img  class="fake-persona2" src="assets/img/fake-persona-foto.jpg" alt="Persoon foto2">
+
+<template id="match-template">
+    <div class="profile-user">
+        <img class="profile-picture" id="matchImage" alt="profile-picture">
+        <p id="matchName"></p>
+    </div>
+</template>
+
+<template id="profiel-template">
+    <div class="profile">
+        <img class="potMatchImageClass" id="imagePotMatch" alt="profile-picture">
+        <p id="namePotMatch"></p>
+    </div>
+</template>
+
+<template id="send-profiel-template">
+    <div class="sendProfiles">
+        <img class="potMatchImageClass" id="imageSendMatch" alt="profile-picture">
+        <p id="nameSendMatch"></p>
+    </div>
+</template>
+
+<template id="received-profiel-template">
+    <div class="receivedProfiles">
+        <img class="potMatchImageClass" id="imageReceivedMatch" alt="profile-picture">
+        <p id="nameReceivedMatch"></p>
+    </div>
+</template>
+
+<div id="matchModal" class="modal">
+    <div class="match-modal-content">
+        <span class="close" id="matchSpan">&times;</span>
+        <img id="madeMatchImg" alt="">
+        <p id="madeMatchName"></p>
+        <p id="madeMatchGender"></p>
+        <p id="madeMatchAge"></p>
+        <p id="madeMatchNat"></p>
+        <p id="madeMatchBio"></p>
+        <p id="madeMatchIntrest"></p>
+        <p id="madeMatchTrip"></p>
+        <button type="button" id="mailButton">Stuur een bericht</button>
+        <button type="button" id="removeButton">Verwijder buddy</button>
+    </div>
 </div>
 
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeSpan">&times;</span>
+        <img id="potMatchModalImg" alt="">
+        <p id="profileName"></p>
+        <p id="profileGender"></p>
+        <p id="profileAge"></p>
+        <p id="profileNat"></p>
+        <p id="profileBio"></p>
+        <p id="profileIntrest"></p>
+        <p id="profileTrip"></p>
+        <button type="button" id="matchButton">Maak Buddy!</button>
+    </div>
+</div>
+
+<div id="sendMatchModal" class="modal">
+    <div class="send-modal-content">
+        <span class="close" id="closeSpanSend">&times;</span>
+        <p>De gebruiker heeft uw verzoek ontvangen, maar nog niet gereageerd</p>
+        <button type="button" id="sendButton">Ok</button>
+        <button type="button" id="sendCancelButton">Annuleer verzoek</button>
+    </div>
+</div>
+
+<div id="receivedMatchModal" class="modal">
+    <div class="received-modal-content">
+        <span class="close" id="closeSpanReceived">&times;</span>
+        <img id="receivedMatchModalImg" alt="">
+        <p id="receivedProfileName"></p>
+        <p id="receivedProfileGender"></p>
+        <p id="receivedProfileAge"></p>
+        <p id="receivedProfileNat"></p>
+        <p id="receivedProfileBio"></p>
+        <p id="receivedProfileIntrest"></p>
+        <p id="receivedProfileTrip"></p>
+        <button type="button" id="receivedButton">Accepteren</button>
+        <button type="button" id="receivedCancelButton">Afwijzen</button>
+    </div>
+</div>
+
+<div id="mailModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeSpanMail">&times;</span>
+        <p id="mailName"></p>
+        <p>Bericht: </p>
+        <textarea id="mailText"></textarea>
+        <div id="mailMessage"></div>
+        <button type="button" id="sendMailButton">Versturen</button>
+    </div>
+</div>
 
 <!-- footer -->
 <div class="nav-footer"></div>
+<script src="assets/js/match.js"></script>
 <script src="assets/js/SharedStyling.js"></script>
 </body>
 </html>

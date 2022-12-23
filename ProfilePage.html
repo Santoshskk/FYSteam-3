@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/profile.css">
-    <link rel="stylesheet" href="assets/css/EditProfile.css">
 
     <script src="https://cdn.fys.cloud/fyscloud/0.0.4/fyscloud.min.js"></script>
     <script src="assets/js/config.js"></script>
@@ -17,51 +16,63 @@
 
 <form id="form1" action="EditProfile.html">
     <script src="assets/js/logout.js"></script>
+    <div class="row">
+        <div class="side">
+            <img id="img" class="profileImg" src="" alt="...">
 
-    <div class="userProfile">
+            <div id="buttonDiv">
+                <input id="submit" type="submit" value="Bewerk Profiel" class="inputText" name="name">
+                <input id="editTripBtn" type="button" value="Bewerk Trip" class="inputText" name="name">
+            </div>
+        </div>
+        <div class="main">
+            <div class="userProfile">
+                <div class="user-info">
+                    <p style="display: none" id="userID"></p>
 
-        <img id="img" class="profileImg" src="" alt="...">
+                    <h1 id="nameText" class="Uservalue"></h1>
+
+                    <p class="infoTextUser">Achternaam: </p>
+                    <p class="Uservalue" id="lastNameText"></p>
+
+                    <p class="infoTextUser">Email: </p>
+                    <p class="Uservalue" id="emailText"></p>
+
+                    <p class="infoTextUser">Land: </p>
+                    <p class="Uservalue" id="land"></p>
 
 
-        <p style="display: none" id = "userID"></p>
+                    <p class="infoTextUser">Gender: </p>
+                    <p class="Uservalue" id="gender"></p>
 
-        <h1 id="nameText" class="Uservalue"></h1>
+                    <p class="infoTextUser">Leeftijd: </p>
+                    <p class="Uservalue" id="age"></p>
 
-        <p class="infoTextUser">Achternaam: </p>
-        <p class="Uservalue" id="lastNameText"></p>
+                    <p class="infoTextUser">Interesses: </p>
+                    <ol class="Uservalue" id="list"></ol>
+                </div>
 
-        <p class="infoTextUser">Email: </p>
-        <p class="Uservalue" id="emailText"></p>
+                <div class="biography">
+                    <p class="infoTextUser">Biografie: </p>
+                    <p class="Uservalue" id="description"></p>
 
-        <p class="infoTextUser">Land: </p>
-        <p class="Uservalue" id="land"></p>
+                    <h3 class="infoTextUser">TripInfo: </h3>
 
+                    <p class="infoTextUser">Locatie: </p>
+                    <p class="Uservalue" id="locatie"></p>
 
-        <p class="infoTextUser">Gender: </p>
-        <p class="Uservalue" id="gender"></p>
+                    <p class="infoTextUser">Startdatum: </p>
+                    <p class="Uservalue" id="startDate1"></p>
 
-        <p class="infoTextUser">age: </p>
-        <p class="Uservalue" id="age"></p>
-
-        <p class="infoTextUser">Biografie: </p>
-        <p class="Uservalue" id="description"></p>
-
-        <h3 class="infoTextUser">tripInfo: </h3>
-
-        <p class="infoTextUser">Locatie: </p>
-        <p class="Uservalue" id="locatie"></p>
-
-        <p class="infoTextUser">startDate: </p>
-        <p class="Uservalue" id="startDate1"></p>
-
-        <p class="infoTextUser">endDate: </p>
-        <p class="Uservalue" id="endDate1"></p>
-
-        <input id="submit" type="submit" value="Edit Profiel" class="inputText" name="name">
-        <input id="editTripBtn" type="button" value="Edit trip" class="inputText" name="name">
+                    <p class="infoTextUser">Einddatum: </p>
+                    <p class="Uservalue" id="endDate1"></p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </form>
+
 
 <div class="nav-footer"></div>
 <script src="assets/js/StoredProcedures.js"></script>

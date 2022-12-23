@@ -16,73 +16,74 @@
 </head>
 <body>
 
-<div class="huis2">
-
-
-    <div class="nav-header"></div>
-
-</div>
-<div class="editText">
-    <h1>Bewerk profiel</h1>
-</div>
+<div class="nav-header"></div>
 
 <form id= "form2" >
     <div class="row">
-        <div class="column">
-            <table>
-                <tr>
+        <div class="side">
+            <div class="editText">
+                <h1>Bewerk profiel</h1>
+            </div>
+        </div>
+        <div class="main">
+            <div class="main-content">
+                <table>
+                    <tr>
                         <input type="hidden" class="inputText" id="userIDInput">
-                    <td>
-                        <label>Voornaam</label>
-                        <input type="text" class="inputText" id="name">
-                    </td>
+                        <td>
+                            <label>Voornaam: </label>
+                            <input type="text" class="inputText" id="name">
+                        </td>
 
-                    <td>
-                        <label>Achternaam</label>
-                        <input type="text" class="inputText" id="lastName">
-                    </td>
+                        <td>
+                            <label>Achternaam: </label>
+                            <input type="text" class="inputText" id="lastName">
+                        </td>
+                    </tr>
 
-                </tr>
+                    <tr>
+                        <td>
+                            <label>E-mail: </label>
+                            <input type="email" class="inputText" id="email">
+                        </td>
 
-                <tr>
-                    <td>
-                        <label>email</label>
-                        <input type="email" class="inputText" id="email">
-                    </td>
+                        <td>
+                            <label>Leeftijd: </label>
+                            <input type="text" class="inputText" id="ageText">
+                        </td>
+                        <td>
+                            <label>Nationaliteit: </label>
+                            <input type="text" class="inputText" id="nationality">
+                        </td>
+                        <td>
+                            <label>Gender: </label>
+                            <select class="inputText" id="genderInput">
+                                <option value="Man">Man</option>
+                                <option value="Vrouw">Vrouw</option>
+                                <option value="anders">Anders</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Bio: </label>
+                            <textarea class="inputText" id="descriptionText"></textarea>
+                        </td>
+                    </tr>
 
-                    <td>
-                        <label>age</label>
-                        <input type="text" class="inputText" id="ageText">
-                    </td>
-                    <td>
-                        <label>Nationaliteit</label>
-                        <input type="text" class="inputText" id="nationality">
-                    </td>
-                    <td>
-                        <select id="genderInput">
-                            <option value="Man">Man</option>
-                            <option value="Vrouw">Vrouw</option>
-                            <option value="anders">anders</option>
-                        </select>
-                        <label>Gender</label>
-                    </td>
-                </tr>
-                <tr>
+                    <tr>
+                        <label>Interesses: </label>
+                        <div id="checkboxie"> </div>
+                    </tr>
+                </table>
 
-                    <td>
-
-                        <textarea id="descriptionText"></textarea>
-                    </td>
-                </tr>
-            </table>
+                <input  type="file" id="fileUpload" class="form-control">
+                <button class="imgButton" type="button" onclick="DeleteProfileImage()">Verwijder profiel foto</button>
+                <input type="submit" value="Opslaan" class="saveButton" name="name">
+            </div>
         </div>
     </div>
-
-    <button type="button" onclick="DeleteProfileImage()">Delete profiel foto</button>
-    <input  type="file" id="fileUpload" class="form-control">
-    <input type="submit" value="Save" class="inputButton" name="name">
 </form>
-
 
 <div class="nav-footer"></div>
 <script src="assets/js/StoredProcedures.js"></script>

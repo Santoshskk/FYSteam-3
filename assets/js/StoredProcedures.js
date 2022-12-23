@@ -1,12 +1,6 @@
 //script with all Stored procedures
 //Tygo
 
-
-//returns array.
-/*
-1: call to store procedure
-2: parameters SP
- */
 function GetAllUserInformation() {
    return ["CALL GetAllUserInformation(?)",
        userID
@@ -18,7 +12,11 @@ function GetAllTripInfo() {
     userID]
 }
 
+function GetUserInterest() {
+    return ["CALL GetUserInterest(?)",
+        userID]
 
+}
 
 function UpdateUserInformation(CurrentUser) {
     FYSCloud.API.queryDatabase("CALL UpdateUserInformation(?,?,?,?,?,?,?,?,?)",
@@ -32,7 +30,7 @@ function UpdateUserInformation(CurrentUser) {
             CurrentUser.profileImage,
             userID
         ]).then(function () {
-        window.location.href = "ProfilePage.html";
+      window.location.href = "ProfilePage.html";
     })
 }
 
@@ -58,7 +56,6 @@ function UpdateTripInfo(CurrentData) {
     })
 }
 
-
 function GetAllCountry() {
     return ["CALL GetAllCountry"];
 }
@@ -69,4 +66,34 @@ function GetAllInterest() {
 
 function GetTripInfoDates() {
     return ["CALL GetTripInfoDates(?)", userID]
+}
+
+
+function InsertUserInterest(CurrentData) {
+    FYSCloud.API.queryDatabase("CALL InsertUserInterest(?,?)",
+        [
+            CurrentData.interestID,
+            userID
+        ])
+}
+
+function DeleteUserInterests(CurrentData) {
+    FYSCloud.API.queryDatabase("CALL DeleteUserInterests(?,?)",
+        [
+            CurrentData.interestID,
+            userID
+        ])
+}
+
+function GetCurrentUserInterest(CurrentData) {
+    return ["CALL GetCurrentUserInterest(?,?)",
+            CurrentData,
+            userID
+        ]
+}
+
+function GetCurrentCountry(CurrentData) {
+    return ["CALL GetCurrentCountry(?)",
+        userID
+    ]
 }

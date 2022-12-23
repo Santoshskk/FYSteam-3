@@ -3,26 +3,18 @@ Tygo
 Javascript script for POST request from profile page to edit profile page
 code could be made cleaner , but it works ;)
 */
-
 const userID = FYSCloud.Session.get("userID");
 let formProfilePage = document.getElementById('form1');
 
 //array with id names from inputfields editprofilePage - to use to create object for getValues() func
 const EditProfilePageId = ["name", "lastName", "email", "nationality", "ageText", "genderInput", "descriptionText"];
+const InterestId = [];
 
 //array with names profile page id (edit user)
-const ProfilePageId = [
-    "nameText",
-    "lastNameText",
-    "emailText",
-    "land",
-    "age",
-    "gender",
-    "description"
+const ProfilePageId = ["nameText", "lastNameText", "emailText", "land", "age", "gender", "description"
 ];
 //array with names profile page id (edit trip)
 const profilePageId2 = ["startDate1", "endDate1"]
-
 const test = ["locatie"]
 ////////////////
 
@@ -30,11 +22,14 @@ const test = ["locatie"]
 let SPNames_UpdateUserInformation = ["firstName", "lastName", "email", "nationality", "age", "gender", "discription", "locatie"];
 let SPnames_SetProfileImageDefault = "profileImg";
 let SPnames_UpdateTripInfo = ["country", "startDate", "endDate", "userID"];
+let SPnames_InsertUserInterest = ["interestID", "userID"];
+
 
 //onclick form profile Page
 formProfilePage?.addEventListener("submit", function (e) {
     e.preventDefault();
     window.location.href = "EditProfile.html";
+
 })
 
 //submit editProfile page
@@ -44,25 +39,23 @@ form?.addEventListener("submit", function (e) {
     e.preventDefault();
     let uploadImage = document.getElementById("fileUpload");
     if (uploadImage.files.length === 0) {
-        UpdateDB(getValues(null, EditProfilePageId, SPNames_UpdateUserInformation), "UpdateUserInformation");
+        UpdateDB(getValues(null, EditProfilePageId, SPNames_UpdateUserInformation, "input"), "UpdateUserInformation");
     } else {
         UploadImage(EditProfilePageId, "fileUpload", SPNames_UpdateUserInformation, "UpdateUserInformation");
     }
 });
 
+const interessesId = ["interesses"];
 if (location.href.includes("ProfilePage")) {
-    GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img");
-    GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null);
-    GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null);
+    GetFromDatabase(ProfilePageId, "HTMLText", GetAllUserInformation(userID), true, "img", false);
+    GetFromDatabase(test, "HTMLText", GetAllTripInfo(userID), false, null, false);
+    GetFromDatabase(profilePageId2, "dateText", GetTripInfoDates(userID), false, null, false);
+    GetFromDatabase(interessesId, "list", GetUserInterest(userID), false , null, false)
 }
 
 if (location.href.includes("EditProfile")) {
-    GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null);
-}
-
-function DeleteProfileImage() {
-    UpdateDB(getValues("https://www.showflipper.com/blog/images/default.jpg",
-        EditProfilePageId, SPnames_SetProfileImageDefault), "SetProfileImage")
+    GetFromDatabase("checkboxie", "checkbox", GetAllInterest(), false, null, true);
+    GetFromDatabase(EditProfilePageId, "inputText", GetAllUserInformation(userID), false, null, false);
 }
 
 //edit trip
@@ -76,17 +69,25 @@ editTripBtn?.addEventListener("click", function (e) {
 
 let formtripPage = document.getElementById('form3');
 let dateArray = ["startDate", "endDate"];
+
 if(location.href.includes("EditTrip")) {
-    GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null);
-    GetFromDatabase("interestSelect", "dropdown", GetAllInterest(), false, null);
     GetFromDatabase(dateArray, "date", GetTripInfoDates(), false, null);
+
+    console.log("1");
+
+    const result = GetFromDatabase("countrySelect", "dropdown", GetAllCountry(), false, null, false);
+    result.then(function() {
+        console.log("3");
+        GetFromDatabase("countrySelect", "valueDropdown",  GetCurrentCountry(userID), false, null, false);
+    });
+
+    console.log("2");
 }
 
 const editTripId = ["countrySelect", "startDate", "endDate"]
 
 formtripPage?.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    UpdateDB(getValues(null, editTripId, SPnames_UpdateTripInfo), "UpdateTripInfo");
-
+    UpdateDB(getValues(null, editTripId, SPnames_UpdateTripInfo, "input"), "UpdateTripInfo");
+    UpdateDB(getValues(null, editTripId, SPnames_UpdateTripInfo, "input"), "UpdateTripInfo");
 })
