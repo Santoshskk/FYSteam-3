@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function logOut(e) {
         var test = e.target.id;
-        if (test === "logout") {
+        if (test === "logout" || test === "logout2") {
             if (confirm("Are you sure you want to log out?")) {
                 console.log("Logged out!");
 
